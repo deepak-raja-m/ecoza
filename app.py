@@ -109,68 +109,110 @@ RECYCLING_CENTERS = [
     }
 ]
 
-# ----------------- Dynamic Page Background Selector -----------------
+# ----------------- Pure CSS Backgrounds Matching The Image -----------------
 if not st.session_state.authenticated:
-    # 1. Nature Light Theme (Login)
-    current_bg_url = "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2000&q=80"
-    current_gradient = "linear-gradient(135deg, rgba(247, 254, 231, 0.78) 0%, rgba(240, 253, 244, 0.85) 60%, rgba(220, 252, 231, 0.90) 100%)"
-elif st.session_state.current_page == "🏠 Home":
-    # 5. Floating Elements / Radiant Earth Theme
-    current_bg_url = "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2000&q=80"
-    current_gradient = "linear-gradient(135deg, rgba(236, 253, 245, 0.82) 0%, rgba(209, 250, 229, 0.85) 60%, rgba(167, 243, 208, 0.88) 100%)"
-elif st.session_state.current_page == "📸 AI Scanner":
-    # Clean Mint Tech Scanner Backdrop
-    current_bg_url = "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2000&q=80"
-    current_gradient = "linear-gradient(135deg, rgba(240, 253, 250, 0.86) 0%, rgba(204, 251, 241, 0.88) 60%, rgba(153, 246, 228, 0.90) 100%)"
-elif st.session_state.current_page == "🗺️ Drop-off Map":
-    # 3. Forest Lake Mountain Theme
-    current_bg_url = "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=80"
-    current_gradient = "linear-gradient(135deg, rgba(236, 254, 255, 0.80) 0%, rgba(207, 250, 254, 0.85) 60%, rgba(165, 243, 252, 0.88) 100%)"
-elif st.session_state.current_page == "🚚 Super Pickup":
-    # 2. Minimal Organic Theme (Sage curves and soft textures)
-    current_bg_url = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2000&q=80"
-    current_gradient = "linear-gradient(135deg, rgba(245, 245, 244, 0.85) 0%, rgba(231, 229, 228, 0.88) 60%, rgba(214, 211, 209, 0.90) 100%)"
-elif st.session_state.current_page == "🎁 Rewards Store":
-    # Warm Festive Sunlit Garden Theme
-    current_bg_url = "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80"
-    current_gradient = "linear-gradient(135deg, rgba(254, 243, 199, 0.82) 0%, rgba(253, 230, 138, 0.85) 60%, rgba(252, 211, 77, 0.88) 100%)"
-elif st.session_state.current_page == "🏆 Champions Leaderboard":
-    # 4. Recycled Paper Kraft Theme
-    current_bg_url = "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=2000&q=80"
-    current_gradient = "linear-gradient(135deg, rgba(254, 249, 240, 0.86) 0%, rgba(250, 240, 225, 0.88) 60%, rgba(245, 230, 210, 0.90) 100%)"
-else:  # 📊 Impact Dashboard
-    # Fresh Pine Forest Air Theme
-    current_bg_url = "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2000&q=80"
-    current_gradient = "linear-gradient(135deg, rgba(240, 253, 244, 0.85) 0%, rgba(220, 252, 231, 0.88) 60%, rgba(187, 247, 208, 0.90) 100%)"
-
-# ----------------- Dynamic Background Injection -----------------
-st.markdown(
-    """
-    <style>
+    # 1. Nature Light Theme (Organic sunlit wave shapes & natural green layers)
+    theme_bg_css = """
     .stApp {
-        background: """ + current_gradient + """, url('""" + current_bg_url + """') !important;
-        background-size: cover !important;
-        background-position: center center !important;
-        background-repeat: no-repeat !important;
+        background: 
+            radial-gradient(circle at 10% 10%, rgba(134, 239, 172, 0.45) 0%, transparent 45%),
+            radial-gradient(circle at 90% 15%, rgba(187, 247, 208, 0.40) 0%, transparent 45%),
+            radial-gradient(circle at 85% 85%, rgba(22, 101, 52, 0.25) 0%, transparent 50%),
+            linear-gradient(135deg, #f7fee7 0%, #ecfdf5 45%, #d1fae5 100%) !important;
         background-attachment: fixed !important;
     }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+    """
+elif st.session_state.current_page == "🏠 Home":
+    # 5. Floating Elements Theme (Radiant bottom Earth sphere glow + floating mint orbs)
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 50% 105%, #15803d 0%, #166534 30%, #064e3b 55%, transparent 75%),
+            radial-gradient(circle at 15% 75%, rgba(34, 197, 94, 0.35) 0%, transparent 35%),
+            radial-gradient(circle at 85% 75%, rgba(74, 222, 128, 0.35) 0%, transparent 35%),
+            radial-gradient(circle at 20% 30%, rgba(187, 247, 208, 0.5) 0%, transparent 40%),
+            radial-gradient(circle at 80% 35%, rgba(187, 247, 208, 0.5) 0%, transparent 40%),
+            linear-gradient(180deg, #ecfdf5 0%, #d1fae5 60%, #bbf7d0 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+elif st.session_state.current_page == "📸 AI Scanner":
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.25) 0%, transparent 40%),
+            radial-gradient(circle at 80% 80%, rgba(13, 148, 136, 0.25) 0%, transparent 45%),
+            linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 50%, #99f6e4 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+elif st.session_state.current_page == "🗺️ Drop-off Map":
+    # 3. Forest Lake Mountain Atmosphere
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 50% 10%, rgba(254, 240, 138, 0.4) 0%, transparent 45%),
+            radial-gradient(circle at 85% 90%, rgba(15, 118, 110, 0.35) 0%, transparent 50%),
+            linear-gradient(180deg, #ecfeff 0%, #cffafe 45%, #a5f3fc 85%, #0f766e 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+elif st.session_state.current_page == "🚚 Super Pickup":
+    # 2. Minimal Organic Theme (Soft neutral sand and sage tones)
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 10% 20%, rgba(220, 252, 231, 0.6) 0%, transparent 45%),
+            radial-gradient(circle at 90% 80%, rgba(245, 245, 244, 0.9) 0%, transparent 50%),
+            linear-gradient(135deg, #fafaf9 0%, #f5f5f4 50%, #e7e5e4 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+elif st.session_state.current_page == "🎁 Rewards Store":
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 15% 15%, rgba(253, 224, 71, 0.5) 0%, transparent 40%),
+            radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.3) 0%, transparent 50%),
+            linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+elif st.session_state.current_page == "🏆 Champions Leaderboard":
+    # 4. Recycled Paper Theme (Warm kraft cardboard palette)
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 80% 20%, rgba(214, 180, 138, 0.35) 0%, transparent 45%),
+            radial-gradient(circle at 15% 85%, rgba(180, 142, 98, 0.3) 0%, transparent 45%),
+            linear-gradient(135deg, #fefae0 0%, #faedcd 50%, #e9edc9 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+else:  # 📊 Impact Dashboard
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 50% 15%, rgba(134, 239, 172, 0.45) 0%, transparent 45%),
+            linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
 
-# ----------------- Static UI & Typography Styling CSS -----------------
+# Inject Dynamic CSS safely
+st.markdown("<style>" + theme_bg_css + "</style>", unsafe_allow_html=True)
+
+# ----------------- Static Layout & Typography Styling -----------------
 st.markdown(
     """
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Fredoka:wght@600;700&display=swap');
 
-    /* Hide default sidebar */
     [data-testid="stSidebar"], section[data-testid="stSidebar"] {
         display: none !important;
     }
 
-    /* Force all Streamlit root wrappers to transparent */
+    /* Keep all Streamlit inner wrappers transparent so the background renders fully */
     [data-testid="stHeader"],
     .stAppHeader,
     .stAppViewContainer,
@@ -184,7 +226,6 @@ st.markdown(
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
     
-    /* Global Typography */
     .stApp p, .stApp span, .stApp label, .stApp div {
         color: #143522;
         font-family: 'Plus Jakarta Sans', sans-serif;
@@ -192,7 +233,6 @@ st.markdown(
         line-height: 1.6;
     }
 
-    /* Large Headings */
     h1 {
         font-family: 'Fredoka', cursive, sans-serif !important;
         letter-spacing: 0.3px;
@@ -221,7 +261,6 @@ st.markdown(
         font-size: 24px !important;
     }
 
-    /* Streamlit Tabs */
     button[data-baseweb="tab"] {
         font-size: 22px !important;
         font-family: 'Fredoka', cursive !important;
@@ -230,7 +269,6 @@ st.markdown(
         background: transparent !important;
     }
 
-    /* Brand Logo */
     .brand-logo {
         font-size: 38px;
         font-family: 'Fredoka', cursive, sans-serif;
@@ -241,7 +279,6 @@ st.markdown(
         gap: 10px;
     }
 
-    /* Reward Badge */
     .badge-points {
         background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
         color: #ffffff !important;
@@ -255,7 +292,6 @@ st.markdown(
         display: inline-block;
     }
 
-    /* Navigation Pill Bar */
     div[role="radiogroup"] {
         background: rgba(255, 255, 255, 0.94);
         backdrop-filter: blur(14px);
@@ -282,7 +318,6 @@ st.markdown(
         background: #dcfce7 !important;
     }
 
-    /* Frosted Organic Cards */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
         background: rgba(255, 255, 255, 0.94) !important;
         backdrop-filter: blur(16px) !important;
@@ -292,7 +327,6 @@ st.markdown(
         border: 2px solid #bbf7d0 !important;
     }
 
-    /* Form Inputs */
     input, select, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {
         background-color: #ffffff !important;
         color: #0f381f !important;
@@ -307,7 +341,6 @@ st.markdown(
         font-size: 19px !important;
     }
 
-    /* Metric Counters */
     div[data-testid="stMetricValue"] {
         color: #15803d !important;
         font-family: 'Fredoka', cursive !important;
@@ -320,7 +353,6 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-    /* Leaf Green Action Buttons */
     .stButton>button, div[data-testid="stForm"] button {
         background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
         color: #ffffff !important;
@@ -340,7 +372,6 @@ st.markdown(
         color: #ffffff !important;
     }
 
-    /* Uploader Dropzone */
     [data-testid="stFileUploader"] {
         background: rgba(255, 255, 255, 0.95) !important;
         border: 2px dashed #16a34a !important;
@@ -357,7 +388,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ----------------- LOGIN GATEWAY -----------------
+# ----------------- LOGIN GATEWAY (Nature Light Theme) -----------------
 if not st.session_state.authenticated:
     st.markdown("<br>", unsafe_allow_html=True)
     col_l1, col_l2, col_l3 = st.columns([1, 2.2, 1])
@@ -474,7 +505,7 @@ st.markdown("<hr style='margin-top: 4px; margin-bottom: 26px; border: 0; border-
 # ----------------- 1. Home / Hero Screen (Floating Elements Theme) -----------------
 if st.session_state.current_page == "🏠 Home":
     st.markdown(
-        f"""
+        """
         <div style="text-align: center; max-width: 920px; margin: 0 auto; padding: 20px 0 26px 0;">
             <div style="background: rgba(255,255,255,0.92); color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 10px 28px; border-radius: 9999px; display: inline-block; font-size: 18px; margin-bottom: 16px; border: 2px solid #86efac; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.12);">
                 🍃 RETHINK • REUSE • RECREATE 🍃
@@ -482,6 +513,24 @@ if st.session_state.current_page == "🏠 Home":
             <h1 style="font-size: 58px; color: #064e3b; line-height: 1.18; margin-bottom: 14px;">
                 Turn Everyday Waste Into <span style="color: #16a34a;">EcoPoints!</span>
             </h1>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Floating eco orbs container matching image tile 5
+    st.markdown(
+        """
+        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 24px;">
+            <div style="background: rgba(255,255,255,0.85); border: 2px solid #86efac; border-radius: 50%; width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 6px 18px rgba(34, 197, 94, 0.25);">
+                ♻️
+            </div>
+            <div style="background: rgba(255,255,255,0.85); border: 2px solid #86efac; border-radius: 50%; width: 78px; height: 78px; display: flex; align-items: center; justify-content: center; font-size: 36px; box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);">
+                🌿
+            </div>
+            <div style="background: rgba(255,255,255,0.85); border: 2px solid #86efac; border-radius: 50%; width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 6px 18px rgba(34, 197, 94, 0.25);">
+                💡
+            </div>
         </div>
         """,
         unsafe_allow_html=True
