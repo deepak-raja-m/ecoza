@@ -12,212 +12,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ----------------- Force High-Priority Nature Light Background CSS -----------------
-st.markdown(
-    """
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Fredoka:wght@600;700&display=swap');
-
-    /* Hide default sidebar */
-    [data-testid="stSidebar"], section[data-testid="stSidebar"] {
-        display: none !important;
-    }
-
-    /* Force all Streamlit root wrapper layers to transparent so the background is visible */
-    [data-testid="stHeader"],
-    .stAppHeader,
-    .stAppViewContainer,
-    .main,
-    .block-container {
-        background-color: transparent !important;
-        background: transparent !important;
-    }
-    
-    /* Nature Light Real Photographic Botanical Sunlit Background */
-    .stApp {
-        background: 
-            linear-gradient(135deg, rgba(247, 254, 231, 0.78) 0%, rgba(240, 253, 244, 0.85) 60%, rgba(220, 252, 231, 0.90) 100%),
-            url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2000&q=80') !important;
-        background-size: cover !important;
-        background-position: center top !important;
-        background-repeat: no-repeat !important;
-        background-attachment: fixed !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
-    }
-    
-    /* Global Body Typography */
-    .stApp p, .stApp span, .stApp label, .stApp div {
-        color: #143522;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 20px;
-        line-height: 1.6;
-    }
-
-    /* Headings */
-    h1 {
-        font-family: 'Fredoka', cursive, sans-serif !important;
-        letter-spacing: 0.3px;
-        color: #064e3b !important;
-        font-size: 54px !important;
-        margin-bottom: 14px !important;
-    }
-
-    h2 {
-        font-family: 'Fredoka', cursive, sans-serif !important;
-        color: #064e3b !important;
-        font-size: 40px !important;
-        margin-top: 18px !important;
-        margin-bottom: 12px !important;
-    }
-
-    h3 {
-        font-family: 'Fredoka', cursive, sans-serif !important;
-        color: #065f46 !important;
-        font-size: 28px !important;
-    }
-
-    h4 {
-        font-family: 'Fredoka', cursive, sans-serif !important;
-        color: #065f46 !important;
-        font-size: 24px !important;
-    }
-
-    /* Streamlit Tabs */
-    button[data-baseweb="tab"] {
-        font-size: 22px !important;
-        font-family: 'Fredoka', cursive !important;
-        font-weight: 700 !important;
-        padding: 10px 24px !important;
-        background: transparent !important;
-    }
-
-    /* Brand Logo */
-    .brand-logo {
-        font-size: 38px;
-        font-family: 'Fredoka', cursive, sans-serif;
-        font-weight: 700;
-        color: #0f5132 !important;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    /* Reward Badge */
-    .badge-points {
-        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-        color: #ffffff !important;
-        font-family: 'Fredoka', cursive;
-        font-weight: 700;
-        padding: 12px 26px;
-        border-radius: 9999px;
-        font-size: 20px;
-        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
-        border: 2px solid #bbf7d0;
-        display: inline-block;
-    }
-
-    /* Navigation Pill Bar */
-    div[role="radiogroup"] {
-        background: rgba(255, 255, 255, 0.94);
-        backdrop-filter: blur(14px);
-        padding: 10px 18px;
-        border-radius: 9999px;
-        border: 2px solid #bbf7d0;
-        box-shadow: 0 4px 20px rgba(6, 78, 59, 0.1);
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    div[role="radiogroup"] label {
-        padding: 10px 20px !important;
-        border-radius: 9999px !important;
-        font-weight: 700 !important;
-        font-family: 'Fredoka', cursive !important;
-        color: #065f46 !important;
-        font-size: 19px !important;
-        transition: all 0.2s ease;
-    }
-
-    div[role="radiogroup"] label:hover {
-        background: #dcfce7 !important;
-    }
-
-    /* Frosted Organic Cards */
-    [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: rgba(255, 255, 255, 0.94) !important;
-        backdrop-filter: blur(16px) !important;
-        padding: 32px !important;
-        border-radius: 26px !important;
-        box-shadow: 0 10px 30px rgba(6, 78, 59, 0.09) !important;
-        border: 2px solid #bbf7d0 !important;
-    }
-
-    /* Form Inputs */
-    input, select, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {
-        background-color: #ffffff !important;
-        color: #0f381f !important;
-        border-color: #86efac !important;
-        border-radius: 14px !important;
-        font-size: 20px !important;
-        padding: 12px 16px !important;
-    }
-
-    input::placeholder {
-        color: #94a3b8 !important;
-        font-size: 19px !important;
-    }
-
-    /* Metric Counters */
-    div[data-testid="stMetricValue"] {
-        color: #15803d !important;
-        font-family: 'Fredoka', cursive !important;
-        font-weight: 700 !important;
-        font-size: 50px !important;
-    }
-
-    div[data-testid="stMetricLabel"] * {
-        font-size: 22px !important;
-        font-weight: 700 !important;
-    }
-
-    /* Leaf Green Action Buttons */
-    .stButton>button, div[data-testid="stForm"] button {
-        background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
-        color: #ffffff !important;
-        font-family: 'Fredoka', cursive !important;
-        font-size: 22px !important;
-        font-weight: 700 !important;
-        border-radius: 20px !important;
-        border: 2px solid #86efac !important;
-        padding: 14px 34px !important;
-        box-shadow: 0 6px 18px rgba(22, 163, 74, 0.28) !important;
-        transition: transform 0.15s ease;
-    }
-
-    .stButton>button:hover, div[data-testid="stForm"] button:hover {
-        transform: translateY(-2px);
-        background: linear-gradient(135deg, #166534 0%, #15803d 100%) !important;
-        color: #ffffff !important;
-    }
-
-    /* Uploader Dropzone */
-    [data-testid="stFileUploader"] {
-        background: rgba(255, 255, 255, 0.95) !important;
-        border: 2px dashed #16a34a !important;
-        border-radius: 22px !important;
-        padding: 34px !important;
-    }
-
-    [data-testid="stFileUploader"] * {
-        background-color: transparent !important;
-        font-size: 19px !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # ----------------- Session State Initialization -----------------
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -234,7 +28,15 @@ if "registered_users" not in st.session_state:
         "9876543210": {"password": "ecoza", "name": "Deepak Raja"}
     }
 
-PAGES = ["🏠 Home", "📸 AI Scanner", "🗺️ Drop-off Map", "🚚 Super Pickup", "🎁 Rewards Store", "🏆 Champions Leaderboard", "📊 Impact Dashboard"]
+PAGES = [
+    "🏠 Home", 
+    "📸 AI Scanner", 
+    "🗺️ Drop-off Map", 
+    "🚚 Super Pickup", 
+    "🎁 Rewards Store", 
+    "🏆 Champions Leaderboard", 
+    "📊 Impact Dashboard"
+]
 
 if "current_page" not in st.session_state:
     st.session_state.current_page = "🏠 Home"
@@ -306,6 +108,247 @@ RECYCLING_CENTERS = [
         "lon": 80.2570
     }
 ]
+
+# ----------------- Dynamic Page Background Selector -----------------
+# Maps each individual section to a distinct themed high-res backdrop
+if not st.session_state.authenticated:
+    # 1. Nature Light Theme (Login)
+    current_bg_url = "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2000&q=80"
+    current_gradient = "linear-gradient(135deg, rgba(247, 254, 231, 0.78) 0%, rgba(240, 253, 244, 0.85) 60%, rgba(220, 252, 231, 0.90) 100%)"
+elif st.session_state.current_page == "🏠 Home":
+    # 5. Floating Elements / Radiant Earth Theme
+    current_bg_url = "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2000&q=80"
+    current_gradient = "linear-gradient(135deg, rgba(236, 253, 245, 0.82) 0%, rgba(209, 250, 229, 0.85) 60%, rgba(167, 243, 208, 0.88) 100%)"
+elif st.session_state.current_page == "📸 AI Scanner":
+    # Clean Mint Tech Scanner Backdrop
+    current_bg_url = "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2000&q=80"
+    current_gradient = "linear-gradient(135deg, rgba(240, 253, 250, 0.86) 0%, rgba(204, 251, 241, 0.88) 60%, rgba(153, 246, 228, 0.90) 100%)"
+elif st.session_state.current_page == "🗺️ Drop-off Map":
+    # 3. Forest Lake Mountain Theme
+    current_bg_url = "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=80"
+    current_gradient = "linear-gradient(135deg, rgba(236, 254, 255, 0.80) 0%, rgba(207, 250, 254, 0.85) 60%, rgba(165, 243, 252, 0.88) 100%)"
+elif st.session_state.current_page == "🚚 Super Pickup":
+    # 2. Minimal Organic Theme (Sage curves and soft textures)
+    current_bg_url = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2000&q=80"
+    current_gradient = "linear-gradient(135deg, rgba(245, 245, 244, 0.85) 0%, rgba(231, 229, 228, 0.88) 60%, rgba(214, 211, 209, 0.90) 100%)"
+elif st.session_state.current_page == "🎁 Rewards Store":
+    # Warm Festive Sunlit Garden Theme
+    current_bg_url = "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80"
+    current_gradient = "linear-gradient(135deg, rgba(254, 243, 199, 0.82) 0%, rgba(253, 230, 138, 0.85) 60%, rgba(252, 211, 77, 0.88) 100%)"
+elif st.session_state.current_page == "🏆 Champions Leaderboard":
+    # 4. Recycled Paper Kraft Theme
+    current_bg_url = "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=2000&q=80"
+    current_gradient = "linear-gradient(135deg, rgba(254, 249, 240, 0.86) 0%, rgba(250, 240, 225, 0.88) 60%, rgba(245, 230, 210, 0.90) 100%)"
+else:  # 📊 Impact Dashboard
+    # Fresh Pine Forest Air Theme
+    current_bg_url = "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2000&q=80"
+    current_gradient = "linear-gradient(135deg, rgba(240, 253, 244, 0.85) 0%, rgba(220, 252, 231, 0.88) 60%, rgba(187, 247, 208, 0.90) 100%)"
+
+# ----------------- Dynamic Background Injection CSS -----------------
+st.markdown(
+    f"""
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Fredoka:wght@600;700&display=swap');
+
+    /* Hide default sidebar */
+    [data-testid="stSidebar"], section[data-testid="stSidebar"] {
+        display: none !important;
+    }
+
+    /* Force all Streamlit root wrappers to transparent */
+    [data-testid="stHeader"],
+    .stAppHeader,
+    .stAppViewContainer,
+    .main,
+    .block-container {{
+        background-color: transparent !important;
+        background: transparent !important;
+    }}
+    
+    /* Dynamically loaded page background */
+    .stApp {{
+        background: 
+            {current_gradient},
+            url('{current_bg_url}') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: fixed !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }}
+    
+    /* Global Typography */
+    .stApp p, .stApp span, .stApp label, .stApp div {{
+        color: #143522;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 20px;
+        line-height: 1.6;
+    }}
+
+    /* Large Headings */
+    h1 {{
+        font-family: 'Fredoka', cursive, sans-serif !important;
+        letter-spacing: 0.3px;
+        color: #064e3b !important;
+        font-size: 54px !important;
+        margin-bottom: 14px !important;
+    }}
+
+    h2 {{
+        font-family: 'Fredoka', cursive, sans-serif !important;
+        color: #064e3b !important;
+        font-size: 40px !important;
+        margin-top: 18px !important;
+        margin-bottom: 12px !important;
+    }}
+
+    h3 {{
+        font-family: 'Fredoka', cursive, sans-serif !important;
+        color: #065f46 !important;
+        font-size: 28px !important;
+    }}
+
+    h4 {{
+        font-family: 'Fredoka', cursive, sans-serif !important;
+        color: #065f46 !important;
+        font-size: 24px !important;
+    }}
+
+    /* Streamlit Tabs */
+    button[data-baseweb="tab"] {{
+        font-size: 22px !important;
+        font-family: 'Fredoka', cursive !important;
+        font-weight: 700 !important;
+        padding: 10px 24px !important;
+        background: transparent !important;
+    }}
+
+    /* Brand Logo */
+    .brand-logo {{
+        font-size: 38px;
+        font-family: 'Fredoka', cursive, sans-serif;
+        font-weight: 700;
+        color: #0f5132 !important;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }}
+
+    /* Reward Badge */
+    .badge-points {{
+        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        color: #ffffff !important;
+        font-family: 'Fredoka', cursive;
+        font-weight: 700;
+        padding: 12px 26px;
+        border-radius: 9999px;
+        font-size: 20px;
+        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+        border: 2px solid #bbf7d0;
+        display: inline-block;
+    }}
+
+    /* Navigation Pill Bar */
+    div[role="radiogroup"] {{
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(14px);
+        padding: 10px 18px;
+        border-radius: 9999px;
+        border: 2px solid #bbf7d0;
+        box-shadow: 0 4px 20px rgba(6, 78, 59, 0.1);
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }}
+
+    div[role="radiogroup"] label {{
+        padding: 10px 20px !important;
+        border-radius: 9999px !important;
+        font-weight: 700 !important;
+        font-family: 'Fredoka', cursive !important;
+        color: #065f46 !important;
+        font-size: 19px !important;
+        transition: all 0.2s ease;
+    }}
+
+    div[role="radiogroup"] label:hover {{
+        background: #dcfce7 !important;
+    }}
+
+    /* Frosted Organic Cards */
+    [data-testid="stForm"], [data-testid="stMetric"], .stTable {{
+        background: rgba(255, 255, 255, 0.94) !important;
+        backdrop-filter: blur(16px) !important;
+        padding: 32px !important;
+        border-radius: 26px !important;
+        box-shadow: 0 10px 30px rgba(6, 78, 59, 0.09) !important;
+        border: 2px solid #bbf7d0 !important;
+    }}
+
+    /* Form Inputs */
+    input, select, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {{
+        background-color: #ffffff !important;
+        color: #0f381f !important;
+        border-color: #86efac !important;
+        border-radius: 14px !important;
+        font-size: 20px !important;
+        padding: 12px 16px !important;
+    }}
+
+    input::placeholder {{
+        color: #94a3b8 !important;
+        font-size: 19px !important;
+    }}
+
+    /* Metric Counters */
+    div[data-testid="stMetricValue"] {{
+        color: #15803d !important;
+        font-family: 'Fredoka', cursive !important;
+        font-weight: 700 !important;
+        font-size: 50px !important;
+    }}
+
+    div[data-testid="stMetricLabel"] * {{
+        font-size: 22px !important;
+        font-weight: 700 !important;
+    }}
+
+    /* Leaf Green Action Buttons */
+    .stButton>button, div[data-testid="stForm"] button {{
+        background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
+        color: #ffffff !important;
+        font-family: 'Fredoka', cursive !important;
+        font-size: 22px !important;
+        font-weight: 700 !important;
+        border-radius: 20px !important;
+        border: 2px solid #86efac !important;
+        padding: 14px 34px !important;
+        box-shadow: 0 6px 18px rgba(22, 163, 74, 0.28) !important;
+        transition: transform 0.15s ease;
+    }}
+
+    .stButton>button:hover, div[data-testid="stForm"] button:hover {{
+        transform: translateY(-2px);
+        background: linear-gradient(135deg, #166534 0%, #15803d 100%) !important;
+        color: #ffffff !important;
+    }}
+
+    /* Uploader Dropzone */
+    [data-testid="stFileUploader"] {{
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 2px dashed #16a34a !important;
+        border-radius: 22px !important;
+        padding: 34px !important;
+    }}
+
+    [data-testid="stFileUploader"] * {{
+        background-color: transparent !important;
+        font-size: 19px !important;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # ----------------- LOGIN GATEWAY -----------------
 if not st.session_state.authenticated:
@@ -406,6 +449,7 @@ with head_col2:
     )
     if selected != st.session_state.current_page:
         st.session_state.current_page = selected
+        st.rerun()
 
 with head_col3:
     col_pts, col_out = st.columns([1.3, 0.9], vertical_alignment="center")
@@ -420,7 +464,7 @@ with head_col3:
 st.markdown(f"<p style='font-size: 18px; color: #365342; margin-top: -6px;'>Logged in: <b>{st.session_state.username}</b> ({st.session_state.user_identifier})</p>", unsafe_allow_html=True)
 st.markdown("<hr style='margin-top: 4px; margin-bottom: 26px; border: 0; border-top: 2px dashed #bbf7d0;'>", unsafe_allow_html=True)
 
-# ----------------- 1. Home / Hero Screen -----------------
+# ----------------- 1. Home / Hero Screen (Floating Elements Background) -----------------
 if st.session_state.current_page == "🏠 Home":
     st.markdown(
         f"""
@@ -487,7 +531,7 @@ if st.session_state.current_page == "🏠 Home":
     step3.warning("**Step 3: Drop/Pickup**\n\nDeposit at nearby centers or call our pickup van.")
     step4.error("**Step 4: Claim**\n\nRedeem coupons and track your leaderboard rank!")
 
-# ----------------- 2. AI Scanner & Classifier -----------------
+# ----------------- 2. AI Scanner & Classifier (Cyber Mint Background) -----------------
 elif st.session_state.current_page == "📸 AI Scanner":
     st.title("📸 AI Waste Scanner & Classifier")
     st.markdown("<p style='font-size: 22px; color: #365342;'>Upload an image or take a photo to detect material category and log EcoPoints.</p>", unsafe_allow_html=True)
@@ -557,7 +601,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
             st.success(f"Awesome! Added {calculated_points} EcoPoints to your balance!")
             st.rerun()
 
-# ----------------- 3. Nearby Collection Centers (Map) -----------------
+# ----------------- 3. Nearby Collection Centers (Forest Lake Theme) -----------------
 elif st.session_state.current_page == "🗺️ Drop-off Map":
     st.title("🗺️ Ecoza Drop-Off Centers")
     st.markdown("<p style='font-size: 22px; color: #365342;'>Find certified circular recycling drop-off centers across Chennai!</p>", unsafe_allow_html=True)
@@ -578,7 +622,7 @@ elif st.session_state.current_page == "🗺️ Drop-off Map":
                 st.button("Visit Station", key=f"dir_{row['Center Name']}")
             st.divider()
 
-# ----------------- 4. Doorstep Pickup -----------------
+# ----------------- 4. Doorstep Pickup (Minimal Organic Theme) -----------------
 elif st.session_state.current_page == "🚚 Super Pickup":
     st.title("🚚 Schedule Doorstep Pickup")
     st.markdown("<p style='font-size: 22px; color: #365342;'>Book a verified Ecoza pickup partner directly to your address.</p>", unsafe_allow_html=True)
@@ -611,7 +655,7 @@ elif st.session_state.current_page == "🚚 Super Pickup":
         st.subheader("📋 Scheduled Pickups")
         st.dataframe(pd.DataFrame(st.session_state.pickup_requests), use_container_width=True)
 
-# ----------------- 5. Rewards Store -----------------
+# ----------------- 5. Rewards Store (Golden Festive Theme) -----------------
 elif st.session_state.current_page == "🎁 Rewards Store":
     st.title("🎁 Rewards Store")
     st.markdown(f"<p style='font-size: 22px; color: #365342;'>Redeem points for eco-conscious rewards! Balance: <b>{st.session_state.ecopoints} EcoPoints</b></p>", unsafe_allow_html=True)
@@ -647,7 +691,7 @@ elif st.session_state.current_page == "🎁 Rewards Store":
                     st.error("Not enough EcoPoints yet!")
             st.divider()
 
-# ----------------- 6. Champions Leaderboard -----------------
+# ----------------- 6. Champions Leaderboard (Recycled Kraft Paper Theme) -----------------
 elif st.session_state.current_page == "🏆 Champions Leaderboard":
     st.title("🏆 Community Leaderboard")
     st.markdown("<p style='font-size: 22px; color: #365342;'>Top recyclers contributing to zero waste this week!</p>", unsafe_allow_html=True)
@@ -661,7 +705,7 @@ elif st.session_state.current_page == "🏆 Champions Leaderboard":
     ]
     st.table(pd.DataFrame(leaderboard))
 
-# ----------------- 7. User Dashboard -----------------
+# ----------------- 7. User Dashboard (Clean Forest Canopy Theme) -----------------
 elif st.session_state.current_page == "📊 Impact Dashboard":
     st.title("📊 Environmental Impact Dashboard")
     st.markdown("<p style='font-size: 22px; color: #365342;'>Track your total diverted waste and carbon savings!</p>", unsafe_allow_html=True)
