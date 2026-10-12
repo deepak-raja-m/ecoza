@@ -12,7 +12,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ----------------- Nature Light Theme CSS -----------------
+# ----------------- Force High-Priority Nature Light Background CSS -----------------
 st.markdown(
     """
     <style>
@@ -22,14 +22,25 @@ st.markdown(
     [data-testid="stSidebar"], section[data-testid="stSidebar"] {
         display: none !important;
     }
+
+    /* Force all Streamlit root wrapper layers to transparent so the background is visible */
+    [data-testid="stHeader"],
+    .stAppHeader,
+    .stAppViewContainer,
+    .main,
+    .block-container {
+        background-color: transparent !important;
+        background: transparent !important;
+    }
     
-    /* Nature Light Background: Soft Sunlit Botanical Mesh Gradient */
+    /* Nature Light Real Photographic Botanical Sunlit Background */
     .stApp {
         background: 
-            radial-gradient(circle at 12% 15%, rgba(217, 249, 157, 0.55) 0%, transparent 45%),
-            radial-gradient(circle at 88% 18%, rgba(134, 239, 172, 0.45) 0%, transparent 45%),
-            radial-gradient(circle at 50% 90%, rgba(187, 247, 208, 0.5) 0%, transparent 55%),
-            linear-gradient(135deg, #f7fee7 0%, #f0fdf4 40%, #e7f7ed 100%) !important;
+            linear-gradient(135deg, rgba(247, 254, 231, 0.78) 0%, rgba(240, 253, 244, 0.85) 60%, rgba(220, 252, 231, 0.90) 100%),
+            url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2000&q=80') !important;
+        background-size: cover !important;
+        background-position: center top !important;
+        background-repeat: no-repeat !important;
         background-attachment: fixed !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
@@ -77,6 +88,7 @@ st.markdown(
         font-family: 'Fredoka', cursive !important;
         font-weight: 700 !important;
         padding: 10px 24px !important;
+        background: transparent !important;
     }
 
     /* Brand Logo */
@@ -106,12 +118,12 @@ st.markdown(
 
     /* Navigation Pill Bar */
     div[role="radiogroup"] {
-        background: rgba(255, 255, 255, 0.92);
-        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(14px);
         padding: 10px 18px;
         border-radius: 9999px;
         border: 2px solid #bbf7d0;
-        box-shadow: 0 4px 20px rgba(6, 78, 59, 0.08);
+        box-shadow: 0 4px 20px rgba(6, 78, 59, 0.1);
         display: flex;
         justify-content: center;
         gap: 10px;
@@ -134,10 +146,10 @@ st.markdown(
     /* Frosted Organic Cards */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
         background: rgba(255, 255, 255, 0.94) !important;
-        backdrop-filter: blur(14px) !important;
+        backdrop-filter: blur(16px) !important;
         padding: 32px !important;
         border-radius: 26px !important;
-        box-shadow: 0 10px 30px rgba(6, 78, 59, 0.08) !important;
+        box-shadow: 0 10px 30px rgba(6, 78, 59, 0.09) !important;
         border: 2px solid #bbf7d0 !important;
     }
 
@@ -413,7 +425,7 @@ if st.session_state.current_page == "🏠 Home":
     st.markdown(
         f"""
         <div style="text-align: center; max-width: 920px; margin: 0 auto; padding: 20px 0 26px 0;">
-            <div style="background: rgba(255,255,255,0.9); color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 10px 28px; border-radius: 9999px; display: inline-block; font-size: 18px; margin-bottom: 16px; border: 2px solid #86efac; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.12);">
+            <div style="background: rgba(255,255,255,0.92); color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 10px 28px; border-radius: 9999px; display: inline-block; font-size: 18px; margin-bottom: 16px; border: 2px solid #86efac; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.12);">
                 🍃 RETHINK • REUSE • RECREATE 🍃
             </div>
             <h1 style="font-size: 58px; color: #064e3b; line-height: 1.18; margin-bottom: 14px;">
