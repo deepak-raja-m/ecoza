@@ -109,87 +109,100 @@ RECYCLING_CENTERS = [
     }
 ]
 
-# ----------------- Graphic Vector Illustrations (Exact Image Replicas) -----------------
-
-# SVG Artwork 1: Nature Light Theme (Sunlit leaves framing corner + organic wavy sage curves)
-NATURE_LIGHT_SVG = """data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080' fill='none'>
-  <defs>
-    <linearGradient id='bgGrad' x1='0' y1='0' x2='1920' y2='1080' gradientUnits='userSpaceOnUse'>
-      <stop offset='0%' stop-color='%23f4fbf4'/>
-      <stop offset='50%' stop-color='%23e9f7ec'/>
-      <stop offset='100%' stop-color='%23dcf1e1'/>
-    </linearGradient>
-    <linearGradient id='wave1' x1='0' y1='0' x2='1000' y2='1000' gradientUnits='userSpaceOnUse'>
-      <stop offset='0%' stop-color='%2365a30d' stop-opacity='0.22'/>
-      <stop offset='100%' stop-color='%2315803d' stop-opacity='0.45'/>
-    </linearGradient>
-    <linearGradient id='wave2' x1='1920' y1='1080' x2='1000' y2='400' gradientUnits='userSpaceOnUse'>
-      <stop offset='0%' stop-color='%2322c55e' stop-opacity='0.35'/>
-      <stop offset='100%' stop-color='%23166534' stop-opacity='0.15'/>
-    </linearGradient>
-  </defs>
-  <rect width='1920' height='1080' fill='url(%23bgGrad)'/>
-  <!-- Organic wave shapes matching tile 1 -->
-  <path d='M-100,0 C300,100 500,450 350,850 C250,1100 50,1200 -100,1200 Z' fill='url(%23wave1)'/>
-  <path d='M1200,1080 C1350,800 1650,650 2020,700 L2020,1080 Z' fill='url(%23wave2)'/>
-  <!-- Botanical branch & leaf silhouettes top left -->
-  <g fill='%2315803d' opacity='0.75'>
-    <path d='M-20,-20 Q120,60 220,10 Q280,140 180,180 Q60,110 -20,-20 Z'/>
-    <path d='M100,40 Q250,90 280,200 Q180,220 120,120 Z'/>
-    <path d='M180,180 Q320,230 360,340 Q260,340 210,240 Z'/>
-    <path d='M-10,120 Q100,180 130,280 Q40,280 0,180 Z'/>
-    <path d='M60,260 Q180,320 200,430 Q110,410 70,320 Z'/>
-  </g>
-</svg>"""
-
-# SVG Artwork 5: Floating Elements Theme (3D glowing Earth curve at bottom, floating leaves & bubbles)
-FLOATING_ELEMENTS_SVG = """data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080' fill='none'>
-  <defs>
-    <radialGradient id='skyGlow' cx='50%' cy='25%' r='80%'>
-      <stop offset='0%' stop-color='%23ffffff'/>
-      <stop offset='45%' stop-color='%23e9f9ee'/>
-      <stop offset='100%' stop-color='%23d1fae5'/>
-    </radialGradient>
-    <radialGradient id='globeGrad' cx='50%' cy='35%' r='65%'>
-      <stop offset='0%' stop-color='%234ade80'/>
-      <stop offset='35%' stop-color='%2316a34a'/>
-      <stop offset='70%' stop-color='%23166534'/>
-      <stop offset='100%' stop-color='%23052e16'/>
-    </radialGradient>
-    <filter id='globeGlow' x='-20%' y='-20%' width='140%' height='140%'>
-      <feGaussianBlur stdDeviation='50' result='blur'/>
-      <feComposite in='SourceGraphic' in2='blur' operator='over'/>
-    </filter>
-  </defs>
-  <rect width='1920' height='1080' fill='url(%23skyGlow)'/>
-  <!-- Ambient floating glowing bubbles -->
-  <circle cx='380' cy='520' r='55' fill='white' fill-opacity='0.7' stroke='%2386efac' stroke-width='2'/>
-  <circle cx='960' cy='420' r='68' fill='white' fill-opacity='0.75' stroke='%234ade80' stroke-width='2.5'/>
-  <circle cx='1540' cy='520' r='55' fill='white' fill-opacity='0.7' stroke='%2386efac' stroke-width='2'/>
-  <!-- Floating leaf silhouettes -->
-  <g fill='%2316a34a' opacity='0.85'>
-    <path d='M320,380 Q360,350 400,370 Q380,410 330,400 Z'/>
-    <path d='M1450,320 Q1480,280 1520,300 Q1510,340 1460,340 Z'/>
-    <path d='M1620,440 Q1670,430 1690,470 Q1640,490 1620,450 Z'/>
-    <path d='M250,560 Q290,540 310,580 Q270,600 250,570 Z'/>
-    <path d='M1050,280 Q1090,260 1110,300 Q1070,320 1050,290 Z'/>
-  </g>
-  <!-- Curving Earth horizon at bottom matching tile 5 -->
-  <ellipse cx='960' cy='1280' rx='1080' ry='500' fill='url(%23globeGrad)' filter='url(%23globeGlow)'/>
-  <ellipse cx='960' cy='1280' rx='1080' ry='500' fill='none' stroke='%2386efac' stroke-width='6' opacity='0.6'/>
-</svg>"""
-
-# Dynamic background selection based on screen
+# ----------------- Pure CSS Backgrounds Matching The Image -----------------
 if not st.session_state.authenticated:
-    active_bg_svg = NATURE_LIGHT_SVG
+    # 1. Nature Light Theme (Organic sunlit wave shapes & natural green layers)
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 10% 10%, rgba(134, 239, 172, 0.45) 0%, transparent 45%),
+            radial-gradient(circle at 90% 15%, rgba(187, 247, 208, 0.40) 0%, transparent 45%),
+            radial-gradient(circle at 85% 85%, rgba(22, 101, 52, 0.25) 0%, transparent 50%),
+            linear-gradient(135deg, #f7fee7 0%, #ecfdf5 45%, #d1fae5 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
 elif st.session_state.current_page == "🏠 Home":
-    active_bg_svg = FLOATING_ELEMENTS_SVG
+    # 5. Floating Elements Theme (Radiant bottom Earth sphere glow + floating mint orbs)
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 50% 105%, #15803d 0%, #166534 30%, #064e3b 55%, transparent 75%),
+            radial-gradient(circle at 15% 75%, rgba(34, 197, 94, 0.35) 0%, transparent 35%),
+            radial-gradient(circle at 85% 75%, rgba(74, 222, 128, 0.35) 0%, transparent 35%),
+            radial-gradient(circle at 20% 30%, rgba(187, 247, 208, 0.5) 0%, transparent 40%),
+            radial-gradient(circle at 80% 35%, rgba(187, 247, 208, 0.5) 0%, transparent 40%),
+            linear-gradient(180deg, #ecfdf5 0%, #d1fae5 60%, #bbf7d0 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
 elif st.session_state.current_page == "📸 AI Scanner":
-    active_bg_svg = NATURE_LIGHT_SVG
-else:
-    active_bg_svg = FLOATING_ELEMENTS_SVG
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(20, 184, 166, 0.25) 0%, transparent 40%),
+            radial-gradient(circle at 80% 80%, rgba(13, 148, 136, 0.25) 0%, transparent 45%),
+            linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 50%, #99f6e4 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+elif st.session_state.current_page == "🗺️ Drop-off Map":
+    # 3. Forest Lake Mountain Atmosphere
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 50% 10%, rgba(254, 240, 138, 0.4) 0%, transparent 45%),
+            radial-gradient(circle at 85% 90%, rgba(15, 118, 110, 0.35) 0%, transparent 50%),
+            linear-gradient(180deg, #ecfeff 0%, #cffafe 45%, #a5f3fc 85%, #0f766e 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+elif st.session_state.current_page == "🚚 Super Pickup":
+    # 2. Minimal Organic Theme (Soft neutral sand and sage tones)
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 10% 20%, rgba(220, 252, 231, 0.6) 0%, transparent 45%),
+            radial-gradient(circle at 90% 80%, rgba(245, 245, 244, 0.9) 0%, transparent 50%),
+            linear-gradient(135deg, #fafaf9 0%, #f5f5f4 50%, #e7e5e4 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+elif st.session_state.current_page == "🎁 Rewards Store":
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 15% 15%, rgba(253, 224, 71, 0.5) 0%, transparent 40%),
+            radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.3) 0%, transparent 50%),
+            linear-gradient(135deg, #fffbeb 0%, #fef3c7 50%, #fde68a 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+elif st.session_state.current_page == "🏆 Champions Leaderboard":
+    # 4. Recycled Paper Theme (Warm kraft cardboard palette)
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 80% 20%, rgba(214, 180, 138, 0.35) 0%, transparent 45%),
+            radial-gradient(circle at 15% 85%, rgba(180, 142, 98, 0.3) 0%, transparent 45%),
+            linear-gradient(135deg, #fefae0 0%, #faedcd 50%, #e9edc9 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
+else:  # 📊 Impact Dashboard
+    theme_bg_css = """
+    .stApp {
+        background: 
+            radial-gradient(circle at 50% 15%, rgba(134, 239, 172, 0.45) 0%, transparent 45%),
+            linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%) !important;
+        background-attachment: fixed !important;
+    }
+    """
 
-# ----------------- CSS Styling -----------------
+# Inject Dynamic CSS safely
+st.markdown("<style>" + theme_bg_css + "</style>", unsafe_allow_html=True)
+
+# ----------------- Static Layout & Typography Styling -----------------
 st.markdown(
     """
     <style>
@@ -199,6 +212,7 @@ st.markdown(
         display: none !important;
     }
 
+    /* Keep all Streamlit inner wrappers transparent so the background renders fully */
     [data-testid="stHeader"],
     .stAppHeader,
     .stAppViewContainer,
@@ -208,16 +222,10 @@ st.markdown(
         background: transparent !important;
     }
 
-    /* Crisp white frosted containers to ensure readability over the graphics */
     .stApp {
-        background-image: url('""" + active_bg_svg + """') !important;
-        background-size: cover !important;
-        background-position: center center !important;
-        background-repeat: no-repeat !important;
-        background-attachment: fixed !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
-
+    
     .stApp p, .stApp span, .stApp label, .stApp div {
         color: #143522;
         font-family: 'Plus Jakarta Sans', sans-serif;
@@ -247,39 +255,75 @@ st.markdown(
         font-size: 28px !important;
     }
 
-    /* Navigation Bar */
+    h4 {
+        font-family: 'Fredoka', cursive, sans-serif !important;
+        color: #065f46 !important;
+        font-size: 24px !important;
+    }
+
+    button[data-baseweb="tab"] {
+        font-size: 22px !important;
+        font-family: 'Fredoka', cursive !important;
+        font-weight: 700 !important;
+        padding: 10px 24px !important;
+        background: transparent !important;
+    }
+
+    .brand-logo {
+        font-size: 38px;
+        font-family: 'Fredoka', cursive, sans-serif;
+        font-weight: 700;
+        color: #0f5132 !important;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .badge-points {
+        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        color: #ffffff !important;
+        font-family: 'Fredoka', cursive;
+        font-weight: 700;
+        padding: 12px 26px;
+        border-radius: 9999px;
+        font-size: 20px;
+        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+        border: 2px solid #bbf7d0;
+        display: inline-block;
+    }
+
     div[role="radiogroup"] {
-        background: rgba(255, 255, 255, 0.95) !important;
-        backdrop-filter: blur(14px) !important;
-        padding: 8px 16px !important;
-        border-radius: 9999px !important;
-        border: 2px solid #86efac !important;
-        box-shadow: 0 6px 20px rgba(22, 101, 52, 0.12) !important;
-        display: flex !important;
-        justify-content: center !important;
-        gap: 8px !important;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(14px);
+        padding: 10px 18px;
+        border-radius: 9999px;
+        border: 2px solid #bbf7d0;
+        box-shadow: 0 4px 20px rgba(6, 78, 59, 0.1);
+        display: flex;
+        justify-content: center;
+        gap: 10px;
     }
 
     div[role="radiogroup"] label {
-        padding: 8px 18px !important;
+        padding: 10px 20px !important;
         border-radius: 9999px !important;
         font-weight: 700 !important;
         font-family: 'Fredoka', cursive !important;
         color: #065f46 !important;
-        font-size: 18px !important;
+        font-size: 19px !important;
+        transition: all 0.2s ease;
     }
 
     div[role="radiogroup"] label:hover {
         background: #dcfce7 !important;
     }
 
-    /* Frosted Cards */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: rgba(255, 255, 255, 0.95) !important;
+        background: rgba(255, 255, 255, 0.94) !important;
         backdrop-filter: blur(16px) !important;
         padding: 32px !important;
-        border-radius: 24px !important;
-        box-shadow: 0 10px 30px rgba(6, 78, 59, 0.10) !important;
+        border-radius: 26px !important;
+        box-shadow: 0 10px 30px rgba(6, 78, 59, 0.09) !important;
         border: 2px solid #bbf7d0 !important;
     }
 
@@ -292,11 +336,21 @@ st.markdown(
         padding: 12px 16px !important;
     }
 
+    input::placeholder {
+        color: #94a3b8 !important;
+        font-size: 19px !important;
+    }
+
     div[data-testid="stMetricValue"] {
         color: #15803d !important;
         font-family: 'Fredoka', cursive !important;
         font-weight: 700 !important;
         font-size: 50px !important;
+    }
+
+    div[data-testid="stMetricLabel"] * {
+        font-size: 22px !important;
+        font-weight: 700 !important;
     }
 
     .stButton>button, div[data-testid="stForm"] button {
@@ -309,34 +363,25 @@ st.markdown(
         border: 2px solid #86efac !important;
         padding: 14px 34px !important;
         box-shadow: 0 6px 18px rgba(22, 163, 74, 0.28) !important;
+        transition: transform 0.15s ease;
     }
 
     .stButton>button:hover, div[data-testid="stForm"] button:hover {
+        transform: translateY(-2px);
         background: linear-gradient(135deg, #166534 0%, #15803d 100%) !important;
         color: #ffffff !important;
     }
 
-    .badge-points {
-        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-        color: #ffffff !important;
-        font-family: 'Fredoka', cursive;
-        font-weight: 700;
-        padding: 10px 24px;
-        border-radius: 9999px;
-        font-size: 19px;
-        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
-        border: 2px solid #bbf7d0;
-        display: inline-block;
+    [data-testid="stFileUploader"] {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 2px dashed #16a34a !important;
+        border-radius: 22px !important;
+        padding: 34px !important;
     }
 
-    .brand-logo {
-        font-size: 38px;
-        font-family: 'Fredoka', cursive, sans-serif;
-        font-weight: 700;
-        color: #0f5132 !important;
-        display: flex;
-        align-items: center;
-        gap: 10px;
+    [data-testid="stFileUploader"] * {
+        background-color: transparent !important;
+        font-size: 19px !important;
     }
     </style>
     """,
@@ -454,20 +499,38 @@ with head_col3:
             st.session_state.user_identifier = ""
             st.rerun()
 
-st.markdown(f"<p style='font-size: 18px; color: #14532d; font-weight: 700; margin-top: -4px;'>Logged in: <b>{st.session_state.username}</b> ({st.session_state.user_identifier})</p>", unsafe_allow_html=True)
-st.markdown("<hr style='margin-top: 4px; margin-bottom: 26px; border: 0; border-top: 2px dashed #86efac;'>", unsafe_allow_html=True)
+st.markdown(f"<p style='font-size: 18px; color: #365342; margin-top: -6px;'>Logged in: <b>{st.session_state.username}</b> ({st.session_state.user_identifier})</p>", unsafe_allow_html=True)
+st.markdown("<hr style='margin-top: 4px; margin-bottom: 26px; border: 0; border-top: 2px dashed #bbf7d0;'>", unsafe_allow_html=True)
 
 # ----------------- 1. Home / Hero Screen (Floating Elements Theme) -----------------
 if st.session_state.current_page == "🏠 Home":
     st.markdown(
         """
-        <div style="text-align: center; max-width: 920px; margin: 0 auto; padding: 20px 0 20px 0;">
+        <div style="text-align: center; max-width: 920px; margin: 0 auto; padding: 20px 0 26px 0;">
             <div style="background: rgba(255,255,255,0.92); color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 10px 28px; border-radius: 9999px; display: inline-block; font-size: 18px; margin-bottom: 16px; border: 2px solid #86efac; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.12);">
                 🍃 RETHINK • REUSE • RECREATE 🍃
             </div>
             <h1 style="font-size: 58px; color: #064e3b; line-height: 1.18; margin-bottom: 14px;">
                 Turn Everyday Waste Into <span style="color: #16a34a;">EcoPoints!</span>
             </h1>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Floating eco orbs container matching image tile 5
+    st.markdown(
+        """
+        <div style="display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 24px;">
+            <div style="background: rgba(255,255,255,0.85); border: 2px solid #86efac; border-radius: 50%; width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 6px 18px rgba(34, 197, 94, 0.25);">
+                ♻️
+            </div>
+            <div style="background: rgba(255,255,255,0.85); border: 2px solid #86efac; border-radius: 50%; width: 78px; height: 78px; display: flex; align-items: center; justify-content: center; font-size: 36px; box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);">
+                🌿
+            </div>
+            <div style="background: rgba(255,255,255,0.85); border: 2px solid #86efac; border-radius: 50%; width: 68px; height: 68px; display: flex; align-items: center; justify-content: center; font-size: 30px; box-shadow: 0 6px 18px rgba(34, 197, 94, 0.25);">
+                💡
+            </div>
         </div>
         """,
         unsafe_allow_html=True
@@ -485,7 +548,7 @@ if st.session_state.current_page == "🏠 Home":
     with col1:
         st.markdown(
             """
-            <div style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 6px 18px rgba(6, 78, 59, 0.08);">
+            <div style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 6px 18px rgba(6, 78, 59, 0.06);">
                 <div style="font-size: 52px; margin-bottom: 10px;">📷</div>
                 <h3 style="color: #065f46; margin: 0 0 10px 0; font-size: 28px;">AI Waste Scanner</h3>
                 <p style="color: #365342; font-size: 19px; margin: 0; line-height: 1.5;">Upload or snap photos to identify materials and calculate points per 1,000 grams.</p>
@@ -496,7 +559,7 @@ if st.session_state.current_page == "🏠 Home":
     with col2:
         st.markdown(
             """
-            <div style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 6px 18px rgba(6, 78, 59, 0.08);">
+            <div style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 6px 18px rgba(6, 78, 59, 0.06);">
                 <div style="font-size: 52px; margin-bottom: 10px;">🚚</div>
                 <h3 style="color: #065f46; margin: 0 0 10px 0; font-size: 28px;">Doorstep Collection</h3>
                 <p style="color: #365342; font-size: 19px; margin: 0; line-height: 1.5;">Schedule doorstep pickups with certified recycling partners.</p>
@@ -507,7 +570,7 @@ if st.session_state.current_page == "🏠 Home":
     with col3:
         st.markdown(
             """
-            <div style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 6px 18px rgba(6, 78, 59, 0.08);">
+            <div style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 6px 18px rgba(6, 78, 59, 0.06);">
                 <div style="font-size: 52px; margin-bottom: 10px;">🎁</div>
                 <h3 style="color: #065f46; margin: 0 0 10px 0; font-size: 28px;">Community Rewards</h3>
                 <p style="color: #365342; font-size: 19px; margin: 0; line-height: 1.5;">Trade accumulated points for plant saplings, book coupons, and vouchers.</p>
