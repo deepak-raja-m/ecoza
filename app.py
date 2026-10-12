@@ -12,7 +12,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ----------------- Vibrant Nature Theme with Extra Large Typography -----------------
+# ----------------- Nature Light Theme CSS -----------------
 st.markdown(
     """
     <style>
@@ -23,9 +23,14 @@ st.markdown(
         display: none !important;
     }
     
-    /* Fresh Botanical Eco Gradient Background */
+    /* Nature Light Background: Soft Sunlit Botanical Mesh Gradient */
     .stApp {
-        background: radial-gradient(circle at 10% 10%, #ecfdf5 0%, #f0fdf4 40%, #e6f7ef 100%) !important;
+        background: 
+            radial-gradient(circle at 12% 15%, rgba(217, 249, 157, 0.55) 0%, transparent 45%),
+            radial-gradient(circle at 88% 18%, rgba(134, 239, 172, 0.45) 0%, transparent 45%),
+            radial-gradient(circle at 50% 90%, rgba(187, 247, 208, 0.5) 0%, transparent 55%),
+            linear-gradient(135deg, #f7fee7 0%, #f0fdf4 40%, #e7f7ed 100%) !important;
+        background-attachment: fixed !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
     
@@ -37,7 +42,7 @@ st.markdown(
         line-height: 1.6;
     }
 
-    /* Extra Large Headings Across All Screens */
+    /* Headings */
     h1 {
         font-family: 'Fredoka', cursive, sans-serif !important;
         letter-spacing: 0.3px;
@@ -76,38 +81,37 @@ st.markdown(
 
     /* Brand Logo */
     .brand-logo {
-        font-size: 40px;
+        font-size: 38px;
         font-family: 'Fredoka', cursive, sans-serif;
         font-weight: 700;
-        background: linear-gradient(135deg, #059669 0%, #10b981 50%, #047857 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: #0f5132 !important;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
 
     /* Reward Badge */
     .badge-points {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
         color: #ffffff !important;
         font-family: 'Fredoka', cursive;
         font-weight: 700;
-        padding: 12px 28px;
+        padding: 12px 26px;
         border-radius: 9999px;
         font-size: 20px;
-        box-shadow: 0 4px 14px rgba(217, 119, 6, 0.3);
-        border: 2px solid #fef3c7;
+        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+        border: 2px solid #bbf7d0;
         display: inline-block;
     }
 
     /* Navigation Pill Bar */
     div[role="radiogroup"] {
-        background: #ffffff;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
         padding: 10px 18px;
         border-radius: 9999px;
-        border: 2px solid #a7f3d0;
-        box-shadow: 0 4px 18px rgba(16, 185, 129, 0.12);
+        border: 2px solid #bbf7d0;
+        box-shadow: 0 4px 20px rgba(6, 78, 59, 0.08);
         display: flex;
         justify-content: center;
         gap: 10px;
@@ -124,19 +128,20 @@ st.markdown(
     }
 
     div[role="radiogroup"] label:hover {
-        background: #d1fae5 !important;
+        background: #dcfce7 !important;
     }
 
-    /* Card Containers */
+    /* Frosted Organic Cards */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: #ffffff !important;
+        background: rgba(255, 255, 255, 0.94) !important;
+        backdrop-filter: blur(14px) !important;
         padding: 32px !important;
-        border-radius: 24px !important;
-        box-shadow: 0 8px 24px rgba(5, 150, 105, 0.08) !important;
+        border-radius: 26px !important;
+        box-shadow: 0 10px 30px rgba(6, 78, 59, 0.08) !important;
         border: 2px solid #bbf7d0 !important;
     }
 
-    /* Large Form Inputs */
+    /* Form Inputs */
     input, select, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {
         background-color: #ffffff !important;
         color: #0f381f !important;
@@ -151,9 +156,9 @@ st.markdown(
         font-size: 19px !important;
     }
 
-    /* Large Metric Text */
+    /* Metric Counters */
     div[data-testid="stMetricValue"] {
-        color: #059669 !important;
+        color: #15803d !important;
         font-family: 'Fredoka', cursive !important;
         font-weight: 700 !important;
         font-size: 50px !important;
@@ -164,30 +169,30 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-    /* Large Action Buttons */
+    /* Leaf Green Action Buttons */
     .stButton>button, div[data-testid="stForm"] button {
-        background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+        background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
         color: #ffffff !important;
         font-family: 'Fredoka', cursive !important;
         font-size: 22px !important;
         font-weight: 700 !important;
         border-radius: 20px !important;
-        border: 2px solid #6ee7b7 !important;
+        border: 2px solid #86efac !important;
         padding: 14px 34px !important;
-        box-shadow: 0 6px 18px rgba(5, 150, 105, 0.28) !important;
+        box-shadow: 0 6px 18px rgba(22, 163, 74, 0.28) !important;
         transition: transform 0.15s ease;
     }
 
     .stButton>button:hover, div[data-testid="stForm"] button:hover {
         transform: translateY(-2px);
-        background: linear-gradient(135deg, #047857 0%, #059669 100%) !important;
+        background: linear-gradient(135deg, #166534 0%, #15803d 100%) !important;
         color: #ffffff !important;
     }
 
-    /* Large File Uploader Box */
+    /* Uploader Dropzone */
     [data-testid="stFileUploader"] {
-        background: #ffffff !important;
-        border: 2px dashed #059669 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 2px dashed #16a34a !important;
         border-radius: 22px !important;
         padding: 34px !important;
     }
@@ -298,14 +303,17 @@ if not st.session_state.authenticated:
     with col_l2:
         st.markdown(
             """
-            <div style="text-align: center; margin-bottom: 26px;">
-                <div style="display: inline-flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 6px;">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="#00aa6c" style="display: block;">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 4px;">
+                    <svg width="54" height="54" viewBox="0 0 24 24" fill="#15803d">
                         <path d="M2 22h20c0-5.52-4.48-10-10-10v-3.17c2.83-.48 5-2.94 5-5.83 0-.55-.45-1-1-1s-1 .45-1 1c0 2.21-1.79 4-4 4-1.1 0-2.1-.45-2.83-1.17-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41C7.79 8.44 9 9.61 10 9.87V12C4.48 12 0 16.48 0 22h2z"/>
                     </svg>
-                    <span style="font-family: 'Fredoka', cursive, sans-serif; font-size: 58px; font-weight: 700; color: #00aa6c; letter-spacing: -0.5px;">Ecoza</span>
+                    <span style="font-family: 'Fredoka', cursive, sans-serif; font-size: 62px; font-weight: 700; color: #15803d; letter-spacing: -0.5px;">Ecoza</span>
                 </div>
-                <h1 style="color: #064e3b; font-size: 42px; margin-top: 4px; margin-bottom: 6px;">Welcome to Ecoza</h1>
+                <div style="font-size: 21px; color: #166534; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px;">
+                    Rethink. Reuse. Recreate.
+                </div>
+                <h1 style="color: #064e3b; font-size: 40px; margin-bottom: 6px;">Welcome to Ecoza</h1>
                 <p style="color: #365342; font-weight: 600; font-size: 22px;">Log in with your email or mobile number to continue.</p>
             </div>
             """,
@@ -365,7 +373,15 @@ if not st.session_state.authenticated:
 head_col1, head_col2, head_col3 = st.columns([1.5, 4.3, 1.8], vertical_alignment="center")
 
 with head_col1:
-    st.markdown('<div class="brand-logo">🌱 Ecoza</div>', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div>
+            <div class="brand-logo">🌱 Ecoza</div>
+            <div style="font-size: 14px; font-weight: 700; color: #166534; letter-spacing: 0.8px; margin-top: -6px;">Rethink. Reuse. Recreate.</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 with head_col2:
     current_index = PAGES.index(st.session_state.current_page) if st.session_state.current_page in PAGES else 0
@@ -389,19 +405,19 @@ with head_col3:
             st.session_state.user_identifier = ""
             st.rerun()
 
-st.markdown(f"<p style='font-size: 18px; color: #476853; margin-top: -6px;'>Logged in: <b>{st.session_state.username}</b> ({st.session_state.user_identifier})</p>", unsafe_allow_html=True)
-st.markdown("<hr style='margin-top: 4px; margin-bottom: 26px; border: 0; border-top: 2px dashed #a7f3d0;'>", unsafe_allow_html=True)
+st.markdown(f"<p style='font-size: 18px; color: #365342; margin-top: -6px;'>Logged in: <b>{st.session_state.username}</b> ({st.session_state.user_identifier})</p>", unsafe_allow_html=True)
+st.markdown("<hr style='margin-top: 4px; margin-bottom: 26px; border: 0; border-top: 2px dashed #bbf7d0;'>", unsafe_allow_html=True)
 
 # ----------------- 1. Home / Hero Screen -----------------
 if st.session_state.current_page == "🏠 Home":
     st.markdown(
         f"""
         <div style="text-align: center; max-width: 920px; margin: 0 auto; padding: 20px 0 26px 0;">
-            <div style="background: #dcfce7; color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 10px 26px; border-radius: 9999px; display: inline-block; font-size: 18px; margin-bottom: 16px; border: 2px solid #86efac;">
-                🌍 CIRCULAR LIVING & REWARDS 🌿
+            <div style="background: rgba(255,255,255,0.9); color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 10px 28px; border-radius: 9999px; display: inline-block; font-size: 18px; margin-bottom: 16px; border: 2px solid #86efac; box-shadow: 0 4px 14px rgba(22, 163, 74, 0.12);">
+                🍃 RETHINK • REUSE • RECREATE 🍃
             </div>
             <h1 style="font-size: 58px; color: #064e3b; line-height: 1.18; margin-bottom: 14px;">
-                Turn Everyday Waste Into <span style="background: linear-gradient(135deg, #059669, #0284c7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">EcoPoints!</span>
+                Turn Everyday Waste Into <span style="color: #16a34a;">EcoPoints!</span>
             </h1>
         </div>
         """,
@@ -420,10 +436,10 @@ if st.session_state.current_page == "🏠 Home":
     with col1:
         st.markdown(
             """
-            <div style="background: #ffffff; padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.05);">
+            <div style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 6px 18px rgba(6, 78, 59, 0.06);">
                 <div style="font-size: 52px; margin-bottom: 10px;">📷</div>
                 <h3 style="color: #065f46; margin: 0 0 10px 0; font-size: 28px;">AI Waste Scanner</h3>
-                <p style="color: #4b6354; font-size: 19px; margin: 0; line-height: 1.5;">Upload or snap photos to identify materials and calculate points per 1,000 grams.</p>
+                <p style="color: #365342; font-size: 19px; margin: 0; line-height: 1.5;">Upload or snap photos to identify materials and calculate points per 1,000 grams.</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -431,10 +447,10 @@ if st.session_state.current_page == "🏠 Home":
     with col2:
         st.markdown(
             """
-            <div style="background: #ffffff; padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.05);">
+            <div style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 6px 18px rgba(6, 78, 59, 0.06);">
                 <div style="font-size: 52px; margin-bottom: 10px;">🚚</div>
                 <h3 style="color: #065f46; margin: 0 0 10px 0; font-size: 28px;">Doorstep Collection</h3>
-                <p style="color: #4b6354; font-size: 19px; margin: 0; line-height: 1.5;">Schedule doorstep pickups with certified recycling partners.</p>
+                <p style="color: #365342; font-size: 19px; margin: 0; line-height: 1.5;">Schedule doorstep pickups with certified recycling partners.</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -442,10 +458,10 @@ if st.session_state.current_page == "🏠 Home":
     with col3:
         st.markdown(
             """
-            <div style="background: #ffffff; padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.05);">
+            <div style="background: rgba(255,255,255,0.95); padding: 30px; border-radius: 22px; border: 2px solid #bbf7d0; text-align: center; box-shadow: 0 6px 18px rgba(6, 78, 59, 0.06);">
                 <div style="font-size: 52px; margin-bottom: 10px;">🎁</div>
                 <h3 style="color: #065f46; margin: 0 0 10px 0; font-size: 28px;">Community Rewards</h3>
-                <p style="color: #4b6354; font-size: 19px; margin: 0; line-height: 1.5;">Trade accumulated points for plant saplings, book coupons, and vouchers.</p>
+                <p style="color: #365342; font-size: 19px; margin: 0; line-height: 1.5;">Trade accumulated points for plant saplings, book coupons, and vouchers.</p>
             </div>
             """,
             unsafe_allow_html=True
