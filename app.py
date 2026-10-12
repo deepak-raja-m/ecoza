@@ -12,7 +12,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ----------------- Aggressive Transparency CSS (Removes White Shade Completely) -----------------
+# ----------------- Aggressive Transparency CSS -----------------
 st.markdown(
     """
     <style>
@@ -30,7 +30,7 @@ st.markdown(
         background-color: transparent !important;
     }
 
-    /* Vivid Botanical Tree Background (Zero White Overlay) */
+    /* Vivid Botanical Tree Background */
     body {
         background: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95') no-repeat center center fixed !important;
         background-size: cover !important;
@@ -61,7 +61,7 @@ st.markdown(
     h2 { font-size: 38px !important; margin-bottom: 10px !important; }
     h3 { font-size: 26px !important; }
 
-    /* Ultra-Clean Frosted Navigation Bar */
+    /* Frosted Navigation Bar */
     div[role="radiogroup"] {
         background: rgba(255, 255, 255, 0.5) !important;
         backdrop-filter: blur(12px) !important;
@@ -81,14 +81,14 @@ st.markdown(
         font-weight: 800 !important;
         font-family: 'Fredoka', cursive !important;
         color: #032e18 !important;
-        font-size: 17px !important;
+        font-size: 16px !important;
     }
 
     div[role="radiogroup"] label:hover {
         background: rgba(255, 255, 255, 0.7) !important;
     }
 
-    /* Glass Cards with true transparency */
+    /* Glass Cards */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
         background: rgba(255, 255, 255, 0.45) !important;
         backdrop-filter: blur(14px) !important;
@@ -167,7 +167,16 @@ if "username" not in st.session_state:
 if "scan_result" not in st.session_state:
     st.session_state.scan_result = None
 
-PAGES = ["🏠 Home", "📸 AI Scanner", "🗺️ Drop-off Map", "🚚 Super Pickup", "🎁 Rewards Store", "🏆 Champions Leaderboard", "📊 Impact Dashboard"]
+PAGES = [
+    "🏠 Home", 
+    "📸 AI Scanner", 
+    "💡 Upcycle AI Studio",
+    "🗺️ Drop-off Map", 
+    "🚚 Super Pickup", 
+    "🎁 Rewards Store", 
+    "🏆 Champions Leaderboard", 
+    "📊 Impact Dashboard"
+]
 
 if "current_page" not in st.session_state:
     st.session_state.current_page = "🏠 Home"
@@ -198,6 +207,82 @@ RATES = {
     "🍎 Organic Waste": 5
 }
 
+# Upcycling AI Knowledge Base
+UPCYCLE_SUGGESTIONS = {
+    "🥤 Plastic Bottles": [
+        {
+            "title": "🌿 Self-Watering Indoor Herb Planter",
+            "difficulty": "Easy (15 mins)",
+            "tools": "Scissors, Cotton String, Soil, Seeds",
+            "steps": "1. Cut the bottle in half horizontally.\n2. Puncture the cap and thread a cotton string through it.\n3. Invert the top part with soil and plant seeds.\n4. Fill the base with water; the string will keep the soil moist automatically!"
+        },
+        {
+            "title": "✏️ Multi-Compartment Desk Stationery Organizer",
+            "difficulty": "Easy (10 mins)",
+            "tools": "Craft knife, Colored tape / markers",
+            "steps": "1. Cut the bottom 4 inches off 3-4 bottles at varying heights.\n2. Smooth the edges with colored tape.\n3. Glue them together in a cluster to hold pens, markers, scissors, and paintbrushes!"
+        },
+        {
+            "title": "🐦 Hanging Wild Bird Feeder",
+            "difficulty": "Medium (20 mins)",
+            "tools": "Two wooden spoons, Twine, Bird seeds",
+            "steps": "1. Pierce pairs of holes across the bottle to insert wooden spoons.\n2. Widen the hole above the spoon bowl slightly for seeds to spill onto it.\n3. Fill with grains, screw the cap, and hang it on a branch!"
+        }
+    ],
+    "📦 Paper & Cardboard": [
+        {
+            "title": "🌱 Biodegradable Seedling Nursery Pots",
+            "difficulty": "Easy (10 mins)",
+            "tools": "Cardboard tubes or egg cartons, Soil",
+            "steps": "1. Cut cardboard toilet paper rolls into 2-inch segments.\n2. Fold the bottom tabs inward to create cups.\n3. Fill with compost, plant saplings, and plant them directly into garden soil when ready!"
+        },
+        {
+            "title": "📦 Geometric Desk File Organizer",
+            "difficulty": "Medium (25 mins)",
+            "tools": "Cereal box / packing box, Glue, Wrapping paper",
+            "steps": "1. Cut diagonally across the side of a cereal box to form a magazine holder shape.\n2. Reinforce the inner walls with folded scrap card.\n3. Wrap with newspaper or handmade paper to store school notes neatly."
+        }
+    ],
+    "🥫 Metal & Aluminium Cans": [
+        {
+            "title": "🕯️ Punched-Tin Lantern / Candle Holder",
+            "difficulty": "Medium (30 mins)",
+            "tools": "Clean metal can, Hammer, Nail, Tea light / LED",
+            "steps": "1. Fill the can with water and freeze solid so it retains its shape.\n2. Use a nail and hammer to punch dot patterns (stars, spirals, leaves).\n3. Melt the ice, paint the exterior, and place an LED tea light inside for patterned lanterns."
+        },
+        {
+            "title": "🪴 Hanging Kitchen Utensil / Cutlery Caddy",
+            "difficulty": "Easy (15 mins)",
+            "tools": "Clean tin cans, Acrylic paint, Wooden ruler/board",
+            "steps": "1. Remove sharp edges using pliers or sand paper.\n2. Paint cans with eco-friendly paint.\n3. Fasten onto a recycled wood slat to hold ladles, spoons, or paintbrushes."
+        }
+    ],
+    "🍶 Glass Recyclables": [
+        {
+            "title": "🏺 Fairy Light Memory Jar / Terrarium",
+            "difficulty": "Easy (15 mins)",
+            "tools": "Glass jar, Small pebbles, Activated charcoal, Moss/Succulent",
+            "steps": "1. Clean and dry the jar thoroughly.\n2. Layer pebbles, charcoal, and potting mix.\n3. Plant a small succulent or coil an LED fairy light wire inside for an ambient night lamp."
+        }
+    ],
+    "🔋 E-Waste & Batteries": [
+        {
+            "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
+            "difficulty": "Advanced (30 mins)",
+            "tools": "Old PCB scraps, Keyring, Protective gloves",
+            "steps": "1. Cut small rectangular sections of damaged, non-hazardous motherboards.\n2. Sand the edges smooth and drill a small hole for a key ring.\n3. Note: Never open or puncture lithium batteries—deposit those directly at certified hubs!"
+        }
+    ],
+    "🍎 Organic Waste": [
+        {
+            "title": "🪴 Rich Microbial Kitchen Garden Compost",
+            "difficulty": "Easy (Ongoing)",
+            "tools": "Compost bucket / Pot with lid, Dry leaves",
+            "steps": "1. Layer fruit and vegetable peels with dried leaves (1:2 ratio).\n2. Aerate once a week to maintain oxygen flow.\n3. In 4 weeks, you produce free, nutrient-dense organic soil fertilizer!"
+        }
+    ]
+}
+
 RECYCLING_CENTERS = [
     {"Center Name": "⚡ Guindy Eco Battery & E-Waste Hub", "Type": "E-Waste & Electronics", "Address": "Guindy Industrial Estate", "Contact": "+91 94441 23456", "lat": 13.0067, "lon": 80.2030},
     {"Center Name": "📘 Anna Nagar Paper Depot", "Type": "Plastic, Paper & Cardboard", "Address": "Anna Nagar West", "Contact": "+91 98840 56789", "lat": 13.0850, "lon": 80.2101},
@@ -207,38 +292,26 @@ RECYCLING_CENTERS = [
 
 # ----------------- Pixel Classifier Engine -----------------
 def classify_material_accurately(img: Image.Image):
-    """
-    Evaluates pixel saturation, specular highlights, and color distribution.
-    Prioritizes Plastic for high-luminosity/reflective surfaces.
-    """
     img_rgb = img.convert("RGB").resize((100, 100))
     arr = np.array(img_rgb, dtype=np.float32)
 
     r, g, b = arr[:, :, 0], arr[:, :, 1], arr[:, :, 2]
     mean_r, mean_g, mean_b = np.mean(r), np.mean(g), np.mean(b)
     brightness = (mean_r + mean_g + mean_b) / 3.0
-    
-    # Check specular highlights (characteristic of plastic bottles / poly-wrap)
-    bright_pixels = np.sum((r > 190) & (g > 190) & (b > 190)) / 10000.0
 
-    # Organic (distinct green dominance)
     if mean_g > mean_r + 15 and mean_g > mean_b + 15:
         return "🍎 Organic Waste", 96.4
     
-    # Paper / Cardboard (warm brown or tan: R > G > B)
     if mean_r > mean_g + 18 and mean_g > mean_b + 12 and brightness < 200:
         return "📦 Paper & Cardboard", 95.8
 
-    # Metal Cans (metallic/neutral gray with low color spread)
     saturation = np.std(arr, axis=2).mean()
     if saturation < 18 and 80 < brightness < 185:
         return "🥫 Metal & Aluminium Cans", 94.2
 
-    # E-Waste (low overall luminosity)
     if brightness < 75:
         return "🔋 E-Waste & Batteries", 93.6
 
-    # Plastic (dominant for transparent bottles, containers, labels, high glare)
     return "🥤 Plastic Bottles", 97.2
 
 # ----------------- 1. LOGIN SCREEN -----------------
@@ -311,17 +384,21 @@ if st.session_state.current_page == "🏠 Home":
                 🍃 RETHINK • REUSE • RECREATE 🍃
             </div>
             <h1 style="line-height: 1.15;">
-                Turn Everyday Waste Into <span style="color: #16a34a;">EcoPoints!</span>
+                Turn Everyday Waste Into <span style="color: #16a34a;">EcoPoints & Upcycled Creations!</span>
             </h1>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    _, cb, _ = st.columns([2.2, 1.6, 2.2])
-    with cb:
-        if st.button("✨ Scan An Item Now!", use_container_width=True):
+    c_b1, c_b2, _ = st.columns([1.5, 1.8, 1.5])
+    with c_b1:
+        if st.button("📸 AI Scanner & Log", use_container_width=True):
             st.session_state.current_page = "📸 AI Scanner"
+            st.rerun()
+    with c_b2:
+        if st.button("💡 Upcycle AI Studio", use_container_width=True):
+            st.session_state.current_page = "💡 Upcycle AI Studio"
             st.rerun()
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -332,7 +409,7 @@ if st.session_state.current_page == "🏠 Home":
         <div style="background: rgba(255,255,255,0.55); backdrop-filter: blur(12px); padding: 24px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.9); text-align: center;">
             <div style="font-size: 46px; margin-bottom: 8px;">📷</div>
             <h3 style="margin: 0 0 6px 0;">AI Waste Scanner</h3>
-            <p style="font-size: 16px; margin: 0;">Instant pixel recognition for plastics, paper, metals, and e-waste.</p>
+            <p style="font-size: 16px; margin: 0;">Instant recognition for plastics, paper, metals, and e-waste.</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -340,9 +417,9 @@ if st.session_state.current_page == "🏠 Home":
     col2.markdown(
         """
         <div style="background: rgba(255,255,255,0.55); backdrop-filter: blur(12px); padding: 24px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.9); text-align: center;">
-            <div style="font-size: 46px; margin-bottom: 8px;">🚚</div>
-            <h3 style="margin: 0 0 6px 0;">Doorstep Collection</h3>
-            <p style="font-size: 16px; margin: 0;">Schedule doorstep pickups with verified local recycling partners.</p>
+            <div style="font-size: 46px; margin-bottom: 8px;">💡</div>
+            <h3 style="margin: 0 0 6px 0;">Upcycle AI Studio</h3>
+            <p style="font-size: 16px; margin: 0;">Snap waste materials to receive clever DIY upcycling project guides.</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -351,7 +428,7 @@ if st.session_state.current_page == "🏠 Home":
         """
         <div style="background: rgba(255,255,255,0.55); backdrop-filter: blur(12px); padding: 24px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.9); text-align: center;">
             <div style="font-size: 46px; margin-bottom: 8px;">🎁</div>
-            <h3 style="margin: 0 0 6px 0;">Community Rewards</h3>
+            <h3 style="margin: 0 0 6px 0;">Rewards Store</h3>
             <p style="font-size: 16px; margin: 0;">Trade accumulated points for plant saplings and gift vouchers.</p>
         </div>
         """,
@@ -412,7 +489,54 @@ elif st.session_state.current_page == "📸 AI Scanner":
             st.success(f"Successfully recorded! Added {pts} EcoPoints.")
             st.rerun()
 
-# ----------------- 3. DROP-OFF MAP -----------------
+# ----------------- 3. UPCYCLE AI STUDIO (NEW FEATURE) -----------------
+elif st.session_state.current_page == "💡 Upcycle AI Studio":
+    st.title("💡 Upcycle AI Studio — Recreate From Waste")
+    st.write("Take a picture of an item you are about to throw away. The AI will tell you how you can recreate it into something useful!")
+
+    u_t1, u_t2 = st.tabs(["📷 Snap Item With Camera", "📁 Upload An Item Photo"])
+    upcycle_img = None
+
+    with u_t1:
+        u_cam = st.camera_input("Snap the waste item (e.g. plastic bottle, cardboard box, tin can)")
+        if u_cam:
+            upcycle_img = Image.open(u_cam)
+
+    with u_t2:
+        u_file = st.file_uploader("Upload an item picture", type=["jpg", "jpeg", "png"], key="upcycle_file_uploader")
+        if u_file:
+            upcycle_img = Image.open(u_file)
+
+    detected_upcycle_cat = "🥤 Plastic Bottles"
+
+    if upcycle_img:
+        det_cat, det_conf = classify_material_accurately(upcycle_img)
+        detected_upcycle_cat = det_cat
+
+        col_u1, col_u2 = st.columns([1, 1.8])
+        with col_u1:
+            st.image(upcycle_img, caption="Material Submitted", use_container_width=True)
+        with col_u2:
+            st.success(f"### Detected Material: **{detected_upcycle_cat}** ({det_conf}% confidence)")
+            st.info("✨ The AI analyzed this item and generated the following step-by-step DIY upcycling ideas:")
+
+    st.markdown("---")
+    st.subheader(f"🛠️ Creative Upcycling Ideas for: {detected_upcycle_cat}")
+
+    suggestions = UPCYCLE_SUGGESTIONS.get(detected_upcycle_cat, UPCYCLE_SUGGESTIONS["🥤 Plastic Bottles"])
+
+    for idx, idea in enumerate(suggestions):
+        with st.expander(f"✨ Project {idx + 1}: {idea['title']}  •  [{idea['difficulty']}]", expanded=True):
+            st.markdown(f"**🧰 Tools & Supplies Needed:** `{idea['tools']}`")
+            st.markdown("**📋 How To Make It:**")
+            st.write(idea["steps"])
+            if st.button(f"⭐ I made this project! (+15 Bonus EcoPoints)", key=f"bonus_up_{idx}"):
+                st.session_state.ecopoints += 15
+                st.balloons()
+                st.success("Congratulations on upcycling! 15 Bonus EcoPoints added to your balance.")
+                st.rerun()
+
+# ----------------- 4. DROP-OFF MAP -----------------
 elif st.session_state.current_page == "🗺️ Drop-off Map":
     st.title("🗺️ Ecoza Drop-Off Centers")
     df_centers = pd.DataFrame(RECYCLING_CENTERS)
@@ -425,7 +549,7 @@ elif st.session_state.current_page == "🗺️ Drop-off Map":
             c2.write(f"📞 `{row['Contact']}`")
             st.divider()
 
-# ----------------- 4. DOORSTEP PICKUP -----------------
+# ----------------- 5. DOORSTEP PICKUP -----------------
 elif st.session_state.current_page == "🚚 Super Pickup":
     st.title("🚚 Schedule Doorstep Collection")
 
@@ -449,7 +573,7 @@ elif st.session_state.current_page == "🚚 Super Pickup":
     if st.session_state.pickup_requests:
         st.dataframe(pd.DataFrame(st.session_state.pickup_requests), use_container_width=True)
 
-# ----------------- 5. REWARDS STORE -----------------
+# ----------------- 6. REWARDS STORE -----------------
 elif st.session_state.current_page == "🎁 Rewards Store":
     st.title(f"🎁 Ecoza Rewards Store (Balance: {st.session_state.ecopoints} pts)")
 
@@ -477,7 +601,7 @@ elif st.session_state.current_page == "🎁 Rewards Store":
                 else:
                     st.error("Insufficient points!")
 
-# ----------------- 6. LEADERBOARD -----------------
+# ----------------- 7. LEADERBOARD -----------------
 elif st.session_state.current_page == "🏆 Champions Leaderboard":
     st.title("🏆 Champions Leaderboard")
     leaderboard = [
@@ -488,7 +612,7 @@ elif st.session_state.current_page == "🏆 Champions Leaderboard":
     ]
     st.table(pd.DataFrame(leaderboard))
 
-# ----------------- 7. DASHBOARD -----------------
+# ----------------- 8. DASHBOARD -----------------
 elif st.session_state.current_page == "📊 Impact Dashboard":
     st.title("📊 Environmental Impact Dashboard")
 
