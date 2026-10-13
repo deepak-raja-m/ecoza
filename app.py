@@ -17,10 +17,10 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if "user_identifier" not in st.session_state:
-    st.session_state.user_identifier = "deepakraja6524@gmail.com"
+    st.session_state.user_identifier = ""
 
 if "username" not in st.session_state:
-    st.session_state.username = "Deepak Raja"
+    st.session_state.username = ""
 
 if "scan_result" not in st.session_state:
     st.session_state.scan_result = None
@@ -105,8 +105,8 @@ st.markdown(
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 
-    /* High contrast text across backgrounds */
-    .stApp p, .stApp span, .stApp label, .stApp div {
+    /* Target specific text elements rather than wildcarding all divs (fixes password toggle text) */
+    .stApp p, .stApp span:not([data-testid="stIconMaterial"]), .stApp label {
         color: #021a0c !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 19px;
@@ -114,6 +114,7 @@ st.markdown(
         line-height: 1.5;
     }
 
+    /* Headings */
     h1, h2, h3, h4 {
         font-family: 'Fredoka', cursive, sans-serif !important;
         color: #022b14 !important;
@@ -126,7 +127,7 @@ st.markdown(
 
     /* Frosted Cards */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: rgba(255, 255, 255, 0.88) !important;
+        background: rgba(255, 255, 255, 0.90) !important;
         backdrop-filter: blur(18px) !important;
         -webkit-backdrop-filter: blur(18px) !important;
         padding: 24px !important;
@@ -135,7 +136,8 @@ st.markdown(
         border: 2px solid #16a34a !important;
     }
 
-    input, select, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {
+    /* Inputs */
+    input, select, textarea {
         background-color: #ffffff !important;
         color: #022e18 !important;
         border: 2px solid #16a34a !important;
@@ -144,6 +146,12 @@ st.markdown(
         font-weight: 800 !important;
     }
 
+    input::placeholder {
+        color: #889988 !important;
+        font-weight: 600 !important;
+    }
+
+    /* Metric Values */
     div[data-testid="stMetricValue"] {
         color: #14532d !important;
         font-family: 'Fredoka', cursive !important;
@@ -157,7 +165,7 @@ st.markdown(
         color: #064e3b !important;
     }
 
-    /* Standard Button Styling */
+    /* Buttons */
     .stButton>button {
         background: rgba(255, 255, 255, 0.95) !important;
         color: #064e3b !important;
@@ -287,7 +295,7 @@ UPCYCLE_SUGGESTIONS = {
             "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
             "difficulty": "Advanced (30 mins)",
             "tools": "Old PCB scraps, Keyring, Protective gloves",
-            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified hubs!"
+            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
         }
     ],
     "🍎 Organic Waste": [
@@ -307,7 +315,7 @@ RECYCLING_CENTERS = [
     {"Center Name": "🌱 Adyar Eco Park Composting Hub", "Type": "Wet & Organic Waste", "Address": "Adyar Eco Park Zone", "Contact": "+91 91234 98765", "lat": 13.0125, "lon": 80.2570}
 ]
 
-# ----------------- 1. LOGIN SCREEN -----------------
+# ----------------- 1. LOGIN SCREEN (Blank Inputs) -----------------
 if not st.session_state.authenticated:
     st.markdown("<br><br>", unsafe_allow_html=True)
     _, col_log, _ = st.columns([1, 2, 1])
@@ -325,9 +333,9 @@ if not st.session_state.authenticated:
             unsafe_allow_html=True
         )
 
-        with st.form("quick_login_form"):
-            in_user = st.text_input("User Email or Mobile", value=st.session_state.user_identifier)
-            in_pass = st.text_input("Password", type="password", value="ecoza123")
+        with st.form("clean_login_form"):
+            in_user = st.text_input("User Email or Mobile", placeholder="Enter your email or phone number")
+            in_pass = st.text_input("Password", type="password", placeholder="Enter your password")
             
             c_btn1, c_btn2 = st.columns(2)
             with c_btn1:
@@ -335,10 +343,20 @@ if not st.session_state.authenticated:
             with c_btn2:
                 btn_demo = st.form_submit_button("⚡ Guest Login", use_container_width=True)
 
-            if btn_enter or btn_demo:
+            if btn_enter:
+                cleaned_user = in_user.strip()
+                if not cleaned_user or not in_pass.strip():
+                    st.error("Please enter both your Email/Mobile and Password!")
+                else:
+                    st.session_state.authenticated = True
+                    st.session_state.user_identifier = cleaned_user
+                    st.session_state.username = cleaned_user.split("@")[0].title() if "@" in cleaned_user else cleaned_user
+                    st.rerun()
+
+            if btn_demo:
                 st.session_state.authenticated = True
-                st.session_state.user_identifier = in_user.strip() if in_user else "deepakraja6524@gmail.com"
-                st.session_state.username = "Deepak Raja"
+                st.session_state.user_identifier = "guest@ecoza.com"
+                st.session_state.username = "Guest User"
                 st.rerun()
 
     st.stop()
@@ -354,16 +372,18 @@ with top_c2:
     with out_col:
         if st.button("🚪 Out"):
             st.session_state.authenticated = False
+            st.session_state.user_identifier = ""
+            st.session_state.username = ""
             st.rerun()
 
+display_name = st.session_state.username if st.session_state.username else "User"
 st.markdown(f"""
 <div style="margin-top: 4px; margin-bottom: 12px;">
-    <span class="user-pill">👤 Logged in: <b>{st.session_state.username}</b> ({st.session_state.user_identifier})</span>
+    <span class="user-pill">👤 Logged in: <b>{display_name}</b> ({st.session_state.user_identifier})</span>
 </div>
 """, unsafe_allow_html=True)
 
-# ----------------- 100% VISIBLE NAVIGATION GRID (2 Rows x 4 Columns) -----------------
-# Clean, fully visible interactive button grid that never squishes or clips
+# ----------------- NAVIGATION GRID -----------------
 nav_row1 = st.columns(4)
 for i, page_name in enumerate(PAGES[:4]):
     with nav_row1[i]:
@@ -616,7 +636,7 @@ elif st.session_state.current_page == "🏆 Champions Leaderboard":
     leaderboard = [
         {"Rank": "🥇 1st", "Contributor": "Class 8B (Little Flower School)", "Waste Saved": "44,000 g", "EcoPoints": 880},
         {"Rank": "🥈 2nd", "Contributor": "Priya R.", "Waste Saved": "38,500 g", "EcoPoints": 770},
-        {"Rank": "🥉 3rd", "Contributor": f"{st.session_state.username} (You)", "Waste Saved": "28,000 g", "EcoPoints": st.session_state.ecopoints},
+        {"Rank": "🥉 3rd", "Contributor": f"{display_name} (You)", "Waste Saved": "28,000 g", "EcoPoints": st.session_state.ecopoints},
         {"Rank": "4th Place", "Contributor": "Karthik Raj", "Waste Saved": "18,500 g", "EcoPoints": 370}
     ]
     st.table(pd.DataFrame(leaderboard))
