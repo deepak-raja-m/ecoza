@@ -58,6 +58,7 @@ if "redeemed_coupons" not in st.session_state:
 
 RATES = {
     "🥤 Plastic Bottles": 20,
+    "👜 Fabric, Leather & Bags": 25,
     "📦 Paper & Cardboard": 10,
     "🥫 Metal & Aluminium Cans": 30,
     "🍶 Glass Recyclables": 15,
@@ -83,7 +84,7 @@ if not st.session_state.authenticated:
 else:
     active_bg = PAGE_BACKGROUNDS.get(st.session_state.current_page, PAGE_BACKGROUNDS["🏠 Home"])
 
-# ----------------- High-Contrast Visible Styling CSS -----------------
+# ----------------- High-Contrast CSS (Prevents Text Overlapping) -----------------
 st.markdown(
     """
     <style>
@@ -105,11 +106,10 @@ st.markdown(
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 
-    /* Crisp Typography */
     .stApp p, .stApp span:not([data-testid="stIconMaterial"]), .stApp label {
         color: #021a0c !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 800;
         line-height: 1.5;
     }
@@ -118,15 +118,17 @@ st.markdown(
         font-family: 'Fredoka', cursive, sans-serif !important;
         color: #022b14 !important;
         text-shadow: 0 2px 8px rgba(255, 255, 255, 0.98);
+        word-break: break-word !important;
+        line-height: 1.3 !important;
     }
 
-    h1 { font-size: 46px !important; margin-bottom: 10px !important; }
-    h2 { font-size: 34px !important; margin-bottom: 8px !important; }
-    h3 { font-size: 26px !important; }
+    h1 { font-size: 44px !important; margin-bottom: 10px !important; }
+    h2 { font-size: 32px !important; margin-bottom: 8px !important; }
+    h3 { font-size: 24px !important; }
 
-    /* Frosted Cards for all Form and Table wrappers */
+    /* Solid White Cards */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: rgba(255, 255, 255, 0.95) !important;
+        background: rgba(255, 255, 255, 0.96) !important;
         backdrop-filter: blur(18px) !important;
         -webkit-backdrop-filter: blur(18px) !important;
         padding: 24px !important;
@@ -135,65 +137,26 @@ st.markdown(
         border: 2px solid #16a34a !important;
     }
 
-    /* Solid White Card for Custom Blocks */
     .eco-card {
-        background: rgba(255, 255, 255, 0.96) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        padding: 22px 26px !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        padding: 22px 24px !important;
         border-radius: 20px !important;
-        border: 2px solid #15803d !important;
+        border: 2.5px solid #15803d !important;
         box-shadow: 0 10px 28px rgba(0, 0, 0, 0.30) !important;
-        margin-bottom: 18px !important;
+        margin-bottom: 20px !important;
+        word-wrap: break-word !important;
+        overflow: hidden !important;
     }
 
     .eco-header-banner {
         background: rgba(255, 255, 255, 0.95) !important;
-        backdrop-filter: blur(16px) !important;
         border: 2px solid #16a34a !important;
         border-radius: 18px !important;
-        padding: 18px 26px !important;
+        padding: 16px 22px !important;
         margin-bottom: 18px !important;
         box-shadow: 0 8px 24px rgba(0,0,0,0.22) !important;
         display: inline-block;
         width: 100%;
-    }
-
-    /* FIX FOR EXPANDER: Forces solid white container background and dark text for "How To Make It" */
-    div[data-testid="stExpander"] {
-        background: rgba(255, 255, 255, 0.97) !important;
-        border: 2px solid #16a34a !important;
-        border-radius: 18px !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
-        margin-bottom: 18px !important;
-        overflow: hidden !important;
-    }
-
-    div[data-testid="stExpander"] summary {
-        background: #f0fdf4 !important;
-        border-bottom: 2px solid #bbf7d0 !important;
-        padding: 14px 18px !important;
-    }
-
-    div[data-testid="stExpander"] summary p, div[data-testid="stExpander"] summary span {
-        color: #064e3b !important;
-        font-family: 'Fredoka', cursive !important;
-        font-size: 20px !important;
-        font-weight: 800 !important;
-    }
-
-    div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
-        background: #ffffff !important;
-        padding: 20px !important;
-    }
-
-    div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] p,
-    div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] div,
-    div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] span {
-        color: #032010 !important;
-        font-size: 19px !important;
-        font-weight: 800 !important;
-        line-height: 1.6 !important;
     }
 
     /* Input Fields */
@@ -202,7 +165,7 @@ st.markdown(
         color: #022e18 !important;
         border: 2px solid #16a34a !important;
         border-radius: 12px !important;
-        font-size: 19px !important;
+        font-size: 18px !important;
         font-weight: 800 !important;
     }
 
@@ -211,14 +174,15 @@ st.markdown(
         font-weight: 600 !important;
     }
 
-    /* ALL BUTTONS: Vivid Green with Crisp White Text (Fixes black button bug) */
+    /* Button Styling */
     .stButton>button, div[data-testid="stFormSubmitButton"]>button {
-        background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
+        background: #15803d !important;
+        background-color: #15803d !important;
         color: #ffffff !important;
         font-family: 'Fredoka', cursive !important;
-        font-size: 19px !important;
+        font-size: 18px !important;
         font-weight: 700 !important;
-        border-radius: 16px !important;
+        border-radius: 14px !important;
         border: 2px solid #86efac !important;
         padding: 12px 20px !important;
         box-shadow: 0 6px 18px rgba(21, 128, 61, 0.40) !important;
@@ -227,12 +191,12 @@ st.markdown(
     }
 
     .stButton>button:hover, div[data-testid="stFormSubmitButton"]>button:hover {
-        background: linear-gradient(135deg, #166534 0%, #15803d 100%) !important;
+        background: #166534 !important;
+        background-color: #166534 !important;
         color: #ffffff !important;
-        transform: translateY(-2px);
     }
 
-    .stButton>button * , div[data-testid="stFormSubmitButton"]>button * {
+    .stButton>button *, div[data-testid="stFormSubmitButton"]>button * {
         color: #ffffff !important;
     }
 
@@ -285,75 +249,137 @@ def classify_material_accurately(img: Image.Image):
     r, g, b = arr[:, :, 0], arr[:, :, 1], arr[:, :, 2]
     mean_r, mean_g, mean_b = np.mean(r), np.mean(g), np.mean(b)
     brightness = (mean_r + mean_g + mean_b) / 3.0
+    saturation = np.std(arr, axis=2).mean()
 
+    # 1. Fabrics, Leather, Bags, Wallets (warm dark/brown/tan composite with texture)
+    if (mean_r > mean_b + 10) and (50 < brightness < 150) and (saturation > 14):
+        return "👜 Fabric, Leather & Bags", 95.5
+
+    # 2. Organic Waste (Green dominant)
     if mean_g > mean_r + 15 and mean_g > mean_b + 15:
         return "🍎 Organic Waste", 96.4
     
-    if mean_r > mean_g + 18 and mean_g > mean_b + 12 and brightness < 200:
+    # 3. Paper & Cardboard (Warm tan/beige/light brown)
+    if mean_r > mean_g + 18 and mean_g > mean_b + 12 and brightness >= 150:
         return "📦 Paper & Cardboard", 95.8
 
-    saturation = np.std(arr, axis=2).mean()
-    if saturation < 18 and 80 < brightness < 185:
-        return "🥫 Metal & Aluminium Cans", 94.2
+    # 4. Metal & Aluminium Cans (Silver, gray, metallic reflection, low color variance)
+    if saturation < 12 and 90 < brightness < 185:
+        return "🥫 Metal & Aluminium Cans", 93.8
 
-    if brightness < 75:
+    # 5. E-Waste (Very dark composite, circuitry tones)
+    if brightness < 60:
         return "🔋 E-Waste & Batteries", 93.6
 
-    return "🥤 Plastic Bottles", 97.2
+    # 6. Default to Plastic Bottles / Packaging
+    return "🥤 Plastic Bottles", 96.2
 
 UPCYCLE_SUGGESTIONS = {
-    "🥤 Plastic Bottles": [
+    "👜 Fabric, Leather & Bags": [
         {
-            "title": "🌿 Self-Watering Indoor Herb Planter",
-            "difficulty": "Easy (15 mins)",
-            "tools": "Scissors, Cotton String, Soil, Seeds",
-            "steps": "1. Cut the bottle in half horizontally.\n2. Puncture the cap and thread a cotton string through it.\n3. Invert the top part with soil and plant seeds.\n4. Fill the base with water; the string maintains moisture automatically!"
+            "title": "Tote Organizer & Multi-Pocket Tool Roll",
+            "difficulty": "Easy (20 mins)",
+            "tools": "Old bag/leather scrap, Scissors, Needle & Thread or Fabric Glue",
+            "steps": [
+                "1. Clean the bag and carefully remove broken zippers or torn handles.",
+                "2. Cut the flat side panels into neat rectangular pouches.",
+                "3. Stitch or glue inner dividers to hold screwdrivers, pens, or makeup brushes.",
+                "4. Add a tie ribbon or velcro strip so it rolls up compactly for travel!"
+            ]
         },
         {
-            "title": "✏️ Multi-Compartment Desk Stationery Organizer",
+            "title": "Rustic Hanging Wall Planter Pouch",
+            "difficulty": "Medium (25 mins)",
+            "tools": "Leather/canvas bag, Hole punch, Sturdy twine, Small plastic liner",
+            "steps": [
+                "1. Line the inside base with a thin plastic bag to retain moisture.",
+                "2. Punch two reinforced holes on the top corners.",
+                "3. Thread twine through the holes to hang it on a balcony wall or window rail.",
+                "4. Add potting soil and place cascading succulents or money plants inside!"
+            ]
+        }
+    ],
+    "🥤 Plastic Bottles": [
+        {
+            "title": "Self-Watering Indoor Herb Planter",
+            "difficulty": "Easy (15 mins)",
+            "tools": "Scissors, Cotton String, Soil, Seeds",
+            "steps": [
+                "1. Cut the bottle in half horizontally with scissors.",
+                "2. Puncture the cap and thread a cotton string through it.",
+                "3. Invert the top part with soil and plant your seeds.",
+                "4. Fill the base with water; the string maintains moisture automatically!"
+            ]
+        },
+        {
+            "title": "Multi-Compartment Desk Stationery Organizer",
             "difficulty": "Easy (10 mins)",
             "tools": "Craft knife, Colored tape / markers",
-            "steps": "1. Cut the bottom 4 inches off 3-4 bottles at varying heights.\n2. Smooth the edges with colored tape.\n3. Cluster and glue together to hold pens, markers, and paintbrushes!"
+            "steps": [
+                "1. Cut the bottom 4 inches off 3-4 bottles at varying heights.",
+                "2. Smooth the edges with colored tape to make them safe.",
+                "3. Cluster and glue them together on a base to hold pens, markers, and brushes!"
+            ]
         }
     ],
     "📦 Paper & Cardboard": [
         {
-            "title": "🌱 Biodegradable Seedling Nursery Pots",
+            "title": "Biodegradable Seedling Nursery Pots",
             "difficulty": "Easy (10 mins)",
             "tools": "Cardboard tubes or egg cartons, Soil",
-            "steps": "1. Cut cardboard toilet paper rolls into 2-inch segments.\n2. Fold bottom tabs inward to create cups.\n3. Fill with compost and plant directly into garden soil when ready!"
+            "steps": [
+                "1. Cut cardboard toilet paper rolls into 2-inch segments.",
+                "2. Fold bottom tabs inward to create cups.",
+                "3. Fill with compost and plant directly into garden soil when ready!"
+            ]
         }
     ],
     "🥫 Metal & Aluminium Cans": [
         {
-            "title": "🕯️ Punched-Tin Lantern / Candle Holder",
+            "title": "Punched-Tin Lantern & Candle Holder",
             "difficulty": "Medium (25 mins)",
             "tools": "Clean metal can, Hammer, Nail, Tea light / LED",
-            "steps": "1. Fill the can with water and freeze solid so it retains its shape.\n2. Punch dot patterns with a hammer and nail.\n3. Melt the ice, paint the exterior, and insert an LED tea light."
+            "steps": [
+                "1. Fill the can with water and freeze solid so it retains its shape.",
+                "2. Punch dot patterns with a hammer and nail.",
+                "3. Melt the ice, paint the exterior, and insert an LED tea light."
+            ]
         }
     ],
     "🍶 Glass Recyclables": [
         {
-            "title": "🏺 Fairy Light Memory Jar / Terrarium",
+            "title": "Fairy Light Memory Jar / Terrarium",
             "difficulty": "Easy (15 mins)",
             "tools": "Glass jar, Small pebbles, Activated charcoal, Moss",
-            "steps": "1. Clean and dry the jar thoroughly.\n2. Layer pebbles, charcoal, and potting mix.\n3. Plant a succulent or coil an LED fairy light wire inside."
+            "steps": [
+                "1. Clean and dry the jar thoroughly.",
+                "2. Layer pebbles, charcoal, and potting mix.",
+                "3. Plant a succulent or coil an LED fairy light wire inside."
+            ]
         }
     ],
     "🔋 E-Waste & Batteries": [
         {
-            "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
+            "title": "Miniature Tech Sculpture / Cyber Keychain",
             "difficulty": "Advanced (30 mins)",
             "tools": "Old PCB scraps, Keyring, Protective gloves",
-            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
+            "steps": [
+                "1. Cut small rectangular sections of damaged motherboards.",
+                "2. Sand edges smooth and drill a small hole for a key ring.",
+                "3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
+            ]
         }
     ],
     "🍎 Organic Waste": [
         {
-            "title": "🪴 Rich Microbial Kitchen Garden Compost",
+            "title": "Rich Microbial Kitchen Garden Compost",
             "difficulty": "Easy (Ongoing)",
             "tools": "Compost bucket / Pot with lid, Dry leaves",
-            "steps": "1. Layer fruit/vegetable peels with dried leaves.\n2. Aerate once a week to maintain oxygen flow.\n3. In 4 weeks, you have free, nutrient-dense organic fertilizer!"
+            "steps": [
+                "1. Layer fruit/vegetable peels with dried leaves.",
+                "2. Aerate once a week to maintain oxygen flow.",
+                "3. In 4 weeks, you have free, nutrient-dense organic fertilizer!"
+            ]
         }
     ]
 }
@@ -369,7 +395,7 @@ RECYCLING_CENTERS = [
     },
     {
         "Center Name": "📘 Anna Nagar Paper Depot", 
-        "Type": "Plastic, Paper & Cardboard", 
+        "Type": "Plastic, Paper, Fabric & Cardboard", 
         "Address": "Anna Nagar West, Chennai", 
         "Contact": "+91 98840 56789", 
         "lat": 13.0850, 
@@ -393,7 +419,7 @@ RECYCLING_CENTERS = [
     }
 ]
 
-# ----------------- 1. LOGIN SCREEN (Dedicated Name Field & Bright Buttons) -----------------
+# ----------------- 1. LOGIN SCREEN -----------------
 if not st.session_state.authenticated:
     st.markdown("<br><br>", unsafe_allow_html=True)
     _, col_log, _ = st.columns([1, 2.2, 1])
@@ -519,7 +545,7 @@ if st.session_state.current_page == "🏠 Home":
         <div class="eco-card" style="text-align: center;">
             <div style="font-size: 46px; margin-bottom: 8px;">📷</div>
             <h3 style="margin: 0 0 6px 0;">AI Waste Scanner</h3>
-            <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Instant recognition for plastics, paper, metals, and e-waste.</p>
+            <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Instant recognition for plastics, paper, metals, fabrics, and e-waste.</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -588,7 +614,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
 
     with st.form("log_form_verified"):
         st.subheader("⚖️ Log Weight & Claim Points")
-        sel_cat = st.selectbox("Waste Category", list(RATES.keys()), index=list(RATES.keys()).index(current_cat))
+        sel_cat = st.selectbox("Waste Category", list(RATES.keys()), index=list(RATES.keys()).index(current_cat) if current_cat in RATES else 0)
         in_grams = st.number_input("Weight (in Grams)", min_value=10, max_value=25000, value=250, step=50)
         
         pts = max(1, int((in_grams / 1000.0) * RATES[sel_cat]))
@@ -606,7 +632,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
             st.success(f"Successfully recorded! Added {pts} EcoPoints.")
             st.rerun()
 
-# ----------------- 3. UPCYCLE AI STUDIO (CRISP SOLID CONTAINER) -----------------
+# ----------------- 3. UPCYCLE AI STUDIO (CLEAN, NO OVERLAPPING TEXT) -----------------
 elif st.session_state.current_page == "💡 Upcycle AI":
     st.markdown("""
     <div class="eco-header-banner">
@@ -619,7 +645,7 @@ elif st.session_state.current_page == "💡 Upcycle AI":
     upcycle_img = None
 
     with u_t1:
-        u_cam = st.camera_input("Snap the waste item (e.g. plastic bottle, cardboard box, tin can)")
+        u_cam = st.camera_input("Snap the waste item (e.g. plastic bottle, handbag, cardboard box, tin can)")
         if u_cam:
             upcycle_img = Image.open(u_cam)
 
@@ -642,41 +668,58 @@ elif st.session_state.current_page == "💡 Upcycle AI":
             <div class="eco-card">
                 <h3 style="color: #15803d; margin: 0 0 6px 0;">Detected Material: <b>{detected_upcycle_cat}</b></h3>
                 <p style="margin: 0; font-size: 18px;">AI Confidence: <b>{det_conf}%</b></p>
-                <p style="margin: 6px 0 0 0; color: #166534; font-size: 18px;">✨ Step-by-step DIY upcycling ideas generated below:</p>
+                <p style="margin: 6px 0 0 0; color: #166534; font-size: 17px;">✨ See below for custom DIY upcycling guides!</p>
             </div>
             """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
-    st.subheader(f"🛠️ Creative Upcycling Ideas for: {detected_upcycle_cat}")
+    
+    # Material confirmation & override selector
+    c_hdr1, c_hdr2 = st.columns([2, 1.5], vertical_alignment="center")
+    with c_hdr1:
+        st.markdown(f"<h3 style='margin: 0;'>🛠️ DIY Guides for: <span style='color: #16a34a;'>{detected_upcycle_cat}</span></h3>", unsafe_allow_html=True)
+    with c_hdr2:
+        override_cat = st.selectbox(
+            "Wrong item? Select correct material:",
+            list(UPCYCLE_SUGGESTIONS.keys()),
+            index=list(UPCYCLE_SUGGESTIONS.keys()).index(detected_upcycle_cat) if detected_upcycle_cat in UPCYCLE_SUGGESTIONS else 0
+        )
+        if override_cat != detected_upcycle_cat:
+            detected_upcycle_cat = override_cat
 
     suggestions = UPCYCLE_SUGGESTIONS.get(detected_upcycle_cat, UPCYCLE_SUGGESTIONS["🥤 Plastic Bottles"])
 
+    # Clean, responsive project cards without text overlapping
     for idx, idea in enumerate(suggestions):
-        with st.expander(f"✨ Project {idx + 1}: {idea['title']}  •  [{idea['difficulty']}]", expanded=True):
-            st.markdown(f"""
-            <div style="background: #f8fafc; border-left: 5px solid #16a34a; padding: 14px 18px; border-radius: 8px; margin-bottom: 14px;">
-                <p style="margin: 0; font-size: 18px; color: #0f172a;">
-                    <b>🧰 Tools & Supplies Needed:</b> <code style="background: #e2e8f0; color: #0f172a; padding: 2px 8px; border-radius: 6px;">{idea['tools']}</code>
+        st.markdown(f"""
+        <div style="background: rgba(255, 255, 255, 0.98); border: 2.5px solid #16a34a; border-radius: 18px; padding: 22px 24px; box-shadow: 0 10px 28px rgba(0,0,0,0.25); margin-bottom: 22px;">
+            <div style="margin-bottom: 14px;">
+                <h3 style="margin: 0 0 6px 0; color: #064e3b; font-size: 24px; line-height: 1.3;">
+                    ✨ Project {idx + 1}: {idea['title']}
+                </h3>
+                <span style="display: inline-block; background: #dcfce7; color: #166534; border: 1.5px solid #16a34a; padding: 3px 12px; border-radius: 9999px; font-weight: 800; font-size: 14px;">
+                    ⏱️ {idea['difficulty']}
+                </span>
+            </div>
+            
+            <div style="background: #f1f5f9; border-left: 5px solid #16a34a; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;">
+                <p style="margin: 0; font-size: 17px; color: #0f172a; font-weight: 800; line-height: 1.4;">
+                    🧰 <b>Tools & Supplies:</b> <span style="background: #ffffff; color: #15803d; padding: 2px 8px; border-radius: 6px; border: 1px solid #cbd5e1; display: inline-block; margin-top: 4px;">{idea['tools']}</span>
                 </p>
             </div>
-            """, unsafe_allow_html=True)
-            
-            st.markdown("""
-            <div style="background: #ffffff; border: 1.5px solid #cbd5e1; padding: 16px 20px; border-radius: 12px; margin-bottom: 16px;">
-                <h4 style="margin: 0 0 10px 0; color: #15803d; font-size: 20px;">📋 How To Make It:</h4>
-            """, unsafe_allow_html=True)
-            
-            for line in idea["steps"].split("\n"):
-                if line.strip():
-                    st.markdown(f"<p style='margin: 0 0 8px 0; font-size: 18px; color: #021a0c; font-weight: 700; line-height: 1.5;'>{line.strip()}</p>", unsafe_allow_html=True)
-            
-            st.markdown("</div>", unsafe_allow_html=True)
-            
-            if st.button(f"⭐ I made this project! (+15 Bonus EcoPoints)", key=f"bonus_up_{idx}", use_container_width=True):
-                st.session_state.ecopoints += 15
-                st.balloons()
-                st.success("Congratulations on upcycling! 15 Bonus EcoPoints added to your balance.")
-                st.rerun()
+
+            <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 16px 20px; margin-bottom: 14px;">
+                <h4 style="margin: 0 0 10px 0; color: #15803d; font-size: 19px;">📋 Step-by-Step Instructions:</h4>
+                {''.join([f"<p style='margin: 0 0 8px 0; font-size: 17px; color: #021a0c; font-weight: 700; line-height: 1.5;'>{step}</p>" for step in idea['steps']])}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if st.button(f"⭐ I made this project! (+15 Bonus EcoPoints)", key=f"bonus_up_{idx}", use_container_width=True):
+            st.session_state.ecopoints += 15
+            st.balloons()
+            st.success("Congratulations on upcycling! 15 Bonus EcoPoints added to your balance.")
+            st.rerun()
 
 # ----------------- 4. DROP-OFF MAP -----------------
 elif st.session_state.current_page == "🗺️ Drop-off Map":
