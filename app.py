@@ -105,7 +105,7 @@ st.markdown(
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 
-    /* Target specific text elements rather than wildcarding all divs (fixes password toggle text) */
+    /* Crisp Typography */
     .stApp p, .stApp span:not([data-testid="stIconMaterial"]), .stApp label {
         color: #021a0c !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
@@ -114,29 +114,51 @@ st.markdown(
         line-height: 1.5;
     }
 
-    /* Headings */
     h1, h2, h3, h4 {
         font-family: 'Fredoka', cursive, sans-serif !important;
         color: #022b14 !important;
-        text-shadow: 0 2px 6px rgba(255, 255, 255, 0.95);
+        text-shadow: 0 2px 8px rgba(255, 255, 255, 0.98);
     }
 
     h1 { font-size: 46px !important; margin-bottom: 10px !important; }
     h2 { font-size: 34px !important; margin-bottom: 8px !important; }
     h3 { font-size: 26px !important; }
 
-    /* Frosted Cards */
+    /* Frosted Cards for all Form and Table wrappers */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: rgba(255, 255, 255, 0.90) !important;
+        background: rgba(255, 255, 255, 0.94) !important;
         backdrop-filter: blur(18px) !important;
         -webkit-backdrop-filter: blur(18px) !important;
         padding: 24px !important;
         border-radius: 20px !important;
-        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22) !important;
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28) !important;
         border: 2px solid #16a34a !important;
     }
 
-    /* Inputs */
+    /* Ultra-Visible White Card Container */
+    .eco-card {
+        background: rgba(255, 255, 255, 0.96) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        padding: 24px !important;
+        border-radius: 20px !important;
+        border: 2px solid #15803d !important;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.30) !important;
+        margin-bottom: 18px !important;
+    }
+
+    .eco-header-banner {
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(16px) !important;
+        border: 2px solid #16a34a !important;
+        border-radius: 18px !important;
+        padding: 18px 26px !important;
+        margin-bottom: 18px !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.22) !important;
+        display: inline-block;
+        width: 100%;
+    }
+
     input, select, textarea {
         background-color: #ffffff !important;
         color: #022e18 !important;
@@ -151,7 +173,6 @@ st.markdown(
         font-weight: 600 !important;
     }
 
-    /* Metric Values */
     div[data-testid="stMetricValue"] {
         color: #14532d !important;
         font-family: 'Fredoka', cursive !important;
@@ -165,23 +186,23 @@ st.markdown(
         color: #064e3b !important;
     }
 
-    /* Buttons */
+    /* High-Visibility Action Buttons */
     .stButton>button {
-        background: rgba(255, 255, 255, 0.95) !important;
-        color: #064e3b !important;
+        background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
+        color: #ffffff !important;
         font-family: 'Fredoka', cursive !important;
-        font-size: 17px !important;
+        font-size: 18px !important;
         font-weight: 700 !important;
         border-radius: 16px !important;
-        border: 2px solid #16a34a !important;
-        padding: 10px 16px !important;
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+        border: 2px solid #86efac !important;
+        padding: 10px 18px !important;
+        box-shadow: 0 6px 18px rgba(21, 128, 61, 0.35) !important;
         transition: all 0.15s ease !important;
         width: 100% !important;
     }
 
     .stButton>button:hover {
-        background: #16a34a !important;
+        background: linear-gradient(135deg, #166534 0%, #15803d 100%) !important;
         color: #ffffff !important;
         transform: translateY(-2px);
     }
@@ -208,19 +229,19 @@ st.markdown(
         display: flex;
         align-items: center;
         gap: 6px;
-        text-shadow: 0 2px 6px rgba(255, 255, 255, 0.9);
+        text-shadow: 0 2px 6px rgba(255, 255, 255, 0.95);
     }
 
     .user-pill {
-        background: rgba(255, 255, 255, 0.92);
-        border: 1.5px solid #16a34a;
-        padding: 6px 16px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 2px solid #16a34a;
+        padding: 6px 18px;
         border-radius: 9999px;
         display: inline-block;
         font-size: 16px;
         font-weight: 800;
         color: #064e3b !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
     </style>
     """,
@@ -295,7 +316,7 @@ UPCYCLE_SUGGESTIONS = {
             "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
             "difficulty": "Advanced (30 mins)",
             "tools": "Old PCB scraps, Keyring, Protective gloves",
-            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
+            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified hubs!"
         }
     ],
     "🍎 Organic Waste": [
@@ -309,13 +330,41 @@ UPCYCLE_SUGGESTIONS = {
 }
 
 RECYCLING_CENTERS = [
-    {"Center Name": "⚡ Guindy Eco Battery & E-Waste Hub", "Type": "E-Waste & Electronics", "Address": "Guindy Industrial Estate", "Contact": "+91 94441 23456", "lat": 13.0067, "lon": 80.2030},
-    {"Center Name": "📘 Anna Nagar Paper Depot", "Type": "Plastic, Paper & Cardboard", "Address": "Anna Nagar West", "Contact": "+91 98840 56789", "lat": 13.0850, "lon": 80.2101},
-    {"Center Name": "⚙️ Ambattur Scrap & Metal Depot", "Type": "Metal & Glass Recyclables", "Address": "Ambattur Industrial Estate", "Contact": "+91 97720 11223", "lat": 13.1143, "lon": 80.1548},
-    {"Center Name": "🌱 Adyar Eco Park Composting Hub", "Type": "Wet & Organic Waste", "Address": "Adyar Eco Park Zone", "Contact": "+91 91234 98765", "lat": 13.0125, "lon": 80.2570}
+    {
+        "Center Name": "⚡ Guindy Eco Battery & E-Waste Hub", 
+        "Type": "E-Waste & Electronics", 
+        "Address": "Guindy Industrial Estate, Chennai", 
+        "Contact": "+91 94441 23456", 
+        "lat": 13.0067, 
+        "lon": 80.2030
+    },
+    {
+        "Center Name": "📘 Anna Nagar Paper Depot", 
+        "Type": "Plastic, Paper & Cardboard", 
+        "Address": "Anna Nagar West, Chennai", 
+        "Contact": "+91 98840 56789", 
+        "lat": 13.0850, 
+        "lon": 80.2101
+    },
+    {
+        "Center Name": "⚙️ Ambattur Scrap & Metal Depot", 
+        "Type": "Metal & Glass Recyclables", 
+        "Address": "Ambattur Industrial Estate, Chennai", 
+        "Contact": "+91 97720 11223", 
+        "lat": 13.1143, 
+        "lon": 80.1548
+    },
+    {
+        "Center Name": "🌱 Adyar Eco Park Composting Hub", 
+        "Type": "Wet & Organic Waste", 
+        "Address": "Adyar Eco Park Zone, Chennai", 
+        "Contact": "+91 91234 98765", 
+        "lat": 13.0125, 
+        "lon": 80.2570
+    }
 ]
 
-# ----------------- 1. LOGIN SCREEN (Blank Inputs) -----------------
+# ----------------- 1. LOGIN SCREEN -----------------
 if not st.session_state.authenticated:
     st.markdown("<br><br>", unsafe_allow_html=True)
     _, col_log, _ = st.columns([1, 2, 1])
@@ -324,7 +373,7 @@ if not st.session_state.authenticated:
         st.markdown(
             """
             <div style="text-align: center; margin-bottom: 20px;">
-                <span style="font-family: 'Fredoka', cursive; font-size: 56px; color: #15803d; font-weight: 700; text-shadow: 0 2px 8px rgba(255, 255, 255, 0.9);">🌱 Ecoza</span>
+                <span style="font-family: 'Fredoka', cursive; font-size: 56px; color: #15803d; font-weight: 700; text-shadow: 0 2px 8px rgba(255, 255, 255, 0.95);">🌱 Ecoza</span>
                 <div style="font-size: 19px; color: #064e3b; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px;">RETHINK. REUSE. RECREATE.</div>
                 <h2 style="margin: 0 0 6px 0;">Welcome to Ecoza</h2>
                 <p style="font-size: 18px; font-weight: 800; color: #022e18;">Login to start your sustainable recycling journey</p>
@@ -435,7 +484,7 @@ if st.session_state.current_page == "🏠 Home":
     col1, col2, col3 = st.columns(3)
     col1.markdown(
         """
-        <div style="background: rgba(255,255,255,0.90); backdrop-filter: blur(14px); padding: 24px; border-radius: 20px; border: 2px solid #16a34a; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+        <div class="eco-card" style="text-align: center;">
             <div style="font-size: 46px; margin-bottom: 8px;">📷</div>
             <h3 style="margin: 0 0 6px 0;">AI Waste Scanner</h3>
             <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Instant recognition for plastics, paper, metals, and e-waste.</p>
@@ -445,7 +494,7 @@ if st.session_state.current_page == "🏠 Home":
     )
     col2.markdown(
         """
-        <div style="background: rgba(255,255,255,0.90); backdrop-filter: blur(14px); padding: 24px; border-radius: 20px; border: 2px solid #16a34a; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+        <div class="eco-card" style="text-align: center;">
             <div style="font-size: 46px; margin-bottom: 8px;">💡</div>
             <h3 style="margin: 0 0 6px 0;">Upcycle AI Studio</h3>
             <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Snap waste materials to receive clever DIY upcycling project guides.</p>
@@ -455,7 +504,7 @@ if st.session_state.current_page == "🏠 Home":
     )
     col3.markdown(
         """
-        <div style="background: rgba(255,255,255,0.90); backdrop-filter: blur(14px); padding: 24px; border-radius: 20px; border: 2px solid #16a34a; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+        <div class="eco-card" style="text-align: center;">
             <div style="font-size: 46px; margin-bottom: 8px;">🎁</div>
             <h3 style="margin: 0 0 6px 0;">Rewards Store</h3>
             <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Trade accumulated points for plant saplings and gift vouchers.</p>
@@ -466,8 +515,12 @@ if st.session_state.current_page == "🏠 Home":
 
 # ----------------- 2. AI SCANNER SCREEN -----------------
 elif st.session_state.current_page == "📸 AI Scanner":
-    st.title("📸 AI Waste Scanner & Classifier")
-    st.markdown("<p style='font-size: 20px; font-weight: 800;'>Snap a live photo or upload an image to identify the item accurately:</p>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="eco-header-banner">
+        <h2 style="margin: 0 0 4px 0;">📸 AI Waste Scanner & Classifier</h2>
+        <p style="margin: 0; font-size: 18px; color: #064e3b;">Snap a live photo or upload an image to identify the item accurately:</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     t1, t2 = st.tabs(["📷 Camera Scanner", "📁 Upload Image"])
     active_img = None
@@ -490,16 +543,19 @@ elif st.session_state.current_page == "📸 AI Scanner":
         with c_img:
             st.image(active_img, caption="Analyzed Material", use_container_width=True)
         with c_res:
-            st.success(f"### 🎉 Identified Material: **{cat}**")
-            st.markdown(f"<p style='font-size: 20px;'>Confidence score: <b>{conf}%</b></p>", unsafe_allow_html=True)
-            st.markdown(f"<p style='font-size: 20px;'>Reward rate: <b>{RATES[cat]} EcoPoints / 1,000g</b></p>", unsafe_allow_html=True)
+            st.markdown(f"""
+            <div class="eco-card">
+                <h3 style="color: #15803d; margin: 0 0 8px 0;">🎉 Identified Material: <b>{cat}</b></h3>
+                <p style="margin: 0 0 4px 0; font-size: 19px;">Confidence score: <b>{conf}%</b></p>
+                <p style="margin: 0; font-size: 19px;">Reward rate: <b>{RATES[cat]} EcoPoints / 1,000g</b></p>
+            </div>
+            """, unsafe_allow_html=True)
 
-    st.markdown("---")
-    st.subheader("⚖️ Log Weight & Claim Points")
-
+    st.markdown("<br>", unsafe_allow_html=True)
     current_cat = st.session_state.scan_result["category"] if st.session_state.scan_result else "🥤 Plastic Bottles"
 
     with st.form("log_form_verified"):
+        st.subheader("⚖️ Log Weight & Claim Points")
         sel_cat = st.selectbox("Waste Category", list(RATES.keys()), index=list(RATES.keys()).index(current_cat))
         in_grams = st.number_input("Weight (in Grams)", min_value=10, max_value=25000, value=250, step=50)
         
@@ -520,8 +576,12 @@ elif st.session_state.current_page == "📸 AI Scanner":
 
 # ----------------- 3. UPCYCLE AI STUDIO -----------------
 elif st.session_state.current_page == "💡 Upcycle AI":
-    st.title("💡 Upcycle AI Studio — Recreate From Waste")
-    st.markdown("<p style='font-size: 20px; font-weight: 800;'>Take a picture of an item you are about to throw away. The AI will provide ideas to recreate it into something useful!</p>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="eco-header-banner">
+        <h2 style="margin: 0 0 4px 0;">💡 Upcycle AI Studio — Recreate From Waste</h2>
+        <p style="margin: 0; font-size: 18px; color: #064e3b;">Take a picture of an item you are about to throw away. The AI will provide ideas to recreate it into something useful!</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     u_t1, u_t2 = st.tabs(["📷 Snap Item With Camera", "📁 Upload An Item Photo"])
     upcycle_img = None
@@ -546,10 +606,15 @@ elif st.session_state.current_page == "💡 Upcycle AI":
         with col_u1:
             st.image(upcycle_img, caption="Material Submitted", use_container_width=True)
         with col_u2:
-            st.success(f"### Detected Material: **{detected_upcycle_cat}** ({det_conf}% confidence)")
-            st.info("✨ The AI analyzed this item and generated the following step-by-step DIY upcycling ideas:")
+            st.markdown(f"""
+            <div class="eco-card">
+                <h3 style="color: #15803d; margin: 0 0 6px 0;">Detected Material: <b>{detected_upcycle_cat}</b></h3>
+                <p style="margin: 0; font-size: 18px;">AI Confidence: <b>{det_conf}%</b></p>
+                <p style="margin: 6px 0 0 0; color: #166534; font-size: 18px;">✨ Step-by-step DIY upcycling ideas generated below:</p>
+            </div>
+            """, unsafe_allow_html=True)
 
-    st.markdown("---")
+    st.markdown("<br>", unsafe_allow_html=True)
     st.subheader(f"🛠️ Creative Upcycling Ideas for: {detected_upcycle_cat}")
 
     suggestions = UPCYCLE_SUGGESTIONS.get(detected_upcycle_cat, UPCYCLE_SUGGESTIONS["🥤 Plastic Bottles"])
@@ -567,20 +632,48 @@ elif st.session_state.current_page == "💡 Upcycle AI":
 
 # ----------------- 4. DROP-OFF MAP -----------------
 elif st.session_state.current_page == "🗺️ Drop-off Map":
-    st.title("🗺️ Ecoza Drop-Off Centers")
+    st.markdown("""
+    <div class="eco-header-banner">
+        <h2 style="margin: 0 0 4px 0;">🗺️ Ecoza Drop-Off Centers</h2>
+        <p style="margin: 0; font-size: 18px; color: #064e3b;">Find certified circular recycling drop-off centers across Chennai:</p>
+    </div>
+    """, unsafe_allow_html=True)
+
     df_centers = pd.DataFrame(RECYCLING_CENTERS)
     st.map(df_centers[["lat", "lon"]], zoom=11)
 
-    for _, row in df_centers.iterrows():
-        with st.container():
-            c1, c2 = st.columns([3, 1])
-            c1.markdown(f"#### {row['Center Name']}\n**Accepts:** {row['Type']}\n**Address:** {row['Address']}")
-            c2.write(f"📞 `{row['Contact']}`")
-            st.divider()
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="eco-header-banner" style="margin-bottom: 12px;">
+        <h3 style="margin: 0;">📍 Verified Drop-Off Stations</h3>
+    </div>
+    """, unsafe_allow_html=True)
+
+    for idx, row in df_centers.iterrows():
+        st.markdown(f"""
+        <div class="eco-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div>
+                    <h3 style="margin: 0 0 6px 0; color: #064e3b;">{row['Center Name']}</h3>
+                    <p style="margin: 0 0 4px 0; font-size: 18px; color: #022e18;"><b>♻️ Accepts:</b> {row['Type']}</p>
+                    <p style="margin: 0; font-size: 18px; color: #022e18;"><b>📍 Address:</b> {row['Address']}</p>
+                </div>
+                <div style="background: #e0f2fe; padding: 10px 18px; border-radius: 12px; border: 2px solid #0284c7; text-align: right;">
+                    <span style="font-size: 14px; font-weight: 800; color: #0369a1; text-transform: uppercase;">Direct Line</span><br>
+                    <span style="font-size: 20px; font-weight: 800; color: #0c4a6e;">📞 {row['Contact']}</span>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # ----------------- 5. DOORSTEP PICKUP -----------------
 elif st.session_state.current_page == "🚚 Super Pickup":
-    st.title("🚚 Schedule Doorstep Collection")
+    st.markdown("""
+    <div class="eco-header-banner">
+        <h2 style="margin: 0 0 4px 0;">🚚 Schedule Doorstep Collection</h2>
+        <p style="margin: 0; font-size: 18px; color: #064e3b;">Book a verified Ecoza pickup partner directly to your address:</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     with st.form("pickup_booking"):
         addr = st.text_area("Pickup Address", placeholder="Street, Door No, Chennai")
@@ -600,39 +693,84 @@ elif st.session_state.current_page == "🚚 Super Pickup":
                 st.error("Please fill address and phone number.")
 
     if st.session_state.pickup_requests:
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("""
+        <div class="eco-header-banner" style="margin-bottom: 12px;">
+            <h3 style="margin: 0;">📋 Your Scheduled Pickups</h3>
+        </div>
+        """, unsafe_allow_html=True)
         st.dataframe(pd.DataFrame(st.session_state.pickup_requests), use_container_width=True)
 
-# ----------------- 6. REWARDS STORE -----------------
+# ----------------- 6. REWARDS STORE (HIGH-CONTRAST CARDS) -----------------
 elif st.session_state.current_page == "🎁 Rewards Store":
-    st.title(f"🎁 Ecoza Rewards Store (Balance: {st.session_state.ecopoints} pts)")
+    st.markdown(f"""
+    <div class="eco-header-banner">
+        <h2 style="margin: 0 0 6px 0; color: #064e3b;">🎁 Ecoza Rewards Store</h2>
+        <div style="font-size: 20px; font-weight: 800; color: #022e18;">
+            Available Balance: <span style="background: #16a34a; color: white; padding: 4px 14px; border-radius: 9999px;">🌟 {st.session_state.ecopoints} EcoPoints</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     rewards = [
-        {"title": "🌱 Plant A Sapling", "cost": 150, "desc": "Fruit sapling planted with your name tag."},
-        {"title": "🍦 Juice / Treat Voucher", "cost": 80, "desc": "1 artisanal fruit smoothie at partner stores."},
-        {"title": "📚 Book & Stationery Voucher", "cost": 100, "desc": "₹100 discount coupon for books."},
-        {"title": "🚌 Metro City Day Pass", "cost": 120, "desc": "1-day student transit pass across city metro."}
+        {"title": "🌱 Plant A Sapling", "cost": 150, "desc": "A fruit sapling planted in Chennai with your custom name tag."},
+        {"title": "🍦 Juice / Treat Voucher", "cost": 80, "desc": "1 artisanal fresh fruit smoothie voucher at partner organic stores."},
+        {"title": "📚 Book & Stationery Voucher", "cost": 100, "desc": "₹100 discount coupon redeemable for notebooks & school supplies."},
+        {"title": "🚌 Metro City Day Pass", "cost": 120, "desc": "1-day student transit pass across the city metro railway."}
     ]
 
     col_a, col_b = st.columns(2)
     for i, r in enumerate(rewards):
         target = col_a if i % 2 == 0 else col_b
         with target:
-            st.markdown(f"### {r['title']}")
-            st.write(r["desc"])
-            if st.button(f"Redeem ({r['cost']} pts)", key=f"rw_{i}"):
+            # Solid, high-contrast white card container with dark text
+            st.markdown(f"""
+            <div class="eco-card" style="margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                    <h3 style="margin: 0; color: #064e3b; font-size: 24px;">{r['title']}</h3>
+                    <span style="background: #dcfce7; color: #166534; border: 2px solid #16a34a; font-weight: 800; font-size: 16px; padding: 4px 12px; border-radius: 9999px; white-space: nowrap;">
+                        {r['cost']} pts
+                    </span>
+                </div>
+                <p style="margin: 0; font-size: 18px; color: #022e18; font-weight: 700; line-height: 1.4;">
+                    {r['desc']}
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            if st.button(f"✨ Redeem Voucher ({r['cost']} pts)", key=f"rw_{i}", use_container_width=True):
                 if st.session_state.ecopoints >= r["cost"]:
                     st.session_state.ecopoints -= r["cost"]
+                    v_code = f"ECO-{datetime.datetime.now().strftime('%M%S')}"
                     st.session_state.redeemed_coupons.append({
-                        "Reward": r["title"], "Code": f"ECO-{datetime.datetime.now().strftime('%M%S')}", "Date": str(datetime.date.today())
+                        "Reward": r["title"], "Code": v_code, "Date": str(datetime.date.today())
                     })
-                    st.success("Redeemed successfully!")
+                    st.balloons()
+                    st.success(f"🎉 Voucher Claimed! Your Coupon Code: **{v_code}**")
                     st.rerun()
                 else:
-                    st.error("Insufficient points!")
+                    st.error("Insufficient points! Complete drop-offs or upcycle items to earn more points.")
+            
+            st.markdown("<div style='margin-bottom: 14px;'></div>", unsafe_allow_html=True)
+
+    if st.session_state.redeemed_coupons:
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("""
+        <div class="eco-header-banner" style="margin-bottom: 12px;">
+            <h3 style="margin: 0;">🎟️ Your Claimed Vouchers</h3>
+        </div>
+        """, unsafe_allow_html=True)
+        st.dataframe(pd.DataFrame(st.session_state.redeemed_coupons), use_container_width=True)
 
 # ----------------- 7. LEADERBOARD -----------------
 elif st.session_state.current_page == "🏆 Champions Leaderboard":
-    st.title("🏆 Champions Leaderboard")
+    st.markdown("""
+    <div class="eco-header-banner">
+        <h2 style="margin: 0 0 4px 0;">🏆 Champions Leaderboard</h2>
+        <p style="margin: 0; font-size: 18px; color: #064e3b;">Community leaders preventing landfill waste this week:</p>
+    </div>
+    """, unsafe_allow_html=True)
+
     leaderboard = [
         {"Rank": "🥇 1st", "Contributor": "Class 8B (Little Flower School)", "Waste Saved": "44,000 g", "EcoPoints": 880},
         {"Rank": "🥈 2nd", "Contributor": "Priya R.", "Waste Saved": "38,500 g", "EcoPoints": 770},
@@ -643,7 +781,12 @@ elif st.session_state.current_page == "🏆 Champions Leaderboard":
 
 # ----------------- 8. DASHBOARD -----------------
 elif st.session_state.current_page == "📊 Impact Dashboard":
-    st.title("📊 Environmental Impact Dashboard")
+    st.markdown("""
+    <div class="eco-header-banner">
+        <h2 style="margin: 0 0 4px 0;">📊 Environmental Impact Dashboard</h2>
+        <p style="margin: 0; font-size: 18px; color: #064e3b;">Real-time carbon offset and material recycling metrics:</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     total = len(st.session_state.waste_history)
     m1, m2, m3, m4 = st.columns(4)
@@ -652,7 +795,11 @@ elif st.session_state.current_page == "📊 Impact Dashboard":
     m3.metric("Pickups", len(st.session_state.pickup_requests))
     m4.metric("CO₂ Offset", f"{total * 2.2:.1f} kg")
 
-    st.markdown("---")
-    st.subheader("Recent Recycling Logs")
+    st.markdown("<br>", unsafe_allow_html=True)
     if st.session_state.waste_history:
+        st.markdown("""
+        <div class="eco-header-banner" style="margin-bottom: 12px;">
+            <h3 style="margin: 0;">📜 Recent Recycling Logs</h3>
+        </div>
+        """, unsafe_allow_html=True)
         st.dataframe(pd.DataFrame(st.session_state.waste_history), use_container_width=True)
