@@ -124,9 +124,9 @@ st.markdown(
     h2 { font-size: 34px !important; margin-bottom: 8px !important; }
     h3 { font-size: 26px !important; }
 
-    /* Form & Metric Wrappers */
+    /* Frosted Cards for all Form and Table wrappers */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: rgba(255, 255, 255, 0.94) !important;
+        background: rgba(255, 255, 255, 0.95) !important;
         backdrop-filter: blur(18px) !important;
         -webkit-backdrop-filter: blur(18px) !important;
         padding: 24px !important;
@@ -135,7 +135,7 @@ st.markdown(
         border: 2px solid #16a34a !important;
     }
 
-    /* Solid White Card for Maximum Text Readability */
+    /* Solid White Card for Custom Blocks */
     .eco-card {
         background: rgba(255, 255, 255, 0.96) !important;
         backdrop-filter: blur(16px) !important;
@@ -159,6 +159,44 @@ st.markdown(
         width: 100%;
     }
 
+    /* FIX FOR EXPANDER: Forces solid white container background and dark text for "How To Make It" */
+    div[data-testid="stExpander"] {
+        background: rgba(255, 255, 255, 0.97) !important;
+        border: 2px solid #16a34a !important;
+        border-radius: 18px !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25) !important;
+        margin-bottom: 18px !important;
+        overflow: hidden !important;
+    }
+
+    div[data-testid="stExpander"] summary {
+        background: #f0fdf4 !important;
+        border-bottom: 2px solid #bbf7d0 !important;
+        padding: 14px 18px !important;
+    }
+
+    div[data-testid="stExpander"] summary p, div[data-testid="stExpander"] summary span {
+        color: #064e3b !important;
+        font-family: 'Fredoka', cursive !important;
+        font-size: 20px !important;
+        font-weight: 800 !important;
+    }
+
+    div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] {
+        background: #ffffff !important;
+        padding: 20px !important;
+    }
+
+    div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] p,
+    div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] div,
+    div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] span {
+        color: #032010 !important;
+        font-size: 19px !important;
+        font-weight: 800 !important;
+        line-height: 1.6 !important;
+    }
+
+    /* Input Fields */
     input, select, textarea {
         background-color: #ffffff !important;
         color: #022e18 !important;
@@ -169,41 +207,33 @@ st.markdown(
     }
 
     input::placeholder {
-        color: #889988 !important;
+        color: #64748b !important;
         font-weight: 600 !important;
     }
 
-    div[data-testid="stMetricValue"] {
-        color: #14532d !important;
-        font-family: 'Fredoka', cursive !important;
-        font-weight: 700 !important;
-        font-size: 48px !important;
-    }
-
-    div[data-testid="stMetricLabel"] * {
-        font-size: 20px !important;
-        font-weight: 800 !important;
-        color: #064e3b !important;
-    }
-
-    .stButton>button {
+    /* ALL BUTTONS: Vivid Green with Crisp White Text (Fixes black button bug) */
+    .stButton>button, div[data-testid="stFormSubmitButton"]>button {
         background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
         color: #ffffff !important;
         font-family: 'Fredoka', cursive !important;
-        font-size: 18px !important;
+        font-size: 19px !important;
         font-weight: 700 !important;
         border-radius: 16px !important;
         border: 2px solid #86efac !important;
-        padding: 10px 18px !important;
-        box-shadow: 0 6px 18px rgba(21, 128, 61, 0.35) !important;
+        padding: 12px 20px !important;
+        box-shadow: 0 6px 18px rgba(21, 128, 61, 0.40) !important;
         transition: all 0.15s ease !important;
         width: 100% !important;
     }
 
-    .stButton>button:hover {
+    .stButton>button:hover, div[data-testid="stFormSubmitButton"]>button:hover {
         background: linear-gradient(135deg, #166534 0%, #15803d 100%) !important;
         color: #ffffff !important;
         transform: translateY(-2px);
+    }
+
+    .stButton>button * , div[data-testid="stFormSubmitButton"]>button * {
+        color: #ffffff !important;
     }
 
     .badge-points {
@@ -363,10 +393,10 @@ RECYCLING_CENTERS = [
     }
 ]
 
-# ----------------- 1. LOGIN SCREEN -----------------
+# ----------------- 1. LOGIN SCREEN (Dedicated Name Field & Bright Buttons) -----------------
 if not st.session_state.authenticated:
     st.markdown("<br><br>", unsafe_allow_html=True)
-    _, col_log, _ = st.columns([1, 2, 1])
+    _, col_log, _ = st.columns([1, 2.2, 1])
 
     with col_log:
         st.markdown(
@@ -381,10 +411,12 @@ if not st.session_state.authenticated:
             unsafe_allow_html=True
         )
 
-        with st.form("clean_login_form"):
-            in_user = st.text_input("User Email or Mobile", placeholder="Enter your email or phone number")
+        with st.form("custom_login_form"):
+            in_name = st.text_input("Your Full Name / Username", placeholder="e.g. Deepak Raja, Priya, GreenClub")
+            in_user = st.text_input("Email ID or Mobile Number", placeholder="Enter your email or 10-digit mobile")
             in_pass = st.text_input("Password", type="password", placeholder="Enter your password")
             
+            st.markdown("<div style='margin-top: 14px;'></div>", unsafe_allow_html=True)
             c_btn1, c_btn2 = st.columns(2)
             with c_btn1:
                 btn_enter = st.form_submit_button("🚀 Enter App", use_container_width=True)
@@ -392,19 +424,20 @@ if not st.session_state.authenticated:
                 btn_demo = st.form_submit_button("⚡ Guest Login", use_container_width=True)
 
             if btn_enter:
+                cleaned_name = in_name.strip()
                 cleaned_user = in_user.strip()
                 if not cleaned_user or not in_pass.strip():
-                    st.error("Please enter both your Email/Mobile and Password!")
+                    st.error("Please enter your Email/Mobile and Password!")
                 else:
                     st.session_state.authenticated = True
                     st.session_state.user_identifier = cleaned_user
-                    st.session_state.username = cleaned_user.split("@")[0].title() if "@" in cleaned_user else cleaned_user
+                    st.session_state.username = cleaned_name if cleaned_name else (cleaned_user.split("@")[0].title() if "@" in cleaned_user else cleaned_user)
                     st.rerun()
 
             if btn_demo:
                 st.session_state.authenticated = True
                 st.session_state.user_identifier = "guest@ecoza.com"
-                st.session_state.username = "Guest User"
+                st.session_state.username = in_name.strip() if in_name.strip() else "Guest User"
                 st.rerun()
 
     st.stop()
@@ -573,7 +606,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
             st.success(f"Successfully recorded! Added {pts} EcoPoints.")
             st.rerun()
 
-# ----------------- 3. UPCYCLE AI STUDIO -----------------
+# ----------------- 3. UPCYCLE AI STUDIO (CRISP SOLID CONTAINER) -----------------
 elif st.session_state.current_page == "💡 Upcycle AI":
     st.markdown("""
     <div class="eco-header-banner">
@@ -620,16 +653,32 @@ elif st.session_state.current_page == "💡 Upcycle AI":
 
     for idx, idea in enumerate(suggestions):
         with st.expander(f"✨ Project {idx + 1}: {idea['title']}  •  [{idea['difficulty']}]", expanded=True):
-            st.markdown(f"**🧰 Tools & Supplies Needed:** `{idea['tools']}`")
-            st.markdown("**📋 How To Make It:**")
-            st.write(idea["steps"])
-            if st.button(f"⭐ I made this project! (+15 Bonus EcoPoints)", key=f"bonus_up_{idx}"):
+            st.markdown(f"""
+            <div style="background: #f8fafc; border-left: 5px solid #16a34a; padding: 14px 18px; border-radius: 8px; margin-bottom: 14px;">
+                <p style="margin: 0; font-size: 18px; color: #0f172a;">
+                    <b>🧰 Tools & Supplies Needed:</b> <code style="background: #e2e8f0; color: #0f172a; padding: 2px 8px; border-radius: 6px;">{idea['tools']}</code>
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div style="background: #ffffff; border: 1.5px solid #cbd5e1; padding: 16px 20px; border-radius: 12px; margin-bottom: 16px;">
+                <h4 style="margin: 0 0 10px 0; color: #15803d; font-size: 20px;">📋 How To Make It:</h4>
+            """, unsafe_allow_html=True)
+            
+            for line in idea["steps"].split("\n"):
+                if line.strip():
+                    st.markdown(f"<p style='margin: 0 0 8px 0; font-size: 18px; color: #021a0c; font-weight: 700; line-height: 1.5;'>{line.strip()}</p>", unsafe_allow_html=True)
+            
+            st.markdown("</div>", unsafe_allow_html=True)
+            
+            if st.button(f"⭐ I made this project! (+15 Bonus EcoPoints)", key=f"bonus_up_{idx}", use_container_width=True):
                 st.session_state.ecopoints += 15
                 st.balloons()
                 st.success("Congratulations on upcycling! 15 Bonus EcoPoints added to your balance.")
                 st.rerun()
 
-# ----------------- 4. DROP-OFF MAP (HIGH VISIBILITY CARDS) -----------------
+# ----------------- 4. DROP-OFF MAP -----------------
 elif st.session_state.current_page == "🗺️ Drop-off Map":
     st.markdown("""
     <div class="eco-header-banner">
@@ -638,13 +687,6 @@ elif st.session_state.current_page == "🗺️ Drop-off Map":
     </div>
     """, unsafe_allow_html=True)
 
-    # Wrap the map inside a high-visibility container
-    st.markdown("""
-    <div class="eco-card" style="padding: 16px; margin-bottom: 22px;">
-        <h3 style="margin: 0 0 10px 0; color: #064e3b; font-size: 22px;">📍 Interactive Stations Map</h3>
-    </div>
-    """, unsafe_allow_html=True)
-    
     df_centers = pd.DataFrame(RECYCLING_CENTERS)
     st.map(df_centers[["lat", "lon"]], zoom=11)
 
@@ -655,7 +697,6 @@ elif st.session_state.current_page == "🗺️ Drop-off Map":
     </div>
     """, unsafe_allow_html=True)
 
-    # Every recycling center in a crisp white card with bold dark lettering
     for idx, row in df_centers.iterrows():
         st.markdown(f"""
         <div style="background: rgba(255, 255, 255, 0.96); padding: 22px 26px; border-radius: 18px; border: 2.5px solid #16a34a; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35); margin-bottom: 16px;">
