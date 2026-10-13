@@ -25,7 +25,6 @@ if "username" not in st.session_state:
 if "scan_result" not in st.session_state:
     st.session_state.scan_result = None
 
-# Compact names so buttons never truncate with "..." on smaller screens
 PAGES = [
     "🏠 Home", 
     "📸 AI Scanner", 
@@ -71,7 +70,6 @@ RATES = {
 PAGE_BACKGROUNDS = {
     "LOGIN": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
     "🏠 Home": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2400&q=95",
-    # Fresh botanical nature canopy (sunlight through emerald tree leaves)
     "📸 AI Scanner": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=2400&q=95",
     "💡 Upcycle AI": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
     "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95",
@@ -146,6 +144,18 @@ st.markdown(
         box-shadow: 0 10px 28px rgba(0, 0, 0, 0.30) !important;
         margin-bottom: 20px !important;
         word-wrap: break-word !important;
+    }}
+
+    .eco-stat-card {{
+        background: rgba(245, 247, 245, 0.96) !important;
+        padding: 24px 22px !important;
+        border-radius: 22px !important;
+        border: 2px solid rgba(22, 163, 74, 0.3) !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14) !important;
+        height: 100% !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }}
 
     .eco-header-banner {{
@@ -536,29 +546,111 @@ for i, page_name in enumerate(PAGES[4:]):
 
 st.markdown("<hr style='margin-top: 14px; margin-bottom: 20px; border-top: 2px dashed rgba(22, 101, 52, 0.4);'>", unsafe_allow_html=True)
 
-# ----------------- 1. HOME SCREEN -----------------
+# ----------------- 1. HOME SCREEN (WITH RELATABLE WASTE CRISIS DATA) -----------------
 if st.session_state.current_page == "🏠 Home":
+    # Hero Title
     st.markdown(
         """
-        <div style="text-align: center; max-width: 850px; margin: 0 auto; padding: 10px 0 20px 0;">
-            <div style="background: rgba(255,255,255,0.92); color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 8px 24px; border-radius: 9999px; display: inline-block; font-size: 17px; margin-bottom: 12px; border: 2px solid #16a34a; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);">
+        <div style="text-align: center; max-width: 900px; margin: 0 auto; padding: 10px 0 16px 0;">
+            <div style="background: rgba(255,255,255,0.92); color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 8px 24px; border-radius: 9999px; display: inline-block; font-size: 16px; margin-bottom: 12px; border: 2px solid #16a34a; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);">
                 🍃 RETHINK • REUSE • RECREATE 🍃
             </div>
-            <h1 style="line-height: 1.15;">
-                Turn Everyday Waste Into <span style="color: #16a34a;">EcoPoints & Upcycled Creations!</span>
+            <h1 style="line-height: 1.15; margin-bottom: 8px;">
+                India Generates <span style="color: #dc2626;">Millions Of Tonnes</span> Of Waste Every Year
             </h1>
+            <p style="font-size: 20px; font-weight: 800; color: #022e18; max-width: 780px; margin: 0 auto;">
+                Traditional systems are overwhelmed. Ecoza digitizes waste sorting with AI to empower everyday students and households to take circular climate action.
+            </p>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-    c_b1, c_b2, _ = st.columns([1.5, 1.8, 1.5])
+    # Relatable Real-World Impact Stat Cards
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        st.markdown(
+            """
+            <div class="eco-stat-card">
+                <div style="font-size: 34px; margin-bottom: 6px;">📊</div>
+                <div style="font-size: 36px; font-weight: 800; font-family: 'Fredoka'; color: #0f172a; line-height: 1;">
+                    62+ Million
+                </div>
+                <p style="font-size: 16px; font-weight: 800; color: #334155; margin: 10px 0 0 0; line-height: 1.4;">
+                    Tonnes of solid waste generated annually across India's urban centers.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    with c2:
+        st.markdown(
+            """
+            <div class="eco-stat-card" style="border-color: rgba(220, 38, 38, 0.4);">
+                <div style="font-size: 34px; margin-bottom: 6px;">⚠️</div>
+                <div style="font-size: 36px; font-weight: 800; font-family: 'Fredoka'; color: #dc2626; line-height: 1;">
+                    Only 28%
+                </div>
+                <p style="font-size: 16px; font-weight: 800; color: #334155; margin: 10px 0 0 0; line-height: 1.4;">
+                    Of municipal solid waste is properly segregated at source before reaching landfills.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    with c3:
+        st.markdown(
+            """
+            <div class="eco-stat-card">
+                <div style="font-size: 34px; margin-bottom: 6px;">🏙️</div>
+                <div style="font-size: 36px; font-weight: 800; font-family: 'Fredoka'; color: #0f172a; line-height: 1;">
+                    5,400 T/day
+                </div>
+                <p style="font-size: 16px; font-weight: 800; color: #334155; margin: 10px 0 0 0; line-height: 1.4;">
+                    Garbage generated daily in Chennai alone, filling dumping yards at Kodungaiyur & Perungudi.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+    with c4:
+        st.markdown(
+            """
+            <div class="eco-stat-card" style="border-color: rgba(22, 163, 74, 0.5);">
+                <div style="font-size: 34px; margin-bottom: 6px;">🔄</div>
+                <div style="font-size: 36px; font-weight: 800; font-family: 'Fredoka'; color: #15803d; line-height: 1;">
+                    80% Can Be Saved
+                </div>
+                <p style="font-size: 16px; font-weight: 800; color: #334155; margin: 10px 0 0 0; line-height: 1.4;">
+                    Of household discarded plastics, cardboard, and electronic scraps can be upcycled or recycled.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Action Banner
+    st.markdown(
+        """
+        <div class="eco-header-banner" style="text-align: center; padding: 20px 24px;">
+            <h2 style="margin: 0 0 6px 0; color: #064e3b;">🛠️ Modern Toolkit for a Cleaner World</h2>
+            <p style="margin: 0; font-size: 19px; color: #022e18; font-weight: 800;">
+                Turn items you're about to throw away into reusable creations or trade them for rewards:
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    c_b1, c_b2 = st.columns(2)
     with c_b1:
-        if st.button("📸 AI Scanner & Log", key="home_btn_scan", use_container_width=True):
+        if st.button("📸 Open AI Scanner & Earn EcoPoints", key="home_btn_scan", use_container_width=True):
             st.session_state.current_page = "📸 AI Scanner"
             st.rerun()
     with c_b2:
-        if st.button("💡 Upcycle AI Studio", key="home_btn_up", use_container_width=True):
+        if st.button("💡 Launch Upcycle AI Studio", key="home_btn_up", use_container_width=True):
             st.session_state.current_page = "💡 Upcycle AI"
             st.rerun()
 
