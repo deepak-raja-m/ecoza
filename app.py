@@ -25,7 +25,6 @@ if "username" not in st.session_state:
 if "scan_result" not in st.session_state:
     st.session_state.scan_result = None
 
-# Streamlined, visible page names
 PAGES = [
     "🏠 Home", 
     "📸 Scanner", 
@@ -84,11 +83,11 @@ if not st.session_state.authenticated:
 else:
     active_bg = PAGE_BACKGROUNDS.get(st.session_state.current_page, PAGE_BACKGROUNDS["🏠 Home"])
 
-# ----------------- Responsive, Fully Visible CSS -----------------
+# ----------------- High-Contrast Ultra-Visible Styling CSS -----------------
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Fredoka:wght@600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Fredoka:wght@600;700&display=swap');
 
     [data-testid="stSidebar"], section[data-testid="stSidebar"], #MainMenu, footer {
         display: none !important;
@@ -106,32 +105,34 @@ st.markdown(
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 
+    /* Ultra-readable bold dark text with contrast halo */
     .stApp p, .stApp span, .stApp label, .stApp div {
-        color: #032a15 !important;
+        color: #031e0f !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 18px;
-        font-weight: 700;
+        font-size: 19px;
+        font-weight: 800;
         line-height: 1.5;
     }
 
     h1, h2, h3, h4 {
         font-family: 'Fredoka', cursive, sans-serif !important;
         color: #022b14 !important;
-        text-shadow: 0 1px 4px rgba(255, 255, 255, 0.7);
+        text-shadow: 0 2px 6px rgba(255, 255, 255, 0.95);
     }
 
-    h1 { font-size: 44px !important; margin-bottom: 10px !important; }
-    h2 { font-size: 32px !important; margin-bottom: 8px !important; }
+    h1 { font-size: 46px !important; margin-bottom: 10px !important; }
+    h2 { font-size: 34px !important; margin-bottom: 8px !important; }
+    h3 { font-size: 26px !important; }
 
-    /* FULLY VISIBLE WRAPPING NAVBAR: Never gets clipped on edges */
+    /* High-contrast wrapping navbar */
     div[role="radiogroup"] {
-        background: rgba(255, 255, 255, 0.82) !important;
-        backdrop-filter: blur(14px) !important;
-        -webkit-backdrop-filter: blur(14px) !important;
+        background: rgba(255, 255, 255, 0.94) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
         padding: 8px 16px !important;
-        border-radius: 20px !important;
-        border: 2px solid rgba(22, 163, 74, 0.8) !important;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
+        border-radius: 24px !important;
+        border: 2px solid #15803d !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
         display: flex !important;
         flex-wrap: wrap !important;
         justify-content: center !important;
@@ -140,77 +141,104 @@ st.markdown(
     }
 
     div[role="radiogroup"] label {
-        background: rgba(255, 255, 255, 0.6) !important;
-        padding: 6px 12px !important;
-        border-radius: 12px !important;
+        background: #f0fdf4 !important;
+        padding: 8px 16px !important;
+        border-radius: 14px !important;
         font-weight: 800 !important;
         font-family: 'Fredoka', cursive !important;
-        color: #032e18 !important;
-        font-size: 15px !important;
-        border: 1px solid rgba(22, 163, 74, 0.3) !important;
+        color: #064e3b !important;
+        font-size: 16px !important;
+        border: 1.5px solid #86efac !important;
         cursor: pointer;
-        transition: all 0.2s ease;
+        transition: all 0.15s ease;
     }
 
     div[role="radiogroup"] label:hover {
-        background: #dcfce7 !important;
-        border-color: #16a34a !important;
+        background: #bbf7d0 !important;
+        border-color: #15803d !important;
+        color: #022e18 !important;
     }
 
-    /* Glass Cards */
+    /* Distinct White Frosted Cards (High contrast over any dark/busy background) */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: rgba(255, 255, 255, 0.60) !important;
-        backdrop-filter: blur(14px) !important;
-        -webkit-backdrop-filter: blur(14px) !important;
+        background: rgba(255, 255, 255, 0.88) !important;
+        backdrop-filter: blur(18px) !important;
+        -webkit-backdrop-filter: blur(18px) !important;
         padding: 24px !important;
         border-radius: 20px !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
-        border: 2px solid rgba(255, 255, 255, 0.9) !important;
+        box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22) !important;
+        border: 2px solid #16a34a !important;
     }
 
     input, select, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {
-        background-color: rgba(255, 255, 255, 0.95) !important;
-        color: #032e18 !important;
+        background-color: #ffffff !important;
+        color: #022e18 !important;
         border: 2px solid #16a34a !important;
         border-radius: 12px !important;
-        font-size: 18px !important;
+        font-size: 19px !important;
+        font-weight: 800 !important;
+    }
+
+    div[data-testid="stMetricValue"] {
+        color: #14532d !important;
+        font-family: 'Fredoka', cursive !important;
         font-weight: 700 !important;
+        font-size: 48px !important;
+    }
+
+    div[data-testid="stMetricLabel"] * {
+        font-size: 20px !important;
+        font-weight: 800 !important;
+        color: #064e3b !important;
     }
 
     .stButton>button, div[data-testid="stForm"] button {
         background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
         color: #ffffff !important;
         font-family: 'Fredoka', cursive !important;
-        font-size: 18px !important;
+        font-size: 19px !important;
         font-weight: 700 !important;
         border-radius: 16px !important;
         border: 2px solid #86efac !important;
-        padding: 8px 22px !important;
-        box-shadow: 0 6px 16px rgba(21, 128, 61, 0.3) !important;
+        padding: 10px 26px !important;
+        box-shadow: 0 6px 18px rgba(21, 128, 61, 0.35) !important;
     }
 
     .badge-points {
-        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
         color: #ffffff !important;
         font-family: 'Fredoka', cursive;
         font-weight: 700;
-        padding: 6px 16px;
+        padding: 8px 20px;
         border-radius: 9999px;
-        font-size: 16px;
-        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+        font-size: 17px;
+        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
         border: 2px solid #bbf7d0;
         display: inline-block;
         white-space: nowrap;
     }
 
     .brand-logo {
-        font-size: 32px;
+        font-size: 34px;
         font-family: 'Fredoka', cursive, sans-serif;
         font-weight: 700;
-        color: #0f5132 !important;
+        color: #064e3b !important;
         display: flex;
         align-items: center;
         gap: 6px;
+        text-shadow: 0 2px 6px rgba(255, 255, 255, 0.9);
+    }
+
+    .user-pill {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1.5px solid #16a34a;
+        padding: 4px 14px;
+        border-radius: 9999px;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 800;
+        color: #064e3b !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     </style>
     """,
@@ -285,7 +313,7 @@ UPCYCLE_SUGGESTIONS = {
             "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
             "difficulty": "Advanced (30 mins)",
             "tools": "Old PCB scraps, Keyring, Protective gloves",
-            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified hubs!"
+            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
         }
     ],
     "🍎 Organic Waste": [
@@ -314,10 +342,10 @@ if not st.session_state.authenticated:
         st.markdown(
             """
             <div style="text-align: center; margin-bottom: 20px;">
-                <span style="font-family: 'Fredoka', cursive; font-size: 56px; color: #15803d; font-weight: 700;">🌱 Ecoza</span>
-                <div style="font-size: 18px; color: #166534; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px;">RETHINK. REUSE. RECREATE.</div>
+                <span style="font-family: 'Fredoka', cursive; font-size: 56px; color: #15803d; font-weight: 700; text-shadow: 0 2px 8px rgba(255, 255, 255, 0.9);">🌱 Ecoza</span>
+                <div style="font-size: 19px; color: #064e3b; font-weight: 800; letter-spacing: 1px; margin-bottom: 8px;">RETHINK. REUSE. RECREATE.</div>
                 <h2 style="margin: 0 0 6px 0;">Welcome to Ecoza</h2>
-                <p>Login to start your sustainable recycling journey</p>
+                <p style="font-size: 18px; font-weight: 800; color: #022e18;">Login to start your sustainable recycling journey</p>
             </div>
             """,
             unsafe_allow_html=True
@@ -344,7 +372,7 @@ if not st.session_state.authenticated:
 # ----------------- AUTHENTICATED TOP HEADER -----------------
 top_c1, top_c2 = st.columns([3.8, 1.4], vertical_alignment="center")
 with top_c1:
-    st.markdown('<div class="brand-logo">🌱 Ecoza <span style="font-size: 14px; color: #166534; font-weight: 800;">• RETHINK. REUSE. RECREATE.</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="brand-logo">🌱 Ecoza <span style="font-size: 15px; color: #064e3b; font-weight: 800;">• RETHINK. REUSE. RECREATE.</span></div>', unsafe_allow_html=True)
 with top_c2:
     p_col, out_col = st.columns([1.2, 0.8], vertical_alignment="center")
     with p_col:
@@ -354,22 +382,25 @@ with top_c2:
             st.session_state.authenticated = False
             st.rerun()
 
-# Responsive wrapping navbar: all 8 items stay in full view
+# High-contrast wrapping navbar
 cur_idx = PAGES.index(st.session_state.current_page) if st.session_state.current_page in PAGES else 0
 choice = st.radio("Nav", PAGES, index=cur_idx, horizontal=True, label_visibility="collapsed")
 if choice != st.session_state.current_page:
     st.session_state.current_page = choice
     st.rerun()
 
-st.caption(f"Logged in: **{st.session_state.username}** ({st.session_state.user_identifier})")
-st.markdown("<hr style='margin-top: 2px; margin-bottom: 20px; border-top: 2px dashed rgba(22, 101, 52, 0.4);'>", unsafe_allow_html=True)
+st.markdown(f"""
+<div style="margin-top: 4px; margin-bottom: 16px;">
+    <span class="user-pill">👤 Logged in: <b>{st.session_state.username}</b> ({st.session_state.user_identifier})</span>
+</div>
+""", unsafe_allow_html=True)
 
 # ----------------- 1. HOME SCREEN -----------------
 if st.session_state.current_page == "🏠 Home":
     st.markdown(
         """
         <div style="text-align: center; max-width: 850px; margin: 0 auto; padding: 10px 0 20px 0;">
-            <div style="background: rgba(255,255,255,0.7); color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 8px 24px; border-radius: 9999px; display: inline-block; font-size: 16px; margin-bottom: 12px; border: 2px solid #86efac;">
+            <div style="background: rgba(255,255,255,0.92); color: #15803d; font-weight: 800; font-family: 'Fredoka'; padding: 8px 24px; border-radius: 9999px; display: inline-block; font-size: 17px; margin-bottom: 12px; border: 2px solid #16a34a; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);">
                 🍃 RETHINK • REUSE • RECREATE 🍃
             </div>
             <h1 style="line-height: 1.15;">
@@ -395,30 +426,30 @@ if st.session_state.current_page == "🏠 Home":
     col1, col2, col3 = st.columns(3)
     col1.markdown(
         """
-        <div style="background: rgba(255,255,255,0.55); backdrop-filter: blur(12px); padding: 24px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.9); text-align: center;">
+        <div style="background: rgba(255,255,255,0.90); backdrop-filter: blur(14px); padding: 24px; border-radius: 20px; border: 2px solid #16a34a; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
             <div style="font-size: 46px; margin-bottom: 8px;">📷</div>
             <h3 style="margin: 0 0 6px 0;">AI Waste Scanner</h3>
-            <p style="font-size: 16px; margin: 0;">Instant recognition for plastics, paper, metals, and e-waste.</p>
+            <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Instant recognition for plastics, paper, metals, and e-waste.</p>
         </div>
         """,
         unsafe_allow_html=True
     )
     col2.markdown(
         """
-        <div style="background: rgba(255,255,255,0.55); backdrop-filter: blur(12px); padding: 24px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.9); text-align: center;">
+        <div style="background: rgba(255,255,255,0.90); backdrop-filter: blur(14px); padding: 24px; border-radius: 20px; border: 2px solid #16a34a; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
             <div style="font-size: 46px; margin-bottom: 8px;">💡</div>
             <h3 style="margin: 0 0 6px 0;">Upcycle AI Studio</h3>
-            <p style="font-size: 16px; margin: 0;">Snap waste materials to receive clever DIY upcycling project guides.</p>
+            <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Snap waste materials to receive clever DIY upcycling project guides.</p>
         </div>
         """,
         unsafe_allow_html=True
     )
     col3.markdown(
         """
-        <div style="background: rgba(255,255,255,0.55); backdrop-filter: blur(12px); padding: 24px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.9); text-align: center;">
+        <div style="background: rgba(255,255,255,0.90); backdrop-filter: blur(14px); padding: 24px; border-radius: 20px; border: 2px solid #16a34a; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
             <div style="font-size: 46px; margin-bottom: 8px;">🎁</div>
             <h3 style="margin: 0 0 6px 0;">Rewards Store</h3>
-            <p style="font-size: 16px; margin: 0;">Trade accumulated points for plant saplings and gift vouchers.</p>
+            <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Trade accumulated points for plant saplings and gift vouchers.</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -427,7 +458,7 @@ if st.session_state.current_page == "🏠 Home":
 # ----------------- 2. AI SCANNER SCREEN -----------------
 elif st.session_state.current_page == "📸 Scanner":
     st.title("📸 AI Waste Scanner & Classifier")
-    st.write("Snap a live photo or upload an image to identify the item accurately:")
+    st.markdown("<p style='font-size: 20px; font-weight: 800;'>Snap a live photo or upload an image to identify the item accurately:</p>", unsafe_allow_html=True)
 
     t1, t2 = st.tabs(["📷 Camera Scanner", "📁 Upload Image"])
     active_img = None
@@ -451,8 +482,8 @@ elif st.session_state.current_page == "📸 Scanner":
             st.image(active_img, caption="Analyzed Material", use_container_width=True)
         with c_res:
             st.success(f"### 🎉 Identified Material: **{cat}**")
-            st.write(f"Confidence score: **{conf}%**")
-            st.write(f"Reward rate: **{RATES[cat]} EcoPoints / 1,000g**")
+            st.markdown(f"<p style='font-size: 20px;'>Confidence score: <b>{conf}%</b></p>", unsafe_allow_html=True)
+            st.markdown(f"<p style='font-size: 20px;'>Reward rate: <b>{RATES[cat]} EcoPoints / 1,000g</b></p>", unsafe_allow_html=True)
 
     st.markdown("---")
     st.subheader("⚖️ Log Weight & Claim Points")
@@ -481,7 +512,7 @@ elif st.session_state.current_page == "📸 Scanner":
 # ----------------- 3. UPCYCLE AI STUDIO -----------------
 elif st.session_state.current_page == "💡 Upcycle AI":
     st.title("💡 Upcycle AI Studio — Recreate From Waste")
-    st.write("Take a picture of an item you are about to throw away. The AI will tell you how you can recreate it into something useful!")
+    st.markdown("<p style='font-size: 20px; font-weight: 800;'>Take a picture of an item you are about to throw away. The AI will provide ideas to recreate it into something useful!</p>", unsafe_allow_html=True)
 
     u_t1, u_t2 = st.tabs(["📷 Snap Item With Camera", "📁 Upload An Item Photo"])
     upcycle_img = None
