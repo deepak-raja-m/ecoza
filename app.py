@@ -12,148 +12,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ----------------- Aggressive Transparency CSS -----------------
-st.markdown(
-    """
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Fredoka:wght@600;700&display=swap');
-
-    /* Hide sidebar and Streamlit chrome */
-    [data-testid="stSidebar"], section[data-testid="stSidebar"], #MainMenu, footer {
-        display: none !important;
-    }
-
-    /* Force all wrapper layers to 0% background opacity */
-    html, body, .stApp, [data-testid="stAppViewRoot"], [data-testid="stHeader"], 
-    .stAppHeader, .stAppViewContainer, section.main, .block-container {
-        background: transparent !important;
-        background-color: transparent !important;
-    }
-
-    /* Vivid Botanical Tree Background */
-    body {
-        background: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95') no-repeat center center fixed !important;
-        background-size: cover !important;
-    }
-
-    .stApp {
-        background: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95') no-repeat center center fixed !important;
-        background-size: cover !important;
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
-    }
-
-    /* Text & Headings with Strong Legibility against the background */
-    .stApp p, .stApp span, .stApp label, .stApp div {
-        color: #042f1a !important;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 19px;
-        font-weight: 700;
-        line-height: 1.5;
-    }
-
-    h1, h2, h3, h4 {
-        font-family: 'Fredoka', cursive, sans-serif !important;
-        color: #032e18 !important;
-        text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
-    }
-
-    h1 { font-size: 50px !important; margin-bottom: 12px !important; }
-    h2 { font-size: 38px !important; margin-bottom: 10px !important; }
-    h3 { font-size: 26px !important; }
-
-    /* Frosted Navigation Bar */
-    div[role="radiogroup"] {
-        background: rgba(255, 255, 255, 0.5) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        padding: 6px 14px !important;
-        border-radius: 9999px !important;
-        border: 2px solid rgba(255, 255, 255, 0.8) !important;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15) !important;
-        display: flex !important;
-        justify-content: center !important;
-        gap: 6px !important;
-    }
-
-    div[role="radiogroup"] label {
-        padding: 6px 16px !important;
-        border-radius: 9999px !important;
-        font-weight: 800 !important;
-        font-family: 'Fredoka', cursive !important;
-        color: #032e18 !important;
-        font-size: 16px !important;
-    }
-
-    div[role="radiogroup"] label:hover {
-        background: rgba(255, 255, 255, 0.7) !important;
-    }
-
-    /* Glass Cards */
-    [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: rgba(255, 255, 255, 0.45) !important;
-        backdrop-filter: blur(14px) !important;
-        -webkit-backdrop-filter: blur(14px) !important;
-        padding: 24px !important;
-        border-radius: 20px !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
-        border: 2px solid rgba(255, 255, 255, 0.85) !important;
-    }
-
-    /* Input Fields */
-    input, select, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {
-        background-color: rgba(255, 255, 255, 0.95) !important;
-        color: #032e18 !important;
-        border: 2px solid #16a34a !important;
-        border-radius: 12px !important;
-        font-size: 18px !important;
-        font-weight: 700 !important;
-    }
-
-    /* Action Buttons */
-    .stButton>button, div[data-testid="stForm"] button {
-        background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
-        color: #ffffff !important;
-        font-family: 'Fredoka', cursive !important;
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        border-radius: 18px !important;
-        border: 2px solid #86efac !important;
-        padding: 12px 28px !important;
-        box-shadow: 0 6px 18px rgba(21, 128, 61, 0.35) !important;
-    }
-
-    .stButton>button:hover, div[data-testid="stForm"] button:hover {
-        background: linear-gradient(135deg, #166534 0%, #15803d 100%) !important;
-        color: #ffffff !important;
-    }
-
-    .badge-points {
-        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-        color: #ffffff !important;
-        font-family: 'Fredoka', cursive;
-        font-weight: 700;
-        padding: 8px 20px;
-        border-radius: 9999px;
-        font-size: 18px;
-        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
-        border: 2px solid #bbf7d0;
-        display: inline-block;
-    }
-
-    .brand-logo {
-        font-size: 36px;
-        font-family: 'Fredoka', cursive, sans-serif;
-        font-weight: 700;
-        color: #0f5132 !important;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 # ----------------- State Management -----------------
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -207,88 +65,154 @@ RATES = {
     "🍎 Organic Waste": 5
 }
 
-# Upcycling AI Knowledge Base
-UPCYCLE_SUGGESTIONS = {
-    "🥤 Plastic Bottles": [
-        {
-            "title": "🌿 Self-Watering Indoor Herb Planter",
-            "difficulty": "Easy (15 mins)",
-            "tools": "Scissors, Cotton String, Soil, Seeds",
-            "steps": "1. Cut the bottle in half horizontally.\n2. Puncture the cap and thread a cotton string through it.\n3. Invert the top part with soil and plant seeds.\n4. Fill the base with water; the string will keep the soil moist automatically!"
-        },
-        {
-            "title": "✏️ Multi-Compartment Desk Stationery Organizer",
-            "difficulty": "Easy (10 mins)",
-            "tools": "Craft knife, Colored tape / markers",
-            "steps": "1. Cut the bottom 4 inches off 3-4 bottles at varying heights.\n2. Smooth the edges with colored tape.\n3. Glue them together in a cluster to hold pens, markers, scissors, and paintbrushes!"
-        },
-        {
-            "title": "🐦 Hanging Wild Bird Feeder",
-            "difficulty": "Medium (20 mins)",
-            "tools": "Two wooden spoons, Twine, Bird seeds",
-            "steps": "1. Pierce pairs of holes across the bottle to insert wooden spoons.\n2. Widen the hole above the spoon bowl slightly for seeds to spill onto it.\n3. Fill with grains, screw the cap, and hang it on a branch!"
-        }
-    ],
-    "📦 Paper & Cardboard": [
-        {
-            "title": "🌱 Biodegradable Seedling Nursery Pots",
-            "difficulty": "Easy (10 mins)",
-            "tools": "Cardboard tubes or egg cartons, Soil",
-            "steps": "1. Cut cardboard toilet paper rolls into 2-inch segments.\n2. Fold the bottom tabs inward to create cups.\n3. Fill with compost, plant saplings, and plant them directly into garden soil when ready!"
-        },
-        {
-            "title": "📦 Geometric Desk File Organizer",
-            "difficulty": "Medium (25 mins)",
-            "tools": "Cereal box / packing box, Glue, Wrapping paper",
-            "steps": "1. Cut diagonally across the side of a cereal box to form a magazine holder shape.\n2. Reinforce the inner walls with folded scrap card.\n3. Wrap with newspaper or handmade paper to store school notes neatly."
-        }
-    ],
-    "🥫 Metal & Aluminium Cans": [
-        {
-            "title": "🕯️ Punched-Tin Lantern / Candle Holder",
-            "difficulty": "Medium (30 mins)",
-            "tools": "Clean metal can, Hammer, Nail, Tea light / LED",
-            "steps": "1. Fill the can with water and freeze solid so it retains its shape.\n2. Use a nail and hammer to punch dot patterns (stars, spirals, leaves).\n3. Melt the ice, paint the exterior, and place an LED tea light inside for patterned lanterns."
-        },
-        {
-            "title": "🪴 Hanging Kitchen Utensil / Cutlery Caddy",
-            "difficulty": "Easy (15 mins)",
-            "tools": "Clean tin cans, Acrylic paint, Wooden ruler/board",
-            "steps": "1. Remove sharp edges using pliers or sand paper.\n2. Paint cans with eco-friendly paint.\n3. Fasten onto a recycled wood slat to hold ladles, spoons, or paintbrushes."
-        }
-    ],
-    "🍶 Glass Recyclables": [
-        {
-            "title": "🏺 Fairy Light Memory Jar / Terrarium",
-            "difficulty": "Easy (15 mins)",
-            "tools": "Glass jar, Small pebbles, Activated charcoal, Moss/Succulent",
-            "steps": "1. Clean and dry the jar thoroughly.\n2. Layer pebbles, charcoal, and potting mix.\n3. Plant a small succulent or coil an LED fairy light wire inside for an ambient night lamp."
-        }
-    ],
-    "🔋 E-Waste & Batteries": [
-        {
-            "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
-            "difficulty": "Advanced (30 mins)",
-            "tools": "Old PCB scraps, Keyring, Protective gloves",
-            "steps": "1. Cut small rectangular sections of damaged, non-hazardous motherboards.\n2. Sand the edges smooth and drill a small hole for a key ring.\n3. Note: Never open or puncture lithium batteries—deposit those directly at certified hubs!"
-        }
-    ],
-    "🍎 Organic Waste": [
-        {
-            "title": "🪴 Rich Microbial Kitchen Garden Compost",
-            "difficulty": "Easy (Ongoing)",
-            "tools": "Compost bucket / Pot with lid, Dry leaves",
-            "steps": "1. Layer fruit and vegetable peels with dried leaves (1:2 ratio).\n2. Aerate once a week to maintain oxygen flow.\n3. In 4 weeks, you produce free, nutrient-dense organic soil fertilizer!"
-        }
-    ]
+# ----------------- Distinct Background Selector Per Option -----------------
+PAGE_BACKGROUNDS = {
+    "LOGIN": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2400&q=95",
+    "🏠 Home": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
+    "📸 AI Scanner": "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2400&q=95",
+    "💡 Upcycle AI Studio": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=2400&q=95",
+    "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
+    "🚚 Super Pickup": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2400&q=95",
+    "🎁 Rewards Store": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
+    "🏆 Champions Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
+    "📊 Impact Dashboard": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95"
 }
 
-RECYCLING_CENTERS = [
-    {"Center Name": "⚡ Guindy Eco Battery & E-Waste Hub", "Type": "E-Waste & Electronics", "Address": "Guindy Industrial Estate", "Contact": "+91 94441 23456", "lat": 13.0067, "lon": 80.2030},
-    {"Center Name": "📘 Anna Nagar Paper Depot", "Type": "Plastic, Paper & Cardboard", "Address": "Anna Nagar West", "Contact": "+91 98840 56789", "lat": 13.0850, "lon": 80.2101},
-    {"Center Name": "⚙️ Ambattur Scrap & Metal Depot", "Type": "Metal & Glass Recyclables", "Address": "Ambattur Industrial Estate", "Contact": "+91 97720 11223", "lat": 13.1143, "lon": 80.1548},
-    {"Center Name": "🌱 Adyar Eco Park Composting Hub", "Type": "Wet & Organic Waste", "Address": "Adyar Eco Park Zone", "Contact": "+91 91234 98765", "lat": 13.0125, "lon": 80.2570}
-]
+if not st.session_state.authenticated:
+    active_bg = PAGE_BACKGROUNDS["LOGIN"]
+else:
+    active_bg = PAGE_BACKGROUNDS.get(st.session_state.current_page, PAGE_BACKGROUNDS["🏠 Home"])
+
+# ----------------- Dynamic CSS Injection (No White Shade) -----------------
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Fredoka:wght@600;700&display=swap');
+
+    [data-testid="stSidebar"], section[data-testid="stSidebar"], #MainMenu, footer {
+        display: none !important;
+    }
+
+    html, body, .stApp, [data-testid="stAppViewRoot"], [data-testid="stHeader"], 
+    .stAppHeader, .stAppViewContainer, section.main, .block-container {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    body, .stApp {
+        background: url('""" + active_bg + """') no-repeat center center fixed !important;
+        background-size: cover !important;
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        transition: background 0.3s ease-in-out;
+    }
+
+    .stApp p, .stApp span, .stApp label, .stApp div {
+        color: #032a15 !important;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 19px;
+        font-weight: 700;
+        line-height: 1.5;
+    }
+
+    h1, h2, h3, h4 {
+        font-family: 'Fredoka', cursive, sans-serif !important;
+        color: #022b14 !important;
+        text-shadow: 0 1px 4px rgba(255, 255, 255, 0.7);
+    }
+
+    h1 { font-size: 46px !important; margin-bottom: 10px !important; }
+    h2 { font-size: 34px !important; margin-bottom: 8px !important; }
+    h3 { font-size: 24px !important; }
+
+    /* Wide horizontal navbar spanning full available container width */
+    div[role="radiogroup"] {
+        background: rgba(255, 255, 255, 0.65) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        padding: 6px 14px !important;
+        border-radius: 9999px !important;
+        border: 2px solid rgba(22, 163, 74, 0.7) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        justify-content: center !important;
+        gap: 4px !important;
+        width: 100% !important;
+    }
+
+    div[role="radiogroup"] label {
+        padding: 6px 12px !important;
+        border-radius: 9999px !important;
+        font-weight: 800 !important;
+        font-family: 'Fredoka', cursive !important;
+        color: #032e18 !important;
+        font-size: 15px !important;
+        white-space: nowrap !important;
+    }
+
+    div[role="radiogroup"] label:hover {
+        background: rgba(220, 252, 231, 0.8) !important;
+    }
+
+    [data-testid="stForm"], [data-testid="stMetric"], .stTable {
+        background: rgba(255, 255, 255, 0.55) !important;
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+        padding: 24px !important;
+        border-radius: 20px !important;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+        border: 2px solid rgba(255, 255, 255, 0.85) !important;
+    }
+
+    input, select, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {
+        background-color: rgba(255, 255, 255, 0.95) !important;
+        color: #032e18 !important;
+        border: 2px solid #16a34a !important;
+        border-radius: 12px !important;
+        font-size: 18px !important;
+        font-weight: 700 !important;
+    }
+
+    .stButton>button, div[data-testid="stForm"] button {
+        background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
+        color: #ffffff !important;
+        font-family: 'Fredoka', cursive !important;
+        font-size: 19px !important;
+        font-weight: 700 !important;
+        border-radius: 18px !important;
+        border: 2px solid #86efac !important;
+        padding: 10px 24px !important;
+        box-shadow: 0 6px 18px rgba(21, 128, 61, 0.35) !important;
+    }
+
+    .badge-points {
+        background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+        color: #ffffff !important;
+        font-family: 'Fredoka', cursive;
+        font-weight: 700;
+        padding: 8px 18px;
+        border-radius: 9999px;
+        font-size: 17px;
+        box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+        border: 2px solid #bbf7d0;
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    .brand-logo {
+        font-size: 32px;
+        font-family: 'Fredoka', cursive, sans-serif;
+        font-weight: 700;
+        color: #0f5132 !important;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # ----------------- Pixel Classifier Engine -----------------
 def classify_material_accurately(img: Image.Image):
@@ -313,6 +237,70 @@ def classify_material_accurately(img: Image.Image):
         return "🔋 E-Waste & Batteries", 93.6
 
     return "🥤 Plastic Bottles", 97.2
+
+UPCYCLE_SUGGESTIONS = {
+    "🥤 Plastic Bottles": [
+        {
+            "title": "🌿 Self-Watering Indoor Herb Planter",
+            "difficulty": "Easy (15 mins)",
+            "tools": "Scissors, Cotton String, Soil, Seeds",
+            "steps": "1. Cut the bottle in half horizontally.\n2. Puncture the cap and thread a cotton string through it.\n3. Invert the top part with soil and plant seeds.\n4. Fill the base with water; the string maintains soil moisture automatically!"
+        },
+        {
+            "title": "✏️ Multi-Compartment Desk Stationery Organizer",
+            "difficulty": "Easy (10 mins)",
+            "tools": "Craft knife, Colored tape / markers",
+            "steps": "1. Cut the bottom 4 inches off 3-4 bottles at varying heights.\n2. Smooth the edges with colored tape.\n3. Cluster and glue together to hold pens, markers, and paintbrushes!"
+        }
+    ],
+    "📦 Paper & Cardboard": [
+        {
+            "title": "🌱 Biodegradable Seedling Nursery Pots",
+            "difficulty": "Easy (10 mins)",
+            "tools": "Cardboard tubes or egg cartons, Soil",
+            "steps": "1. Cut cardboard toilet paper rolls into 2-inch segments.\n2. Fold bottom tabs inward to create cups.\n3. Fill with compost, plant saplings, and plant directly into garden soil when ready!"
+        }
+    ],
+    "🥫 Metal & Aluminium Cans": [
+        {
+            "title": "🕯️ Punched-Tin Lantern / Candle Holder",
+            "difficulty": "Medium (25 mins)",
+            "tools": "Clean metal can, Hammer, Nail, Tea light / LED",
+            "steps": "1. Fill the can with water and freeze solid so it retains its shape.\n2. Punch dot patterns with a hammer and nail.\n3. Melt the ice, paint the exterior, and insert an LED tea light."
+        }
+    ],
+    "🍶 Glass Recyclables": [
+        {
+            "title": "🏺 Fairy Light Memory Jar / Terrarium",
+            "difficulty": "Easy (15 mins)",
+            "tools": "Glass jar, Small pebbles, Activated charcoal, Moss",
+            "steps": "1. Clean and dry the jar thoroughly.\n2. Layer pebbles, charcoal, and potting mix.\n3. Plant a succulent or coil an LED fairy light wire inside."
+        }
+    ],
+    "🔋 E-Waste & Batteries": [
+        {
+            "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
+            "difficulty": "Advanced (30 mins)",
+            "tools": "Old PCB scraps, Keyring, Protective gloves",
+            "steps": "1. Cut small rectangular sections of damaged, non-hazardous motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
+        }
+    ],
+    "🍎 Organic Waste": [
+        {
+            "title": "🪴 Rich Microbial Kitchen Garden Compost",
+            "difficulty": "Easy (Ongoing)",
+            "tools": "Compost bucket / Pot with lid, Dry leaves",
+            "steps": "1. Layer fruit/vegetable peels with dried leaves.\n2. Aerate once a week to maintain oxygen flow.\n3. In 4 weeks, you have free, nutrient-dense organic fertilizer!"
+        }
+    ]
+}
+
+RECYCLING_CENTERS = [
+    {"Center Name": "⚡ Guindy Eco Battery & E-Waste Hub", "Type": "E-Waste & Electronics", "Address": "Guindy Industrial Estate", "Contact": "+91 94441 23456", "lat": 13.0067, "lon": 80.2030},
+    {"Center Name": "📘 Anna Nagar Paper Depot", "Type": "Plastic, Paper & Cardboard", "Address": "Anna Nagar West", "Contact": "+91 98840 56789", "lat": 13.0850, "lon": 80.2101},
+    {"Center Name": "⚙️ Ambattur Scrap & Metal Depot", "Type": "Metal & Glass Recyclables", "Address": "Ambattur Industrial Estate", "Contact": "+91 97720 11223", "lat": 13.1143, "lon": 80.1548},
+    {"Center Name": "🌱 Adyar Eco Park Composting Hub", "Type": "Wet & Organic Waste", "Address": "Adyar Eco Park Zone", "Contact": "+91 91234 98765", "lat": 13.0125, "lon": 80.2570}
+]
 
 # ----------------- 1. LOGIN SCREEN -----------------
 if not st.session_state.authenticated:
@@ -350,27 +338,25 @@ if not st.session_state.authenticated:
 
     st.stop()
 
-# ----------------- AUTHENTICATED NAVBAR -----------------
-h1, h2, h3 = st.columns([1.5, 4.3, 1.8], vertical_alignment="center")
-
-with h1:
-    st.markdown('<div class="brand-logo">🌱 Ecoza</div>', unsafe_allow_html=True)
-
-with h2:
-    cur_idx = PAGES.index(st.session_state.current_page) if st.session_state.current_page in PAGES else 0
-    choice = st.radio("Nav", PAGES, index=cur_idx, horizontal=True, label_visibility="collapsed")
-    if choice != st.session_state.current_page:
-        st.session_state.current_page = choice
-        st.rerun()
-
-with h3:
-    cp1, cp2 = st.columns([1.3, 0.9], vertical_alignment="center")
-    with cp1:
+# ----------------- AUTHENTICATED TOP HEADER -----------------
+top_c1, top_c2 = st.columns([4, 1.2], vertical_alignment="center")
+with top_c1:
+    st.markdown('<div class="brand-logo">🌱 Ecoza <span style="font-size: 14px; color: #166534; font-weight: 800;">• RETHINK. REUSE. RECREATE.</span></div>', unsafe_allow_html=True)
+with top_c2:
+    p_col, out_col = st.columns([1.2, 0.8], vertical_alignment="center")
+    with p_col:
         st.markdown(f'<div class="badge-points">🌟 {st.session_state.ecopoints} pts</div>', unsafe_allow_html=True)
-    with cp2:
+    with out_col:
         if st.button("🚪 Out"):
             st.session_state.authenticated = False
             st.rerun()
+
+# Full-width horizontal navigation menu
+cur_idx = PAGES.index(st.session_state.current_page) if st.session_state.current_page in PAGES else 0
+choice = st.radio("Nav", PAGES, index=cur_idx, horizontal=True, label_visibility="collapsed")
+if choice != st.session_state.current_page:
+    st.session_state.current_page = choice
+    st.rerun()
 
 st.caption(f"Logged in: **{st.session_state.username}** ({st.session_state.user_identifier})")
 st.markdown("<hr style='margin-top: 2px; margin-bottom: 20px; border-top: 2px dashed rgba(22, 101, 52, 0.4);'>", unsafe_allow_html=True)
@@ -489,7 +475,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
             st.success(f"Successfully recorded! Added {pts} EcoPoints.")
             st.rerun()
 
-# ----------------- 3. UPCYCLE AI STUDIO (NEW FEATURE) -----------------
+# ----------------- 3. UPCYCLE AI STUDIO -----------------
 elif st.session_state.current_page == "💡 Upcycle AI Studio":
     st.title("💡 Upcycle AI Studio — Recreate From Waste")
     st.write("Take a picture of an item you are about to throw away. The AI will tell you how you can recreate it into something useful!")
