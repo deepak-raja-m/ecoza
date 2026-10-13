@@ -25,6 +25,7 @@ if "username" not in st.session_state:
 if "scan_result" not in st.session_state:
     st.session_state.scan_result = None
 
+# Compact names so buttons never truncate with "..." on smaller screens
 PAGES = [
     "🏠 Home", 
     "📸 AI Scanner", 
@@ -32,8 +33,8 @@ PAGES = [
     "🗺️ Drop-off Map", 
     "🚚 Super Pickup", 
     "🎁 Rewards Store", 
-    "🏆 Champions Leaderboard", 
-    "📊 Impact Dashboard"
+    "🏆 Leaderboard", 
+    "📊 Impact"
 ]
 
 if "current_page" not in st.session_state:
@@ -66,18 +67,18 @@ RATES = {
     "🍎 Organic Waste": 5
 }
 
-# ----------------- Dynamic Background Selection -----------------
-# Dedicated eco, recycling, and sustainable tech themes for each page
+# ----------------- Pure Nature Wallpaper Per Page -----------------
 PAGE_BACKGROUNDS = {
     "LOGIN": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
     "🏠 Home": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2400&q=95",
-    "📸 AI Scanner": "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=2400&q=95",
-    "💡 Upcycle AI": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=2400&q=95",
-    "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
-    "🚚 Super Pickup": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2400&q=95",
+    # Fresh botanical nature canopy (sunlight through emerald tree leaves)
+    "📸 AI Scanner": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=2400&q=95",
+    "💡 Upcycle AI": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
+    "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95",
+    "🚚 Super Pickup": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2400&q=95",
     "🎁 Rewards Store": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
-    "🏆 Champions Leaderboard": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95",
-    "📊 Impact Dashboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95"
+    "🏆 Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
+    "📊 Impact": "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=2400&q=95"
 }
 
 if not st.session_state.authenticated:
@@ -85,7 +86,7 @@ if not st.session_state.authenticated:
 else:
     active_bg = PAGE_BACKGROUNDS.get(st.session_state.current_page, PAGE_BACKGROUNDS["🏠 Home"])
 
-# ----------------- High-Contrast Visible Styling CSS -----------------
+# ----------------- High-Contrast CSS Styling -----------------
 st.markdown(
     f"""
     <style>
@@ -172,14 +173,15 @@ st.markdown(
         background-color: #15803d !important;
         color: #ffffff !important;
         font-family: 'Fredoka', cursive !important;
-        font-size: 18px !important;
+        font-size: 17px !important;
         font-weight: 700 !important;
         border-radius: 14px !important;
         border: 2px solid #86efac !important;
-        padding: 12px 20px !important;
+        padding: 10px 14px !important;
         box-shadow: 0 6px 18px rgba(21, 128, 61, 0.40) !important;
         transition: all 0.15s ease !important;
         width: 100% !important;
+        white-space: nowrap !important;
     }}
 
     .stButton>button:hover, div[data-testid="stFormSubmitButton"]>button:hover {{
@@ -233,23 +235,17 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ----------------- Robust Foreground Pixel Classifier -----------------
+# ----------------- Foreground Pixel Classifier -----------------
 def classify_material_accurately(img: Image.Image):
-    """
-    Isolates foreground subject from background (e.g. cables on white tables)
-    and checks for hardware, electronic cables, fabrics, plastics, cans, etc.
-    """
     img_rgb = img.convert("RGB").resize((120, 120))
     arr = np.array(img_rgb, dtype=np.float32)
 
     r, g, b = arr[:, :, 0], arr[:, :, 1], arr[:, :, 2]
     brightness_map = (r + g + b) / 3.0
 
-    # Mask out flat white/light backgrounds (typical photo tables or desks)
     is_plain_bg = (brightness_map > 215) & (np.abs(r - g) < 18) & (np.abs(g - b) < 18)
     fg_pixels = arr[~is_plain_bg]
 
-    # If the image is cropped tightly without surrounding table background
     if len(fg_pixels) < 250:
         fg_pixels = arr.reshape(-1, 3)
 
@@ -267,33 +263,28 @@ def classify_material_accurately(img: Image.Image):
     bg_ratio = np.sum(is_plain_bg) / (120.0 * 120.0)
 
     # 1. Cables, Wires, USBs, Chargers & Small E-Waste:
-    # High background ratio (isolated object on desk) with a distinct colored wire or dark cords
     has_usb_blue_cord = (mean_fg_b > mean_fg_r + 20) and (mean_fg_b > 60)
     is_isolated_wire = (bg_ratio > 0.35) and (fg_contrast > 25) and (fg_brightness < 165)
     if has_usb_blue_cord or is_isolated_wire or (fg_brightness < 55):
         return "🔋 E-Waste & Cables", 97.4
 
     # 2. Fabric, Leather & Handbags:
-    # Earthy brown, textured leather, or canvas hues
     if (mean_fg_r > mean_fg_b + 12) and (40 < fg_brightness < 145) and (fg_saturation > 14):
         return "👜 Fabric, Leather & Bags", 96.2
 
     # 3. Organic & Food Waste:
-    # Natural green chlorophyll pigment
     if mean_fg_g > mean_fg_r + 14 and mean_fg_g > mean_fg_b + 14:
         return "🍎 Organic Waste", 96.8
 
     # 4. Paper & Cardboard:
-    # Warm cellulose beige, light wood pulp, or books
     if mean_fg_r > mean_fg_g + 16 and mean_fg_g > mean_fg_b + 10 and fg_brightness >= 140:
         return "📦 Paper & Cardboard", 95.8
 
     # 5. Metal Cans:
-    # Highly reflective metallic body with neutral monochrome tone
     if fg_saturation < 14 and 80 < fg_brightness < 190 and bg_ratio < 0.35:
         return "🥫 Metal & Aluminium Cans", 94.5
 
-    # 6. Default Plastic Bottles / Wraps
+    # 6. Default Plastic
     return "🥤 Plastic Bottles", 96.1
 
 UPCYCLE_SUGGESTIONS = {
@@ -890,7 +881,7 @@ elif st.session_state.current_page == "🎁 Rewards Store":
         st.dataframe(pd.DataFrame(st.session_state.redeemed_coupons), use_container_width=True)
 
 # ----------------- 7. LEADERBOARD -----------------
-elif st.session_state.current_page == "🏆 Champions Leaderboard":
+elif st.session_state.current_page == "🏆 Leaderboard":
     st.markdown("""
     <div class="eco-header-banner">
         <h2 style="margin: 0 0 4px 0;">🏆 Champions Leaderboard</h2>
@@ -907,7 +898,7 @@ elif st.session_state.current_page == "🏆 Champions Leaderboard":
     st.table(pd.DataFrame(leaderboard))
 
 # ----------------- 8. DASHBOARD -----------------
-elif st.session_state.current_page == "📊 Impact Dashboard":
+elif st.session_state.current_page == "📊 Impact":
     st.markdown("""
     <div class="eco-header-banner">
         <h2 style="margin: 0 0 4px 0;">📊 Environmental Impact Dashboard</h2>
