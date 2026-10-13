@@ -25,7 +25,6 @@ if "username" not in st.session_state:
 if "scan_result" not in st.session_state:
     st.session_state.scan_result = None
 
-# Renamed "📊 Impact" to "📊 Dashboard"
 PAGES = [
     "🏠 Home", 
     "📸 AI Scanner", 
@@ -77,7 +76,6 @@ PAGE_BACKGROUNDS = {
     "🚚 Super Pickup": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2400&q=95",
     "🎁 Rewards Store": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
     "🏆 Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    # Dashboard: Rich green misty pine forest valley with rolling hills
     "📊 Dashboard": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=2400&q=95"
 }
 
@@ -761,7 +759,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
             st.success(f"Successfully recorded! Added {pts} EcoPoints.")
             st.rerun()
 
-# ----------------- 3. UPCYCLE AI STUDIO -----------------
+# ----------------- 3. UPCYCLE AI STUDIO (PROPERLY RENDERED CARDS) -----------------
 elif st.session_state.current_page == "💡 Upcycle AI":
     st.markdown("""
     <div class="eco-header-banner">
@@ -818,29 +816,24 @@ elif st.session_state.current_page == "💡 Upcycle AI":
     suggestions = UPCYCLE_SUGGESTIONS.get(detected_upcycle_cat, UPCYCLE_SUGGESTIONS["🥤 Plastic Bottles"])
 
     for idx, idea in enumerate(suggestions):
-        st.markdown(f"""
-        <div style="background: rgba(255, 255, 255, 0.98); border: 2.5px solid #16a34a; border-radius: 18px; padding: 22px 24px; box-shadow: 0 10px 28px rgba(0,0,0,0.25); margin-bottom: 22px;">
-            <div style="margin-bottom: 14px;">
-                <h3 style="margin: 0 0 6px 0; color: #064e3b; font-size: 24px; line-height: 1.3;">
-                    ✨ Project {idx + 1}: {idea['title']}
-                </h3>
-                <span style="display: inline-block; background: #dcfce7; color: #166534; border: 1.5px solid #16a34a; padding: 3px 12px; border-radius: 9999px; font-weight: 800; font-size: 14px;">
-                    ⏱️ {idea['difficulty']}
-                </span>
-            </div>
-            
-            <div style="background: #f1f5f9; border-left: 5px solid #16a34a; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px;">
-                <p style="margin: 0; font-size: 17px; color: #0f172a; font-weight: 800; line-height: 1.4;">
-                    🧰 <b>Tools & Supplies:</b> <span style="background: #ffffff; color: #15803d; padding: 2px 8px; border-radius: 6px; border: 1px solid #cbd5e1; display: inline-block; margin-top: 4px;">{idea['tools']}</span>
-                </p>
-            </div>
-
-            <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 16px 20px; margin-bottom: 14px;">
-                <h4 style="margin: 0 0 10px 0; color: #15803d; font-size: 19px;">📋 Step-by-Step Instructions:</h4>
-                {''.join([f"<p style='margin: 0 0 8px 0; font-size: 17px; color: #021a0c; font-weight: 700; line-height: 1.5;'>{step}</p>" for step in idea['steps']])}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        steps_html = "".join([f"<p style='margin:0 0 8px 0; font-size:17px; color:#021a0c; font-weight:700; line-height:1.5;'>{step}</p>" for step in idea['steps']])
+        
+        card_content = (
+            f"<div style='background:rgba(255,255,255,0.98); border:2.5px solid #16a34a; border-radius:18px; padding:22px 24px; box-shadow:0 10px 28px rgba(0,0,0,0.25); margin-bottom:20px;'>"
+            f"<div style='margin-bottom:14px;'>"
+            f"<h3 style='margin:0 0 6px 0; color:#064e3b; font-size:24px; line-height:1.3;'>✨ Project {idx + 1}: {idea['title']}</h3>"
+            f"<span style='display:inline-block; background:#dcfce7; color:#166534; border:1.5px solid #16a34a; padding:3px 12px; border-radius:9999px; font-weight:800; font-size:14px;'>⏱️ {idea['difficulty']}</span>"
+            f"</div>"
+            f"<div style='background:#f1f5f9; border-left:5px solid #16a34a; padding:12px 16px; border-radius:8px; margin-bottom:16px;'>"
+            f"<p style='margin:0; font-size:17px; color:#0f172a; font-weight:800; line-height:1.4;'>🧰 <b>Tools & Supplies:</b> <span style='background:#ffffff; color:#15803d; padding:2px 8px; border-radius:6px; border:1px solid #cbd5e1; display:inline-block; margin-top:4px;'>{idea['tools']}</span></p>"
+            f"</div>"
+            f"<div style='background:#ffffff; border:1.5px solid #cbd5e1; border-radius:12px; padding:16px 20px; margin-bottom:14px;'>"
+            f"<h4 style='margin:0 0 10px 0; color:#15803d; font-size:19px;'>📋 Step-by-Step Instructions:</h4>"
+            f"{steps_html}"
+            f"</div>"
+            f"</div>"
+        )
+        st.markdown(card_content, unsafe_allow_html=True)
 
         if st.button(f"⭐ I made this project! (+15 Bonus EcoPoints)", key=f"bonus_up_{idx}", use_container_width=True):
             st.session_state.ecopoints += 15
