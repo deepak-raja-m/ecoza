@@ -73,13 +73,13 @@ PAGE_BACKGROUNDS = {
     # AI Scanner: Sunlit lush emerald canopy leaves & morning sunbeams
     "📸 AI Scanner": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
     "💡 Upcycle AI": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=2400&q=95",
-    # Drop-off Map: Misty mountain pine forests and green valley landscape
-    "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=2400&q=95",
+    # Drop-off Map: Rolling green hills, lush tea plantations & clear sky
+    "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2400&q=95",
     "🚚 Super Pickup": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2400&q=95",
     "🎁 Rewards Store": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
     "🏆 Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    # Impact Dashboard: Serene aerial green forest hills, river, and open nature
-    "📊 Impact": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2400&q=95"
+    # Impact Dashboard: Serene lake valley surrounded by green pine forests
+    "📊 Impact": "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=2400&q=95"
 }
 
 if not st.session_state.authenticated:
@@ -170,6 +170,17 @@ st.markdown(
         box-shadow: 0 8px 24px rgba(0,0,0,0.22) !important;
         display: inline-block;
         width: 100%;
+    }}
+
+    .eco-subtitle-badge {{
+        background: rgba(255, 255, 255, 0.94) !important;
+        border: 2px solid #16a34a !important;
+        border-radius: 16px !important;
+        padding: 12px 24px !important;
+        margin: 12px auto 0 auto !important;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18) !important;
+        display: inline-block;
+        max-width: 820px;
     }}
 
     input, select, textarea {{
@@ -549,7 +560,7 @@ for i, page_name in enumerate(PAGES[4:]):
 
 st.markdown("<hr style='margin-top: 14px; margin-bottom: 20px; border-top: 2px dashed rgba(22, 101, 52, 0.4);'>", unsafe_allow_html=True)
 
-# ----------------- 1. HOME SCREEN (WITH RELATABLE WASTE CRISIS DATA) -----------------
+# ----------------- 1. HOME SCREEN (WITH VISIBLE SUBTEXT & CRISIS DATA) -----------------
 if st.session_state.current_page == "🏠 Home":
     st.markdown(
         """
@@ -560,9 +571,11 @@ if st.session_state.current_page == "🏠 Home":
             <h1 style="line-height: 1.15; margin-bottom: 8px;">
                 India Generates <span style="color: #dc2626;">Millions Of Tonnes</span> Of Waste Every Year
             </h1>
-            <p style="font-size: 20px; font-weight: 800; color: #022e18; max-width: 780px; margin: 0 auto;">
-                Traditional systems are overwhelmed. Ecoza digitizes waste sorting with AI to empower everyday students and households to take circular climate action.
-            </p>
+            <div class="eco-subtitle-badge">
+                <p style="font-size: 19px; font-weight: 800; color: #022e18; margin: 0; line-height: 1.5;">
+                    Traditional systems are overwhelmed. Ecoza digitizes waste sorting with AI to empower everyday students and households to take circular climate action.
+                </p>
+            </div>
         </div>
         """,
         unsafe_allow_html=True
