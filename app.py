@@ -70,13 +70,16 @@ RATES = {
 PAGE_BACKGROUNDS = {
     "LOGIN": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
     "🏠 Home": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2400&q=95",
-    "📸 AI Scanner": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=2400&q=95",
-    "💡 Upcycle AI": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
-    "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95",
+    # AI Scanner: Sunlit lush emerald canopy leaves & morning sunbeams
+    "📸 AI Scanner": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
+    "💡 Upcycle AI": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=2400&q=95",
+    # Drop-off Map: Misty mountain pine forests and green valley landscape
+    "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=2400&q=95",
     "🚚 Super Pickup": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2400&q=95",
     "🎁 Rewards Store": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
     "🏆 Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    "📊 Impact": "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=2400&q=95"
+    # Impact Dashboard: Serene aerial green forest hills, river, and open nature
+    "📊 Impact": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2400&q=95"
 }
 
 if not st.session_state.authenticated:
@@ -272,29 +275,29 @@ def classify_material_accurately(img: Image.Image):
     fg_saturation = np.std(fg_pixels, axis=1).mean()
     bg_ratio = np.sum(is_plain_bg) / (120.0 * 120.0)
 
-    # 1. Cables, Wires, USBs, Chargers & Small E-Waste:
+    # 1. Cables, Wires, USBs, Chargers & Small E-Waste
     has_usb_blue_cord = (mean_fg_b > mean_fg_r + 20) and (mean_fg_b > 60)
     is_isolated_wire = (bg_ratio > 0.35) and (fg_contrast > 25) and (fg_brightness < 165)
     if has_usb_blue_cord or is_isolated_wire or (fg_brightness < 55):
         return "🔋 E-Waste & Cables", 97.4
 
-    # 2. Fabric, Leather & Handbags:
+    # 2. Fabric, Leather & Handbags
     if (mean_fg_r > mean_fg_b + 12) and (40 < fg_brightness < 145) and (fg_saturation > 14):
         return "👜 Fabric, Leather & Bags", 96.2
 
-    # 3. Organic & Food Waste:
+    # 3. Organic & Food Waste
     if mean_fg_g > mean_fg_r + 14 and mean_fg_g > mean_fg_b + 14:
         return "🍎 Organic Waste", 96.8
 
-    # 4. Paper & Cardboard:
+    # 4. Paper & Cardboard
     if mean_fg_r > mean_fg_g + 16 and mean_fg_g > mean_fg_b + 10 and fg_brightness >= 140:
         return "📦 Paper & Cardboard", 95.8
 
-    # 5. Metal Cans:
+    # 5. Metal Cans
     if fg_saturation < 14 and 80 < fg_brightness < 190 and bg_ratio < 0.35:
         return "🥫 Metal & Aluminium Cans", 94.5
 
-    # 6. Default Plastic
+    # 6. Default Plastic Bottles / Wraps
     return "🥤 Plastic Bottles", 96.1
 
 UPCYCLE_SUGGESTIONS = {
@@ -316,7 +319,7 @@ UPCYCLE_SUGGESTIONS = {
             "tools": "Damaged USB connectors/cables, Keyring, Craft pliers",
             "steps": [
                 "1. Snip the USB-A/Type-C metallic connector heads cleanly.",
-                "2. Smooth sharp cut surfaces using sand paper or clear resin.",
+                "2. Smooth sharp cut surfaces using sandpaper or clear resin.",
                 "3. Loop a small split ring through the connector opening.",
                 "4. Attach to your keys or backpack as a modern tech pendant!"
             ]
@@ -548,7 +551,6 @@ st.markdown("<hr style='margin-top: 14px; margin-bottom: 20px; border-top: 2px d
 
 # ----------------- 1. HOME SCREEN (WITH RELATABLE WASTE CRISIS DATA) -----------------
 if st.session_state.current_page == "🏠 Home":
-    # Hero Title
     st.markdown(
         """
         <div style="text-align: center; max-width: 900px; margin: 0 auto; padding: 10px 0 16px 0;">
@@ -566,7 +568,6 @@ if st.session_state.current_page == "🏠 Home":
         unsafe_allow_html=True
     )
 
-    # Relatable Real-World Impact Stat Cards
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.markdown(
@@ -631,7 +632,6 @@ if st.session_state.current_page == "🏠 Home":
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Action Banner
     st.markdown(
         """
         <div class="eco-header-banner" style="text-align: center; padding: 20px 24px;">
@@ -791,7 +791,6 @@ elif st.session_state.current_page == "💡 Upcycle AI":
 
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Material confirmation & override selector
     c_hdr1, c_hdr2 = st.columns([2, 1.5], vertical_alignment="center")
     with c_hdr1:
         st.markdown(f"<h3 style='margin: 0;'>🛠️ DIY Guides for: <span style='color: #16a34a;'>{detected_upcycle_cat}</span></h3>", unsafe_allow_html=True)
