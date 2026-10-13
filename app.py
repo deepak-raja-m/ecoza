@@ -25,6 +25,7 @@ if "username" not in st.session_state:
 if "scan_result" not in st.session_state:
     st.session_state.scan_result = None
 
+# Renamed "📊 Impact" to "📊 Dashboard"
 PAGES = [
     "🏠 Home", 
     "📸 AI Scanner", 
@@ -33,7 +34,7 @@ PAGES = [
     "🚚 Super Pickup", 
     "🎁 Rewards Store", 
     "🏆 Leaderboard", 
-    "📊 Impact"
+    "📊 Dashboard"
 ]
 
 if "current_page" not in st.session_state:
@@ -70,16 +71,14 @@ RATES = {
 PAGE_BACKGROUNDS = {
     "LOGIN": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
     "🏠 Home": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2400&q=95",
-    # AI Scanner: Sunlit lush emerald canopy leaves & morning sunbeams
     "📸 AI Scanner": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
     "💡 Upcycle AI": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=2400&q=95",
-    # Drop-off Map: Rolling green hills, lush tea plantations & clear sky
     "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2400&q=95",
     "🚚 Super Pickup": "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=2400&q=95",
     "🎁 Rewards Store": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
     "🏆 Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    # Impact Dashboard: Serene lake valley surrounded by green pine forests
-    "📊 Impact": "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=2400&q=95"
+    # Dashboard: Rich green misty pine forest valley with rolling hills
+    "📊 Dashboard": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=2400&q=95"
 }
 
 if not st.session_state.authenticated:
@@ -560,7 +559,7 @@ for i, page_name in enumerate(PAGES[4:]):
 
 st.markdown("<hr style='margin-top: 14px; margin-bottom: 20px; border-top: 2px dashed rgba(22, 101, 52, 0.4);'>", unsafe_allow_html=True)
 
-# ----------------- 1. HOME SCREEN (WITH VISIBLE SUBTEXT & CRISIS DATA) -----------------
+# ----------------- 1. HOME SCREEN -----------------
 if st.session_state.current_page == "🏠 Home":
     st.markdown(
         """
@@ -1001,8 +1000,8 @@ elif st.session_state.current_page == "🏆 Leaderboard":
     ]
     st.table(pd.DataFrame(leaderboard))
 
-# ----------------- 8. DASHBOARD -----------------
-elif st.session_state.current_page == "📊 Impact":
+# ----------------- 8. DASHBOARD SCREEN -----------------
+elif st.session_state.current_page == "📊 Dashboard":
     st.markdown("""
     <div class="eco-header-banner">
         <h2 style="margin: 0 0 4px 0;">📊 Environmental Impact Dashboard</h2>
