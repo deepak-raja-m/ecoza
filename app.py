@@ -25,15 +25,16 @@ if "username" not in st.session_state:
 if "scan_result" not in st.session_state:
     st.session_state.scan_result = None
 
+# Streamlined, visible page names
 PAGES = [
     "🏠 Home", 
-    "📸 AI Scanner", 
-    "💡 Upcycle AI Studio",
-    "🗺️ Drop-off Map", 
-    "🚚 Super Pickup", 
-    "🎁 Rewards Store", 
-    "🏆 Champions Leaderboard", 
-    "📊 Impact Dashboard"
+    "📸 Scanner", 
+    "💡 Upcycle AI",
+    "🗺️ Centers", 
+    "🚚 Pickup", 
+    "🎁 Rewards", 
+    "🏆 Leaderboard", 
+    "📊 Impact"
 ]
 
 if "current_page" not in st.session_state:
@@ -65,17 +66,17 @@ RATES = {
     "🍎 Organic Waste": 5
 }
 
-# ----------------- Distinct Background Selector Per Option -----------------
+# ----------------- Dynamic Background Selection -----------------
 PAGE_BACKGROUNDS = {
     "LOGIN": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2400&q=95",
     "🏠 Home": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    "📸 AI Scanner": "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2400&q=95",
-    "💡 Upcycle AI Studio": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=2400&q=95",
-    "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
-    "🚚 Super Pickup": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2400&q=95",
-    "🎁 Rewards Store": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
-    "🏆 Champions Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    "📊 Impact Dashboard": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95"
+    "📸 Scanner": "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2400&q=95",
+    "💡 Upcycle AI": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=2400&q=95",
+    "🗺️ Centers": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
+    "🚚 Pickup": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2400&q=95",
+    "🎁 Rewards": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
+    "🏆 Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
+    "📊 Impact": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95"
 }
 
 if not st.session_state.authenticated:
@@ -83,7 +84,7 @@ if not st.session_state.authenticated:
 else:
     active_bg = PAGE_BACKGROUNDS.get(st.session_state.current_page, PAGE_BACKGROUNDS["🏠 Home"])
 
-# ----------------- Dynamic CSS Injection (No White Shade) -----------------
+# ----------------- Responsive, Fully Visible CSS -----------------
 st.markdown(
     """
     <style>
@@ -103,13 +104,12 @@ st.markdown(
         background: url('""" + active_bg + """') no-repeat center center fixed !important;
         background-size: cover !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
-        transition: background 0.3s ease-in-out;
     }
 
     .stApp p, .stApp span, .stApp label, .stApp div {
         color: #032a15 !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 700;
         line-height: 1.5;
     }
@@ -120,49 +120,52 @@ st.markdown(
         text-shadow: 0 1px 4px rgba(255, 255, 255, 0.7);
     }
 
-    h1 { font-size: 46px !important; margin-bottom: 10px !important; }
-    h2 { font-size: 34px !important; margin-bottom: 8px !important; }
-    h3 { font-size: 24px !important; }
+    h1 { font-size: 44px !important; margin-bottom: 10px !important; }
+    h2 { font-size: 32px !important; margin-bottom: 8px !important; }
 
-    /* Wide horizontal navbar spanning full available container width */
+    /* FULLY VISIBLE WRAPPING NAVBAR: Never gets clipped on edges */
     div[role="radiogroup"] {
-        background: rgba(255, 255, 255, 0.65) !important;
-        backdrop-filter: blur(12px) !important;
-        -webkit-backdrop-filter: blur(12px) !important;
-        padding: 6px 14px !important;
-        border-radius: 9999px !important;
-        border: 2px solid rgba(22, 163, 74, 0.7) !important;
+        background: rgba(255, 255, 255, 0.82) !important;
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+        padding: 8px 16px !important;
+        border-radius: 20px !important;
+        border: 2px solid rgba(22, 163, 74, 0.8) !important;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
         display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
+        flex-wrap: wrap !important;
         justify-content: center !important;
-        gap: 4px !important;
+        gap: 6px 10px !important;
         width: 100% !important;
     }
 
     div[role="radiogroup"] label {
+        background: rgba(255, 255, 255, 0.6) !important;
         padding: 6px 12px !important;
-        border-radius: 9999px !important;
+        border-radius: 12px !important;
         font-weight: 800 !important;
         font-family: 'Fredoka', cursive !important;
         color: #032e18 !important;
         font-size: 15px !important;
-        white-space: nowrap !important;
+        border: 1px solid rgba(22, 163, 74, 0.3) !important;
+        cursor: pointer;
+        transition: all 0.2s ease;
     }
 
     div[role="radiogroup"] label:hover {
-        background: rgba(220, 252, 231, 0.8) !important;
+        background: #dcfce7 !important;
+        border-color: #16a34a !important;
     }
 
+    /* Glass Cards */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
-        background: rgba(255, 255, 255, 0.55) !important;
+        background: rgba(255, 255, 255, 0.60) !important;
         backdrop-filter: blur(14px) !important;
         -webkit-backdrop-filter: blur(14px) !important;
         padding: 24px !important;
         border-radius: 20px !important;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
-        border: 2px solid rgba(255, 255, 255, 0.85) !important;
+        border: 2px solid rgba(255, 255, 255, 0.9) !important;
     }
 
     input, select, textarea, div[data-baseweb="input"], div[data-baseweb="base-input"] {
@@ -178,12 +181,12 @@ st.markdown(
         background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
         color: #ffffff !important;
         font-family: 'Fredoka', cursive !important;
-        font-size: 19px !important;
+        font-size: 18px !important;
         font-weight: 700 !important;
-        border-radius: 18px !important;
+        border-radius: 16px !important;
         border: 2px solid #86efac !important;
-        padding: 10px 24px !important;
-        box-shadow: 0 6px 18px rgba(21, 128, 61, 0.35) !important;
+        padding: 8px 22px !important;
+        box-shadow: 0 6px 16px rgba(21, 128, 61, 0.3) !important;
     }
 
     .badge-points {
@@ -191,9 +194,9 @@ st.markdown(
         color: #ffffff !important;
         font-family: 'Fredoka', cursive;
         font-weight: 700;
-        padding: 8px 18px;
+        padding: 6px 16px;
         border-radius: 9999px;
-        font-size: 17px;
+        font-size: 16px;
         box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
         border: 2px solid #bbf7d0;
         display: inline-block;
@@ -244,7 +247,7 @@ UPCYCLE_SUGGESTIONS = {
             "title": "🌿 Self-Watering Indoor Herb Planter",
             "difficulty": "Easy (15 mins)",
             "tools": "Scissors, Cotton String, Soil, Seeds",
-            "steps": "1. Cut the bottle in half horizontally.\n2. Puncture the cap and thread a cotton string through it.\n3. Invert the top part with soil and plant seeds.\n4. Fill the base with water; the string maintains soil moisture automatically!"
+            "steps": "1. Cut the bottle in half horizontally.\n2. Puncture the cap and thread a cotton string through it.\n3. Invert the top part with soil and plant seeds.\n4. Fill the base with water; the string maintains moisture automatically!"
         },
         {
             "title": "✏️ Multi-Compartment Desk Stationery Organizer",
@@ -258,7 +261,7 @@ UPCYCLE_SUGGESTIONS = {
             "title": "🌱 Biodegradable Seedling Nursery Pots",
             "difficulty": "Easy (10 mins)",
             "tools": "Cardboard tubes or egg cartons, Soil",
-            "steps": "1. Cut cardboard toilet paper rolls into 2-inch segments.\n2. Fold bottom tabs inward to create cups.\n3. Fill with compost, plant saplings, and plant directly into garden soil when ready!"
+            "steps": "1. Cut cardboard toilet paper rolls into 2-inch segments.\n2. Fold bottom tabs inward to create cups.\n3. Fill with compost and plant directly into garden soil when ready!"
         }
     ],
     "🥫 Metal & Aluminium Cans": [
@@ -282,7 +285,7 @@ UPCYCLE_SUGGESTIONS = {
             "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
             "difficulty": "Advanced (30 mins)",
             "tools": "Old PCB scraps, Keyring, Protective gloves",
-            "steps": "1. Cut small rectangular sections of damaged, non-hazardous motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
+            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified hubs!"
         }
     ],
     "🍎 Organic Waste": [
@@ -339,7 +342,7 @@ if not st.session_state.authenticated:
     st.stop()
 
 # ----------------- AUTHENTICATED TOP HEADER -----------------
-top_c1, top_c2 = st.columns([4, 1.2], vertical_alignment="center")
+top_c1, top_c2 = st.columns([3.8, 1.4], vertical_alignment="center")
 with top_c1:
     st.markdown('<div class="brand-logo">🌱 Ecoza <span style="font-size: 14px; color: #166534; font-weight: 800;">• RETHINK. REUSE. RECREATE.</span></div>', unsafe_allow_html=True)
 with top_c2:
@@ -351,7 +354,7 @@ with top_c2:
             st.session_state.authenticated = False
             st.rerun()
 
-# Full-width horizontal navigation menu
+# Responsive wrapping navbar: all 8 items stay in full view
 cur_idx = PAGES.index(st.session_state.current_page) if st.session_state.current_page in PAGES else 0
 choice = st.radio("Nav", PAGES, index=cur_idx, horizontal=True, label_visibility="collapsed")
 if choice != st.session_state.current_page:
@@ -380,11 +383,11 @@ if st.session_state.current_page == "🏠 Home":
     c_b1, c_b2, _ = st.columns([1.5, 1.8, 1.5])
     with c_b1:
         if st.button("📸 AI Scanner & Log", use_container_width=True):
-            st.session_state.current_page = "📸 AI Scanner"
+            st.session_state.current_page = "📸 Scanner"
             st.rerun()
     with c_b2:
         if st.button("💡 Upcycle AI Studio", use_container_width=True):
-            st.session_state.current_page = "💡 Upcycle AI Studio"
+            st.session_state.current_page = "💡 Upcycle AI"
             st.rerun()
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -422,7 +425,7 @@ if st.session_state.current_page == "🏠 Home":
     )
 
 # ----------------- 2. AI SCANNER SCREEN -----------------
-elif st.session_state.current_page == "📸 AI Scanner":
+elif st.session_state.current_page == "📸 Scanner":
     st.title("📸 AI Waste Scanner & Classifier")
     st.write("Snap a live photo or upload an image to identify the item accurately:")
 
@@ -476,7 +479,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
             st.rerun()
 
 # ----------------- 3. UPCYCLE AI STUDIO -----------------
-elif st.session_state.current_page == "💡 Upcycle AI Studio":
+elif st.session_state.current_page == "💡 Upcycle AI":
     st.title("💡 Upcycle AI Studio — Recreate From Waste")
     st.write("Take a picture of an item you are about to throw away. The AI will tell you how you can recreate it into something useful!")
 
@@ -523,7 +526,7 @@ elif st.session_state.current_page == "💡 Upcycle AI Studio":
                 st.rerun()
 
 # ----------------- 4. DROP-OFF MAP -----------------
-elif st.session_state.current_page == "🗺️ Drop-off Map":
+elif st.session_state.current_page == "🗺️ Centers":
     st.title("🗺️ Ecoza Drop-Off Centers")
     df_centers = pd.DataFrame(RECYCLING_CENTERS)
     st.map(df_centers[["lat", "lon"]], zoom=11)
@@ -536,7 +539,7 @@ elif st.session_state.current_page == "🗺️ Drop-off Map":
             st.divider()
 
 # ----------------- 5. DOORSTEP PICKUP -----------------
-elif st.session_state.current_page == "🚚 Super Pickup":
+elif st.session_state.current_page == "🚚 Pickup":
     st.title("🚚 Schedule Doorstep Collection")
 
     with st.form("pickup_booking"):
@@ -560,7 +563,7 @@ elif st.session_state.current_page == "🚚 Super Pickup":
         st.dataframe(pd.DataFrame(st.session_state.pickup_requests), use_container_width=True)
 
 # ----------------- 6. REWARDS STORE -----------------
-elif st.session_state.current_page == "🎁 Rewards Store":
+elif st.session_state.current_page == "🎁 Rewards":
     st.title(f"🎁 Ecoza Rewards Store (Balance: {st.session_state.ecopoints} pts)")
 
     rewards = [
@@ -588,7 +591,7 @@ elif st.session_state.current_page == "🎁 Rewards Store":
                     st.error("Insufficient points!")
 
 # ----------------- 7. LEADERBOARD -----------------
-elif st.session_state.current_page == "🏆 Champions Leaderboard":
+elif st.session_state.current_page == "🏆 Leaderboard":
     st.title("🏆 Champions Leaderboard")
     leaderboard = [
         {"Rank": "🥇 1st", "Contributor": "Class 8B (Little Flower School)", "Waste Saved": "44,000 g", "EcoPoints": 880},
@@ -599,7 +602,7 @@ elif st.session_state.current_page == "🏆 Champions Leaderboard":
     st.table(pd.DataFrame(leaderboard))
 
 # ----------------- 8. DASHBOARD -----------------
-elif st.session_state.current_page == "📊 Impact Dashboard":
+elif st.session_state.current_page == "📊 Impact":
     st.title("📊 Environmental Impact Dashboard")
 
     total = len(st.session_state.waste_history)
