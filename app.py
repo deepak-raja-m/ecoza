@@ -58,25 +58,26 @@ if "redeemed_coupons" not in st.session_state:
 
 RATES = {
     "🥤 Plastic Bottles": 20,
+    "🔋 E-Waste & Cables": 50,
     "👜 Fabric, Leather & Bags": 25,
     "📦 Paper & Cardboard": 10,
     "🥫 Metal & Aluminium Cans": 30,
     "🍶 Glass Recyclables": 15,
-    "🔋 E-Waste & Batteries": 50,
     "🍎 Organic Waste": 5
 }
 
 # ----------------- Dynamic Background Selection -----------------
+# Dedicated eco, recycling, and sustainable tech themes for each page
 PAGE_BACKGROUNDS = {
-    "LOGIN": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2400&q=95",
-    "🏠 Home": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    "📸 AI Scanner": "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2400&q=95",
+    "LOGIN": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
+    "🏠 Home": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2400&q=95",
+    "📸 AI Scanner": "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=2400&q=95",
     "💡 Upcycle AI": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=2400&q=95",
     "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
     "🚚 Super Pickup": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2400&q=95",
     "🎁 Rewards Store": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
-    "🏆 Champions Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    "📊 Impact Dashboard": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95"
+    "🏆 Champions Leaderboard": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95",
+    "📊 Impact Dashboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95"
 }
 
 if not st.session_state.authenticated:
@@ -84,50 +85,49 @@ if not st.session_state.authenticated:
 else:
     active_bg = PAGE_BACKGROUNDS.get(st.session_state.current_page, PAGE_BACKGROUNDS["🏠 Home"])
 
-# ----------------- High-Contrast CSS (Prevents Text Overlapping) -----------------
+# ----------------- High-Contrast Visible Styling CSS -----------------
 st.markdown(
-    """
+    f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Fredoka:wght@600;700&display=swap');
 
-    [data-testid="stSidebar"], section[data-testid="stSidebar"], #MainMenu, footer {
+    [data-testid="stSidebar"], section[data-testid="stSidebar"], #MainMenu, footer {{
         display: none !important;
-    }
+    }}
 
     html, body, .stApp, [data-testid="stAppViewRoot"], [data-testid="stHeader"], 
-    .stAppHeader, .stAppViewContainer, section.main, .block-container {
+    .stAppHeader, .stAppViewContainer, section.main, .block-container {{
         background: transparent !important;
         background-color: transparent !important;
-    }
+    }}
 
-    body, .stApp {
-        background: url('""" + active_bg + """') no-repeat center center fixed !important;
+    body, .stApp {{
+        background: url('{active_bg}') no-repeat center center fixed !important;
         background-size: cover !important;
         font-family: 'Plus Jakarta Sans', sans-serif !important;
-    }
+    }}
 
-    .stApp p, .stApp span:not([data-testid="stIconMaterial"]), .stApp label {
+    .stApp p, .stApp span:not([data-testid="stIconMaterial"]), .stApp label {{
         color: #021a0c !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 18px;
         font-weight: 800;
         line-height: 1.5;
-    }
+    }}
 
-    h1, h2, h3, h4 {
+    h1, h2, h3, h4 {{
         font-family: 'Fredoka', cursive, sans-serif !important;
         color: #022b14 !important;
         text-shadow: 0 2px 8px rgba(255, 255, 255, 0.98);
         word-break: break-word !important;
         line-height: 1.3 !important;
-    }
+    }}
 
-    h1 { font-size: 44px !important; margin-bottom: 10px !important; }
-    h2 { font-size: 32px !important; margin-bottom: 8px !important; }
-    h3 { font-size: 24px !important; }
+    h1 {{ font-size: 44px !important; margin-bottom: 10px !important; }}
+    h2 {{ font-size: 32px !important; margin-bottom: 8px !important; }}
+    h3 {{ font-size: 24px !important; }}
 
-    /* Solid White Cards */
-    [data-testid="stForm"], [data-testid="stMetric"], .stTable {
+    [data-testid="stForm"], [data-testid="stMetric"], .stTable {{
         background: rgba(255, 255, 255, 0.96) !important;
         backdrop-filter: blur(18px) !important;
         -webkit-backdrop-filter: blur(18px) !important;
@@ -135,9 +135,9 @@ st.markdown(
         border-radius: 20px !important;
         box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28) !important;
         border: 2px solid #16a34a !important;
-    }
+    }}
 
-    .eco-card {
+    .eco-card {{
         background: rgba(255, 255, 255, 0.98) !important;
         padding: 22px 24px !important;
         border-radius: 20px !important;
@@ -145,10 +145,9 @@ st.markdown(
         box-shadow: 0 10px 28px rgba(0, 0, 0, 0.30) !important;
         margin-bottom: 20px !important;
         word-wrap: break-word !important;
-        overflow: hidden !important;
-    }
+    }}
 
-    .eco-header-banner {
+    .eco-header-banner {{
         background: rgba(255, 255, 255, 0.95) !important;
         border: 2px solid #16a34a !important;
         border-radius: 18px !important;
@@ -157,25 +156,18 @@ st.markdown(
         box-shadow: 0 8px 24px rgba(0,0,0,0.22) !important;
         display: inline-block;
         width: 100%;
-    }
+    }}
 
-    /* Input Fields */
-    input, select, textarea {
+    input, select, textarea {{
         background-color: #ffffff !important;
         color: #022e18 !important;
         border: 2px solid #16a34a !important;
         border-radius: 12px !important;
         font-size: 18px !important;
         font-weight: 800 !important;
-    }
+    }}
 
-    input::placeholder {
-        color: #64748b !important;
-        font-weight: 600 !important;
-    }
-
-    /* Button Styling */
-    .stButton>button, div[data-testid="stFormSubmitButton"]>button {
+    .stButton>button, div[data-testid="stFormSubmitButton"]>button {{
         background: #15803d !important;
         background-color: #15803d !important;
         color: #ffffff !important;
@@ -188,19 +180,19 @@ st.markdown(
         box-shadow: 0 6px 18px rgba(21, 128, 61, 0.40) !important;
         transition: all 0.15s ease !important;
         width: 100% !important;
-    }
+    }}
 
-    .stButton>button:hover, div[data-testid="stFormSubmitButton"]>button:hover {
+    .stButton>button:hover, div[data-testid="stFormSubmitButton"]>button:hover {{
         background: #166534 !important;
         background-color: #166534 !important;
         color: #ffffff !important;
-    }
+    }}
 
-    .stButton>button *, div[data-testid="stFormSubmitButton"]>button * {
+    .stButton>button *, div[data-testid="stFormSubmitButton"]>button * {{
         color: #ffffff !important;
-    }
+    }}
 
-    .badge-points {
+    .badge-points {{
         background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
         color: #ffffff !important;
         font-family: 'Fredoka', cursive;
@@ -212,9 +204,9 @@ st.markdown(
         border: 2px solid #bbf7d0;
         display: inline-block;
         white-space: nowrap;
-    }
+    }}
 
-    .brand-logo {
+    .brand-logo {{
         font-size: 34px;
         font-family: 'Fredoka', cursive, sans-serif;
         font-weight: 700;
@@ -223,9 +215,9 @@ st.markdown(
         align-items: center;
         gap: 6px;
         text-shadow: 0 2px 6px rgba(255, 255, 255, 0.95);
-    }
+    }}
 
-    .user-pill {
+    .user-pill {{
         background: rgba(255, 255, 255, 0.95);
         border: 2px solid #16a34a;
         padding: 6px 18px;
@@ -235,46 +227,100 @@ st.markdown(
         font-weight: 800;
         color: #064e3b !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
+    }}
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# ----------------- Pixel Classifier Engine -----------------
+# ----------------- Robust Foreground Pixel Classifier -----------------
 def classify_material_accurately(img: Image.Image):
-    img_rgb = img.convert("RGB").resize((100, 100))
+    """
+    Isolates foreground subject from background (e.g. cables on white tables)
+    and checks for hardware, electronic cables, fabrics, plastics, cans, etc.
+    """
+    img_rgb = img.convert("RGB").resize((120, 120))
     arr = np.array(img_rgb, dtype=np.float32)
 
     r, g, b = arr[:, :, 0], arr[:, :, 1], arr[:, :, 2]
-    mean_r, mean_g, mean_b = np.mean(r), np.mean(g), np.mean(b)
-    brightness = (mean_r + mean_g + mean_b) / 3.0
-    saturation = np.std(arr, axis=2).mean()
+    brightness_map = (r + g + b) / 3.0
 
-    # 1. Fabrics, Leather, Bags, Wallets (warm dark/brown/tan composite with texture)
-    if (mean_r > mean_b + 10) and (50 < brightness < 150) and (saturation > 14):
-        return "👜 Fabric, Leather & Bags", 95.5
+    # Mask out flat white/light backgrounds (typical photo tables or desks)
+    is_plain_bg = (brightness_map > 215) & (np.abs(r - g) < 18) & (np.abs(g - b) < 18)
+    fg_pixels = arr[~is_plain_bg]
 
-    # 2. Organic Waste (Green dominant)
-    if mean_g > mean_r + 15 and mean_g > mean_b + 15:
-        return "🍎 Organic Waste", 96.4
-    
-    # 3. Paper & Cardboard (Warm tan/beige/light brown)
-    if mean_r > mean_g + 18 and mean_g > mean_b + 12 and brightness >= 150:
+    # If the image is cropped tightly without surrounding table background
+    if len(fg_pixels) < 250:
+        fg_pixels = arr.reshape(-1, 3)
+
+    fg_r = fg_pixels[:, 0]
+    fg_g = fg_pixels[:, 1]
+    fg_b = fg_pixels[:, 2]
+
+    mean_fg_r = np.mean(fg_r)
+    mean_fg_g = np.mean(fg_g)
+    mean_fg_b = np.mean(fg_b)
+    fg_brightness = (mean_fg_r + mean_fg_g + mean_fg_b) / 3.0
+
+    fg_contrast = np.std(brightness_map)
+    fg_saturation = np.std(fg_pixels, axis=1).mean()
+    bg_ratio = np.sum(is_plain_bg) / (120.0 * 120.0)
+
+    # 1. Cables, Wires, USBs, Chargers & Small E-Waste:
+    # High background ratio (isolated object on desk) with a distinct colored wire or dark cords
+    has_usb_blue_cord = (mean_fg_b > mean_fg_r + 20) and (mean_fg_b > 60)
+    is_isolated_wire = (bg_ratio > 0.35) and (fg_contrast > 25) and (fg_brightness < 165)
+    if has_usb_blue_cord or is_isolated_wire or (fg_brightness < 55):
+        return "🔋 E-Waste & Cables", 97.4
+
+    # 2. Fabric, Leather & Handbags:
+    # Earthy brown, textured leather, or canvas hues
+    if (mean_fg_r > mean_fg_b + 12) and (40 < fg_brightness < 145) and (fg_saturation > 14):
+        return "👜 Fabric, Leather & Bags", 96.2
+
+    # 3. Organic & Food Waste:
+    # Natural green chlorophyll pigment
+    if mean_fg_g > mean_fg_r + 14 and mean_fg_g > mean_fg_b + 14:
+        return "🍎 Organic Waste", 96.8
+
+    # 4. Paper & Cardboard:
+    # Warm cellulose beige, light wood pulp, or books
+    if mean_fg_r > mean_fg_g + 16 and mean_fg_g > mean_fg_b + 10 and fg_brightness >= 140:
         return "📦 Paper & Cardboard", 95.8
 
-    # 4. Metal & Aluminium Cans (Silver, gray, metallic reflection, low color variance)
-    if saturation < 12 and 90 < brightness < 185:
-        return "🥫 Metal & Aluminium Cans", 93.8
+    # 5. Metal Cans:
+    # Highly reflective metallic body with neutral monochrome tone
+    if fg_saturation < 14 and 80 < fg_brightness < 190 and bg_ratio < 0.35:
+        return "🥫 Metal & Aluminium Cans", 94.5
 
-    # 5. E-Waste (Very dark composite, circuitry tones)
-    if brightness < 60:
-        return "🔋 E-Waste & Batteries", 93.6
-
-    # 6. Default to Plastic Bottles / Packaging
-    return "🥤 Plastic Bottles", 96.2
+    # 6. Default Plastic Bottles / Wraps
+    return "🥤 Plastic Bottles", 96.1
 
 UPCYCLE_SUGGESTIONS = {
+    "🔋 E-Waste & Cables": [
+        {
+            "title": "Twisted Wire Cord Organizer & Cable Keeper",
+            "difficulty": "Easy (10 mins)",
+            "tools": "Old damaged wire, Wire strippers / scissors, Colored insulation tape",
+            "steps": [
+                "1. Confirm the damaged cable is completely disconnected from power.",
+                "2. Cut off damaged terminal ends and strip external colored jacket pieces.",
+                "3. Twist durable internal insulated copper strands into flexible twist-ties.",
+                "4. Use them to organize desk cords, headphone cables, and charger leads!"
+            ]
+        },
+        {
+            "title": "Minimalist Cyber Jewelry & Tech Keychain",
+            "difficulty": "Medium (20 mins)",
+            "tools": "Damaged USB connectors/cables, Keyring, Craft pliers",
+            "steps": [
+                "1. Snip the USB-A/Type-C metallic connector heads cleanly.",
+                "2. Smooth sharp cut surfaces using sand paper or clear resin.",
+                "3. Loop a small split ring through the connector opening.",
+                "4. Attach to your keys or backpack as a modern tech pendant!"
+            ]
+        }
+    ],
     "👜 Fabric, Leather & Bags": [
         {
             "title": "Tote Organizer & Multi-Pocket Tool Roll",
@@ -282,7 +328,7 @@ UPCYCLE_SUGGESTIONS = {
             "tools": "Old bag/leather scrap, Scissors, Needle & Thread or Fabric Glue",
             "steps": [
                 "1. Clean the bag and carefully remove broken zippers or torn handles.",
-                "2. Cut the flat side panels into neat rectangular pouches.",
+                "2. Cut flat side panels into neat rectangular pouches.",
                 "3. Stitch or glue inner dividers to hold screwdrivers, pens, or makeup brushes.",
                 "4. Add a tie ribbon or velcro strip so it rolls up compactly for travel!"
             ]
@@ -292,9 +338,9 @@ UPCYCLE_SUGGESTIONS = {
             "difficulty": "Medium (25 mins)",
             "tools": "Leather/canvas bag, Hole punch, Sturdy twine, Small plastic liner",
             "steps": [
-                "1. Line the inside base with a thin plastic bag to retain moisture.",
+                "1. Line the inside base with a thin plastic wrap to retain moisture.",
                 "2. Punch two reinforced holes on the top corners.",
-                "3. Thread twine through the holes to hang it on a balcony wall or window rail.",
+                "3. Thread twine through the holes to hang on a balcony rail or wall hook.",
                 "4. Add potting soil and place cascading succulents or money plants inside!"
             ]
         }
@@ -358,18 +404,6 @@ UPCYCLE_SUGGESTIONS = {
             ]
         }
     ],
-    "🔋 E-Waste & Batteries": [
-        {
-            "title": "Miniature Tech Sculpture / Cyber Keychain",
-            "difficulty": "Advanced (30 mins)",
-            "tools": "Old PCB scraps, Keyring, Protective gloves",
-            "steps": [
-                "1. Cut small rectangular sections of damaged motherboards.",
-                "2. Sand edges smooth and drill a small hole for a key ring.",
-                "3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
-            ]
-        }
-    ],
     "🍎 Organic Waste": [
         {
             "title": "Rich Microbial Kitchen Garden Compost",
@@ -387,7 +421,7 @@ UPCYCLE_SUGGESTIONS = {
 RECYCLING_CENTERS = [
     {
         "Center Name": "⚡ Guindy Eco Battery & E-Waste Hub", 
-        "Type": "E-Waste & Electronics", 
+        "Type": "E-Waste, Electronics & Wires", 
         "Address": "Guindy Industrial Estate, Chennai", 
         "Contact": "+91 94441 23456", 
         "lat": 13.0067, 
@@ -545,7 +579,7 @@ if st.session_state.current_page == "🏠 Home":
         <div class="eco-card" style="text-align: center;">
             <div style="font-size: 46px; margin-bottom: 8px;">📷</div>
             <h3 style="margin: 0 0 6px 0;">AI Waste Scanner</h3>
-            <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Instant recognition for plastics, paper, metals, fabrics, and e-waste.</p>
+            <p style="font-size: 17px; font-weight: 800; color: #022e18; margin: 0;">Instant recognition for plastics, paper, metals, fabrics, and cables.</p>
         </div>
         """,
         unsafe_allow_html=True
@@ -576,7 +610,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
     st.markdown("""
     <div class="eco-header-banner">
         <h2 style="margin: 0 0 4px 0;">📸 AI Waste Scanner & Classifier</h2>
-        <p style="margin: 0; font-size: 18px; color: #064e3b;">Snap a live photo or upload an image to identify the item accurately:</p>
+        <p style="margin: 0; font-size: 18px; color: #064e3b;">Snap a live photo or upload an image to identify recyclables and electronics:</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -599,7 +633,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
 
         c_img, c_res = st.columns([1, 1.8])
         with c_img:
-            st.image(active_img, caption="Analyzed Material", use_container_width=True)
+            st.image(active_img, caption="Analyzed Item", use_container_width=True)
         with c_res:
             st.markdown(f"""
             <div class="eco-card">
@@ -614,7 +648,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
 
     with st.form("log_form_verified"):
         st.subheader("⚖️ Log Weight & Claim Points")
-        sel_cat = st.selectbox("Waste Category", list(RATES.keys()), index=list(RATES.keys()).index(current_cat) if current_cat in RATES else 0)
+        sel_cat = st.selectbox("Waste Category (adjust if needed)", list(RATES.keys()), index=list(RATES.keys()).index(current_cat) if current_cat in RATES else 0)
         in_grams = st.number_input("Weight (in Grams)", min_value=10, max_value=25000, value=250, step=50)
         
         pts = max(1, int((in_grams / 1000.0) * RATES[sel_cat]))
@@ -632,7 +666,7 @@ elif st.session_state.current_page == "📸 AI Scanner":
             st.success(f"Successfully recorded! Added {pts} EcoPoints.")
             st.rerun()
 
-# ----------------- 3. UPCYCLE AI STUDIO (CLEAN, NO OVERLAPPING TEXT) -----------------
+# ----------------- 3. UPCYCLE AI STUDIO -----------------
 elif st.session_state.current_page == "💡 Upcycle AI":
     st.markdown("""
     <div class="eco-header-banner">
@@ -645,7 +679,7 @@ elif st.session_state.current_page == "💡 Upcycle AI":
     upcycle_img = None
 
     with u_t1:
-        u_cam = st.camera_input("Snap the waste item (e.g. plastic bottle, handbag, cardboard box, tin can)")
+        u_cam = st.camera_input("Snap the waste item (e.g. cable, plastic bottle, handbag, cardboard box, tin can)")
         if u_cam:
             upcycle_img = Image.open(u_cam)
 
@@ -689,7 +723,6 @@ elif st.session_state.current_page == "💡 Upcycle AI":
 
     suggestions = UPCYCLE_SUGGESTIONS.get(detected_upcycle_cat, UPCYCLE_SUGGESTIONS["🥤 Plastic Bottles"])
 
-    # Clean, responsive project cards without text overlapping
     for idx, idea in enumerate(suggestions):
         st.markdown(f"""
         <div style="background: rgba(255, 255, 255, 0.98); border: 2.5px solid #16a34a; border-radius: 18px; padding: 22px 24px; box-shadow: 0 10px 28px rgba(0,0,0,0.25); margin-bottom: 22px;">
@@ -772,7 +805,7 @@ elif st.session_state.current_page == "🚚 Super Pickup":
 
     with st.form("pickup_booking"):
         addr = st.text_area("Pickup Address", placeholder="Street, Door No, Chennai")
-        items = st.multiselect("Waste Types", list(RATES.keys()), default=["🥤 Plastic Bottles", "📦 Paper & Cardboard"])
+        items = st.multiselect("Waste Types", list(RATES.keys()), default=["🥤 Plastic Bottles", "📦 Paper & Cardboard", "🔋 E-Waste & Cables"])
         dt = st.date_input("Date", min_value=datetime.date.today())
         ph = st.text_input("Mobile Number", placeholder="+91 9876543210")
 
