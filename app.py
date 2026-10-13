@@ -124,7 +124,7 @@ st.markdown(
     h2 { font-size: 34px !important; margin-bottom: 8px !important; }
     h3 { font-size: 26px !important; }
 
-    /* Frosted Cards for all Form and Table wrappers */
+    /* Form & Metric Wrappers */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
         background: rgba(255, 255, 255, 0.94) !important;
         backdrop-filter: blur(18px) !important;
@@ -135,12 +135,12 @@ st.markdown(
         border: 2px solid #16a34a !important;
     }
 
-    /* Ultra-Visible White Card Container */
+    /* Solid White Card for Maximum Text Readability */
     .eco-card {
         background: rgba(255, 255, 255, 0.96) !important;
         backdrop-filter: blur(16px) !important;
         -webkit-backdrop-filter: blur(16px) !important;
-        padding: 24px !important;
+        padding: 22px 26px !important;
         border-radius: 20px !important;
         border: 2px solid #15803d !important;
         box-shadow: 0 10px 28px rgba(0, 0, 0, 0.30) !important;
@@ -186,7 +186,6 @@ st.markdown(
         color: #064e3b !important;
     }
 
-    /* High-Visibility Action Buttons */
     .stButton>button {
         background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
         color: #ffffff !important;
@@ -316,7 +315,7 @@ UPCYCLE_SUGGESTIONS = {
             "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
             "difficulty": "Advanced (30 mins)",
             "tools": "Old PCB scraps, Keyring, Protective gloves",
-            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified hubs!"
+            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
         }
     ],
     "🍎 Organic Waste": [
@@ -630,37 +629,49 @@ elif st.session_state.current_page == "💡 Upcycle AI":
                 st.success("Congratulations on upcycling! 15 Bonus EcoPoints added to your balance.")
                 st.rerun()
 
-# ----------------- 4. DROP-OFF MAP -----------------
+# ----------------- 4. DROP-OFF MAP (HIGH VISIBILITY CARDS) -----------------
 elif st.session_state.current_page == "🗺️ Drop-off Map":
     st.markdown("""
     <div class="eco-header-banner">
-        <h2 style="margin: 0 0 4px 0;">🗺️ Ecoza Drop-Off Centers</h2>
-        <p style="margin: 0; font-size: 18px; color: #064e3b;">Find certified circular recycling drop-off centers across Chennai:</p>
+        <h2 style="margin: 0 0 4px 0; color: #064e3b;">🗺️ Ecoza Drop-Off Centers</h2>
+        <p style="margin: 0; font-size: 19px; color: #022e18; font-weight: 800;">Find certified circular recycling drop-off centers across Chennai:</p>
     </div>
     """, unsafe_allow_html=True)
 
+    # Wrap the map inside a high-visibility container
+    st.markdown("""
+    <div class="eco-card" style="padding: 16px; margin-bottom: 22px;">
+        <h3 style="margin: 0 0 10px 0; color: #064e3b; font-size: 22px;">📍 Interactive Stations Map</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
     df_centers = pd.DataFrame(RECYCLING_CENTERS)
     st.map(df_centers[["lat", "lon"]], zoom=11)
 
     st.markdown("<br>", unsafe_allow_html=True)
     st.markdown("""
-    <div class="eco-header-banner" style="margin-bottom: 12px;">
-        <h3 style="margin: 0;">📍 Verified Drop-Off Stations</h3>
+    <div class="eco-header-banner" style="margin-bottom: 16px;">
+        <h3 style="margin: 0; color: #064e3b; font-size: 24px;">🏢 Verified Drop-Off Stations & Contacts</h3>
     </div>
     """, unsafe_allow_html=True)
 
+    # Every recycling center in a crisp white card with bold dark lettering
     for idx, row in df_centers.iterrows():
         st.markdown(f"""
-        <div class="eco-card">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                <div>
-                    <h3 style="margin: 0 0 6px 0; color: #064e3b;">{row['Center Name']}</h3>
-                    <p style="margin: 0 0 4px 0; font-size: 18px; color: #022e18;"><b>♻️ Accepts:</b> {row['Type']}</p>
-                    <p style="margin: 0; font-size: 18px; color: #022e18;"><b>📍 Address:</b> {row['Address']}</p>
+        <div style="background: rgba(255, 255, 255, 0.96); padding: 22px 26px; border-radius: 18px; border: 2.5px solid #16a34a; box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35); margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                <div style="flex: 1; min-width: 280px;">
+                    <h3 style="margin: 0 0 8px 0; color: #064e3b; font-size: 24px; font-weight: 800;">{row['Center Name']}</h3>
+                    <p style="margin: 0 0 6px 0; font-size: 19px; color: #0f172a; font-weight: 800;">
+                        <b>♻️ Accepts:</b> <span style="color: #15803d; font-weight: 800;">{row['Type']}</span>
+                    </p>
+                    <p style="margin: 0; font-size: 18px; color: #1e293b; font-weight: 800;">
+                        <b>📍 Address:</b> {row['Address']}
+                    </p>
                 </div>
-                <div style="background: #e0f2fe; padding: 10px 18px; border-radius: 12px; border: 2px solid #0284c7; text-align: right;">
-                    <span style="font-size: 14px; font-weight: 800; color: #0369a1; text-transform: uppercase;">Direct Line</span><br>
-                    <span style="font-size: 20px; font-weight: 800; color: #0c4a6e;">📞 {row['Contact']}</span>
+                <div style="background: #f0fdf4; padding: 12px 20px; border-radius: 14px; border: 2px solid #22c55e; text-align: center; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);">
+                    <div style="font-size: 13px; font-weight: 800; color: #15803d; text-transform: uppercase; letter-spacing: 0.5px;">Direct Line</div>
+                    <div style="font-size: 20px; font-weight: 800; color: #064e3b; margin-top: 2px;">📞 {row['Contact']}</div>
                 </div>
             </div>
         </div>
@@ -701,7 +712,7 @@ elif st.session_state.current_page == "🚚 Super Pickup":
         """, unsafe_allow_html=True)
         st.dataframe(pd.DataFrame(st.session_state.pickup_requests), use_container_width=True)
 
-# ----------------- 6. REWARDS STORE (HIGH-CONTRAST CARDS) -----------------
+# ----------------- 6. REWARDS STORE -----------------
 elif st.session_state.current_page == "🎁 Rewards Store":
     st.markdown(f"""
     <div class="eco-header-banner">
@@ -723,7 +734,6 @@ elif st.session_state.current_page == "🎁 Rewards Store":
     for i, r in enumerate(rewards):
         target = col_a if i % 2 == 0 else col_b
         with target:
-            # Solid, high-contrast white card container with dark text
             st.markdown(f"""
             <div class="eco-card" style="margin-bottom: 10px;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
