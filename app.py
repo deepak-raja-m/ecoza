@@ -27,13 +27,13 @@ if "scan_result" not in st.session_state:
 
 PAGES = [
     "🏠 Home", 
-    "📸 Scanner", 
+    "📸 AI Scanner", 
     "💡 Upcycle AI",
-    "🗺️ Centers", 
-    "🚚 Pickup", 
-    "🎁 Rewards", 
-    "🏆 Leaderboard", 
-    "📊 Impact"
+    "🗺️ Drop-off Map", 
+    "🚚 Super Pickup", 
+    "🎁 Rewards Store", 
+    "🏆 Champions Leaderboard", 
+    "📊 Impact Dashboard"
 ]
 
 if "current_page" not in st.session_state:
@@ -69,13 +69,13 @@ RATES = {
 PAGE_BACKGROUNDS = {
     "LOGIN": "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=2400&q=95",
     "🏠 Home": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    "📸 Scanner": "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2400&q=95",
+    "📸 AI Scanner": "https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2400&q=95",
     "💡 Upcycle AI": "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=2400&q=95",
-    "🗺️ Centers": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
-    "🚚 Pickup": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2400&q=95",
-    "🎁 Rewards": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
-    "🏆 Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
-    "📊 Impact": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95"
+    "🗺️ Drop-off Map": "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=95",
+    "🚚 Super Pickup": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=2400&q=95",
+    "🎁 Rewards Store": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2400&q=95",
+    "🏆 Champions Leaderboard": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2400&q=95",
+    "📊 Impact Dashboard": "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2400&q=95"
 }
 
 if not st.session_state.authenticated:
@@ -83,7 +83,7 @@ if not st.session_state.authenticated:
 else:
     active_bg = PAGE_BACKGROUNDS.get(st.session_state.current_page, PAGE_BACKGROUNDS["🏠 Home"])
 
-# ----------------- High-Contrast Ultra-Visible Styling CSS -----------------
+# ----------------- High-Contrast Visible Styling CSS -----------------
 st.markdown(
     """
     <style>
@@ -105,9 +105,9 @@ st.markdown(
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }
 
-    /* Ultra-readable bold dark text with contrast halo */
+    /* High contrast text across backgrounds */
     .stApp p, .stApp span, .stApp label, .stApp div {
-        color: #031e0f !important;
+        color: #021a0c !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 19px;
         font-weight: 800;
@@ -124,42 +124,7 @@ st.markdown(
     h2 { font-size: 34px !important; margin-bottom: 8px !important; }
     h3 { font-size: 26px !important; }
 
-    /* High-contrast wrapping navbar */
-    div[role="radiogroup"] {
-        background: rgba(255, 255, 255, 0.94) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        padding: 8px 16px !important;
-        border-radius: 24px !important;
-        border: 2px solid #15803d !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22) !important;
-        display: flex !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        gap: 6px 10px !important;
-        width: 100% !important;
-    }
-
-    div[role="radiogroup"] label {
-        background: #f0fdf4 !important;
-        padding: 8px 16px !important;
-        border-radius: 14px !important;
-        font-weight: 800 !important;
-        font-family: 'Fredoka', cursive !important;
-        color: #064e3b !important;
-        font-size: 16px !important;
-        border: 1.5px solid #86efac !important;
-        cursor: pointer;
-        transition: all 0.15s ease;
-    }
-
-    div[role="radiogroup"] label:hover {
-        background: #bbf7d0 !important;
-        border-color: #15803d !important;
-        color: #022e18 !important;
-    }
-
-    /* Distinct White Frosted Cards (High contrast over any dark/busy background) */
+    /* Frosted Cards */
     [data-testid="stForm"], [data-testid="stMetric"], .stTable {
         background: rgba(255, 255, 255, 0.88) !important;
         backdrop-filter: blur(18px) !important;
@@ -192,16 +157,25 @@ st.markdown(
         color: #064e3b !important;
     }
 
-    .stButton>button, div[data-testid="stForm"] button {
-        background: linear-gradient(135deg, #15803d 0%, #16a34a 100%) !important;
-        color: #ffffff !important;
+    /* Standard Button Styling */
+    .stButton>button {
+        background: rgba(255, 255, 255, 0.95) !important;
+        color: #064e3b !important;
         font-family: 'Fredoka', cursive !important;
-        font-size: 19px !important;
+        font-size: 17px !important;
         font-weight: 700 !important;
         border-radius: 16px !important;
-        border: 2px solid #86efac !important;
-        padding: 10px 26px !important;
-        box-shadow: 0 6px 18px rgba(21, 128, 61, 0.35) !important;
+        border: 2px solid #16a34a !important;
+        padding: 10px 16px !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
+        transition: all 0.15s ease !important;
+        width: 100% !important;
+    }
+
+    .stButton>button:hover {
+        background: #16a34a !important;
+        color: #ffffff !important;
+        transform: translateY(-2px);
     }
 
     .badge-points {
@@ -230,9 +204,9 @@ st.markdown(
     }
 
     .user-pill {
-        background: rgba(255, 255, 255, 0.88);
+        background: rgba(255, 255, 255, 0.92);
         border: 1.5px solid #16a34a;
-        padding: 4px 14px;
+        padding: 6px 16px;
         border-radius: 9999px;
         display: inline-block;
         font-size: 16px;
@@ -313,7 +287,7 @@ UPCYCLE_SUGGESTIONS = {
             "title": "🤖 Miniature Tech Sculpture / Cyber Keychain",
             "difficulty": "Advanced (30 mins)",
             "tools": "Old PCB scraps, Keyring, Protective gloves",
-            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified drop-off hubs!"
+            "steps": "1. Cut small rectangular sections of damaged motherboards.\n2. Sand edges smooth and drill a small hole for a key ring.\n3. Note: Deposit chemical batteries directly at certified hubs!"
         }
     ],
     "🍎 Organic Waste": [
@@ -382,18 +356,33 @@ with top_c2:
             st.session_state.authenticated = False
             st.rerun()
 
-# High-contrast wrapping navbar
-cur_idx = PAGES.index(st.session_state.current_page) if st.session_state.current_page in PAGES else 0
-choice = st.radio("Nav", PAGES, index=cur_idx, horizontal=True, label_visibility="collapsed")
-if choice != st.session_state.current_page:
-    st.session_state.current_page = choice
-    st.rerun()
-
 st.markdown(f"""
-<div style="margin-top: 4px; margin-bottom: 16px;">
+<div style="margin-top: 4px; margin-bottom: 12px;">
     <span class="user-pill">👤 Logged in: <b>{st.session_state.username}</b> ({st.session_state.user_identifier})</span>
 </div>
 """, unsafe_allow_html=True)
+
+# ----------------- 100% VISIBLE NAVIGATION GRID (2 Rows x 4 Columns) -----------------
+# Clean, fully visible interactive button grid that never squishes or clips
+nav_row1 = st.columns(4)
+for i, page_name in enumerate(PAGES[:4]):
+    with nav_row1[i]:
+        is_active = (st.session_state.current_page == page_name)
+        label = f"👉 {page_name}" if is_active else page_name
+        if st.button(label, key=f"nav_btn_{i}", use_container_width=True):
+            st.session_state.current_page = page_name
+            st.rerun()
+
+nav_row2 = st.columns(4)
+for i, page_name in enumerate(PAGES[4:]):
+    with nav_row2[i]:
+        is_active = (st.session_state.current_page == page_name)
+        label = f"👉 {page_name}" if is_active else page_name
+        if st.button(label, key=f"nav_btn_{i+4}", use_container_width=True):
+            st.session_state.current_page = page_name
+            st.rerun()
+
+st.markdown("<hr style='margin-top: 14px; margin-bottom: 20px; border-top: 2px dashed rgba(22, 101, 52, 0.4);'>", unsafe_allow_html=True)
 
 # ----------------- 1. HOME SCREEN -----------------
 if st.session_state.current_page == "🏠 Home":
@@ -413,11 +402,11 @@ if st.session_state.current_page == "🏠 Home":
 
     c_b1, c_b2, _ = st.columns([1.5, 1.8, 1.5])
     with c_b1:
-        if st.button("📸 AI Scanner & Log", use_container_width=True):
-            st.session_state.current_page = "📸 Scanner"
+        if st.button("📸 AI Scanner & Log", key="home_btn_scan", use_container_width=True):
+            st.session_state.current_page = "📸 AI Scanner"
             st.rerun()
     with c_b2:
-        if st.button("💡 Upcycle AI Studio", use_container_width=True):
+        if st.button("💡 Upcycle AI Studio", key="home_btn_up", use_container_width=True):
             st.session_state.current_page = "💡 Upcycle AI"
             st.rerun()
 
@@ -456,7 +445,7 @@ if st.session_state.current_page == "🏠 Home":
     )
 
 # ----------------- 2. AI SCANNER SCREEN -----------------
-elif st.session_state.current_page == "📸 Scanner":
+elif st.session_state.current_page == "📸 AI Scanner":
     st.title("📸 AI Waste Scanner & Classifier")
     st.markdown("<p style='font-size: 20px; font-weight: 800;'>Snap a live photo or upload an image to identify the item accurately:</p>", unsafe_allow_html=True)
 
@@ -557,7 +546,7 @@ elif st.session_state.current_page == "💡 Upcycle AI":
                 st.rerun()
 
 # ----------------- 4. DROP-OFF MAP -----------------
-elif st.session_state.current_page == "🗺️ Centers":
+elif st.session_state.current_page == "🗺️ Drop-off Map":
     st.title("🗺️ Ecoza Drop-Off Centers")
     df_centers = pd.DataFrame(RECYCLING_CENTERS)
     st.map(df_centers[["lat", "lon"]], zoom=11)
@@ -570,7 +559,7 @@ elif st.session_state.current_page == "🗺️ Centers":
             st.divider()
 
 # ----------------- 5. DOORSTEP PICKUP -----------------
-elif st.session_state.current_page == "🚚 Pickup":
+elif st.session_state.current_page == "🚚 Super Pickup":
     st.title("🚚 Schedule Doorstep Collection")
 
     with st.form("pickup_booking"):
@@ -594,7 +583,7 @@ elif st.session_state.current_page == "🚚 Pickup":
         st.dataframe(pd.DataFrame(st.session_state.pickup_requests), use_container_width=True)
 
 # ----------------- 6. REWARDS STORE -----------------
-elif st.session_state.current_page == "🎁 Rewards":
+elif st.session_state.current_page == "🎁 Rewards Store":
     st.title(f"🎁 Ecoza Rewards Store (Balance: {st.session_state.ecopoints} pts)")
 
     rewards = [
@@ -622,18 +611,18 @@ elif st.session_state.current_page == "🎁 Rewards":
                     st.error("Insufficient points!")
 
 # ----------------- 7. LEADERBOARD -----------------
-elif st.session_state.current_page == "🏆 Leaderboard":
+elif st.session_state.current_page == "🏆 Champions Leaderboard":
     st.title("🏆 Champions Leaderboard")
     leaderboard = [
         {"Rank": "🥇 1st", "Contributor": "Class 8B (Little Flower School)", "Waste Saved": "44,000 g", "EcoPoints": 880},
         {"Rank": "🥈 2nd", "Contributor": "Priya R.", "Waste Saved": "38,500 g", "EcoPoints": 770},
         {"Rank": "🥉 3rd", "Contributor": f"{st.session_state.username} (You)", "Waste Saved": "28,000 g", "EcoPoints": st.session_state.ecopoints},
-        {"Rank": "4th", "Contributor": "Karthik Raj", "Waste Saved": "18,500 g", "EcoPoints": 370}
+        {"Rank": "4th Place", "Contributor": "Karthik Raj", "Waste Saved": "18,500 g", "EcoPoints": 370}
     ]
     st.table(pd.DataFrame(leaderboard))
 
 # ----------------- 8. DASHBOARD -----------------
-elif st.session_state.current_page == "📊 Impact":
+elif st.session_state.current_page == "📊 Impact Dashboard":
     st.title("📊 Environmental Impact Dashboard")
 
     total = len(st.session_state.waste_history)
